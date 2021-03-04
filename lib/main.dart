@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:griddynamics_coleman/login_module/ui/login_screen.dart';
+import 'injection.dart';
+import 'login_module/ui/login_screen.dart';
+
 
 void main() {
+  configureDependencies();
   runApp(MyApp());
 }
 
