@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 // ignore: avoid_classes_with_only_static_members
 class UIConstants {
-
   static const gray1 = Color(0xff333333);
   static const gray2 = Color(0xff545454);
   static const gray3 = Color(0xff828282);
@@ -10,6 +9,7 @@ class UIConstants {
   static const gray6 = Color(0xffF2F2F2);
 
   static const appbarBackground = Color(0xffeeeeee);
+  static const blue = Colors.blue;
 
   static ThemeData materialTheme = ThemeData(
     // primarySwatch: Colors.purple,
@@ -24,11 +24,17 @@ class UIConstants {
             ),
           ),
     ),
+
     textTheme: ThemeData.light().textTheme.copyWith(
-          title: const TextStyle(
-            fontSize: 18,
+
+          headline3: const TextStyle(
             fontWeight: FontWeight.bold,
           ),
+
+          headline5: const TextStyle(
+            fontWeight: FontWeight.normal,
+          ),
+
           button: const TextStyle(color: Colors.white),
         ),
   );
