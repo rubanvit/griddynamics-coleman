@@ -6,10 +6,14 @@ import 'package:injectable/injectable.dart';
 @Singleton(as: ILoginRepository)
 @dev
 class LoginRepositoryImpl implements ILoginRepository {
-  final LoginApi loginApi = LoginApi();
+  final LoginApi _loginApi;
+
+  LoginRepositoryImpl(LoginApi loginApi):
+        _loginApi = loginApi;
+
   //TODO EITHER RESULT
   @override
   Future<bool> login(String userName, String password) async {
-    return await loginApi.login(userName, password);
+    return await _loginApi.login(userName, password);
   }
 }

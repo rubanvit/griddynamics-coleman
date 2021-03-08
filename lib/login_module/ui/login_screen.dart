@@ -32,75 +32,6 @@ class _LoginViewState extends State<_LoginView> {
 
   @override
   Widget build(BuildContext context) {
-    Widget _logoWidget() {
-      return const Text('image');
-    }
-
-    Widget _emailPasswordWidget(LoginState state) {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          TextFormField(
-            controller: _emailController,
-            decoration: InputDecoration(
-              prefixIcon: const Icon(
-                Icons.email,
-                color: Colors.white,
-              ),
-              fillColor: Colors.blueAccent,
-              filled: true,
-              hintText: 'Enter your Email',
-              hintMaxLines: 1,
-              hintStyle: AppTextStyle.hint,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(Dimens.medium),
-              ),
-            ),
-            keyboardType: TextInputType.emailAddress,
-          ),
-          const SizedBox(
-            height: Dimens.normal,
-          ),
-          TextFormField(
-            controller: _passwordController,
-            decoration: InputDecoration(
-              prefixIcon: const Icon(
-                Icons.lock,
-                color: Colors.white,
-              ),
-              fillColor: Colors.blueAccent,
-              filled: true,
-              hintText: 'Enter your Password',
-              hintMaxLines: 1,
-              hintStyle: AppTextStyle.hint,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(Dimens.medium),
-              ),
-            ),
-            keyboardType: TextInputType.emailAddress,
-          ),
-          const SizedBox(
-            height: Dimens.big,
-          ),
-          Container(
-            alignment: Alignment.center,
-            height: Dimens.xlarge,
-            child: state is LoginStateProcessing
-                ? const CircularProgressIndicator()
-                : ElevatedButton(
-                    child: const Text('Login'),
-                    onPressed: () {
-                      context.read<LoginBloc>().add(
-                            LoginEventPressed(_emailController.text,
-                                _passwordController.text),
-                          );
-                    },
-                  ),
-          ),
-        ],
-      );
-    }
-
     return BlocConsumer<LoginBloc, LoginState>(
       listener: (context, state) {
         if (state is LoginStateError) {
@@ -130,6 +61,75 @@ class _LoginViewState extends State<_LoginView> {
           ),
         );
       },
+    );
+  }
+
+  Widget _logoWidget() {
+    return const Text('image');
+  }
+
+  Widget _emailPasswordWidget(LoginState state) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        TextFormField(
+          controller: _emailController,
+          decoration: InputDecoration(
+            prefixIcon: const Icon(
+              Icons.email,
+              color: Colors.white,
+            ),
+            fillColor: Colors.blueAccent,
+            filled: true,
+            hintText: 'Enter your Email',
+            hintMaxLines: 1,
+            hintStyle: AppTextStyle.hint,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(Dimens.medium),
+            ),
+          ),
+          keyboardType: TextInputType.emailAddress,
+        ),
+        const SizedBox(
+          height: Dimens.normal,
+        ),
+        TextFormField(
+          controller: _passwordController,
+          decoration: InputDecoration(
+            prefixIcon: const Icon(
+              Icons.lock,
+              color: Colors.white,
+            ),
+            fillColor: Colors.blueAccent,
+            filled: true,
+            hintText: 'Enter your Password',
+            hintMaxLines: 1,
+            hintStyle: AppTextStyle.hint,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(Dimens.medium),
+            ),
+          ),
+          keyboardType: TextInputType.emailAddress,
+        ),
+        const SizedBox(
+          height: Dimens.big,
+        ),
+        Container(
+          alignment: Alignment.center,
+          height: Dimens.xlarge,
+          child: state is LoginStateProcessing
+              ? const CircularProgressIndicator()
+              : ElevatedButton(
+            child: const Text('Login'),
+            onPressed: () {
+              context.read<LoginBloc>().add(
+                LoginEventPressed(_emailController.text,
+                    _passwordController.text),
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 
