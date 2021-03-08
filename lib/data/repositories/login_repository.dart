@@ -4,7 +4,6 @@ import 'package:coleman/domain/repositories/login_repository.dart';
 import 'package:injectable/injectable.dart';
 
 @Singleton(as: ILoginRepository)
-@dev
 class LoginRepositoryImpl implements ILoginRepository {
   final LoginApi _loginApi;
 

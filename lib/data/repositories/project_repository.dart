@@ -4,7 +4,6 @@ import 'package:coleman/domain/repositories/project_repository.dart';
 import 'package:injectable/injectable.dart';
 
 @Singleton(as: ProjectRepository)
-@dev
 class ProjectRepositoryImpl implements ProjectRepository {
   final ProjectApi projectApi = ProjectApi();
 
