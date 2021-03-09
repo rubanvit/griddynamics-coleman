@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'injection.dart';
+import 'login_module/ui/login_screen.dart';
+
 
 void main() {
+  configureDependencies();
   runApp(MyApp());
 }
 
@@ -13,23 +17,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(),
+      home: LoginScreen(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(''),
-      ),
-    );
-  }
-}
