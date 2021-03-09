@@ -1,14 +1,23 @@
+import 'package:coleman/domain/repositories/project_repository.dart';
+import 'package:coleman/injection.dart';
 import 'package:coleman/ui/common/search_bar.dart';
 import 'package:coleman/ui/project_module/project_resources.dart';
-import 'package:coleman/ui/ui_helper.dart';
 import 'package:flutter/material.dart';
 
 import '../ui_constants.dart';
 
 class ProjectScreen extends StatelessWidget {
+  final repository = getIt<ProjectRepository>();
+
   @override
   Widget build(BuildContext context) {
+    getData();
     return StackOver();
+  }
+
+  void getData() async {
+    final data = await repository.loadProjects();
+    print(data.toString());
   }
 }
 
