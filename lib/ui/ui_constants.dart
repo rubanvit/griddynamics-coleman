@@ -9,7 +9,9 @@ class UIConstants {
   static const gray6 = Color(0xffF2F2F2);
 
   static const appbarBackground = Color(0xffeeeeee);
-  static const blue = Colors.blue;
+  static const lightOrange = Color(0xfffefaf4);
+  static const orange = Color(0xfff2d19c);
+  static const blue = Color(0xff5d99d6);
 
   static ThemeData materialTheme = ThemeData(
     // primarySwatch: Colors.purple,
