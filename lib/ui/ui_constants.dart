@@ -13,14 +13,16 @@ class UIConstants {
   static const lightOrange = Color(0xfffefaf4);
   static const orange = Color(0xfff2d19c);
   static const blue = Color(0xff5d99d6);
+  static const white = Color(0xffffffff);
   static const bookmarkIconColor = Color(0xffb3aec7);
   static const outlinedButtonColor = Color(0xff006e00);
+  static const buttonColor = Color(0xff6c141f);
 
   static ThemeData materialTheme = ThemeData(
     // primarySwatch: Colors.purple,
-    // accentColor: Colors.amber,
+    accentColor: Colors.amber,
     appBarTheme: AppBarTheme(
-      backgroundColor: appbarBackground,
+      color: appbarBackground,
       textTheme: ThemeData.light().textTheme.copyWith(
             title: const TextStyle(
               fontSize: 20,
