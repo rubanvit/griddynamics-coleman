@@ -1,14 +1,23 @@
+import 'package:coleman/domain/repositories/project_repository.dart';
+import 'package:coleman/injection.dart';
 import 'package:coleman/ui/common/search_bar.dart';
 import 'package:coleman/ui/project_module/project_resources.dart';
-import 'package:coleman/ui/ui_helper.dart';
 import 'package:flutter/material.dart';
 
 import '../ui_constants.dart';
 
 class ProjectScreen extends StatelessWidget {
+  final repository = getIt<ProjectRepository>();
+
   @override
   Widget build(BuildContext context) {
+    getData();
     return StackOver();
+  }
+
+  void getData() async {
+    final data = await repository.loadProjects();
+    print(data.toString());
   }
 }
 
@@ -45,6 +54,7 @@ class _StackOverState extends State<StackOver>
             children: [
               _getTabs(),
               _getSearchBar(context),
+              _getBanner(context),
               Expanded(
                 child: TabBarView(
                   controller: _tabController,
@@ -149,6 +159,54 @@ class _StackOverState extends State<StackOver>
     return Padding(
       padding: EdgeInsets.all(12.0),
       child: SearchBar(),
+    );
+  }
+
+  Widget _getBanner(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      child: Card(
+        color: UIConstants.lightOrange,
+        shape: RoundedRectangleBorder(
+          side: BorderSide(color: UIConstants.orange, width: 1.0),
+        ),
+        elevation: 4,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Container(
+            child: Row(
+              children: [
+                Icon(Icons.people, size: 40, color: UIConstants.orange),
+                SizedBox(width: 16),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        ProjectResources.qualifiedExperts,
+                        style: Theme.of(context).textTheme.headline6,
+                      ),
+                      SizedBox(height: 4),
+                      RichText(
+                        text: TextSpan(
+                          text: ProjectResources.banner1,
+                          style: Theme.of(context).textTheme.bodyText2,
+                          children: <TextSpan>[
+                            TextSpan(
+                                text: ProjectResources.banner2,
+                                style: TextStyle(color: UIConstants.blue)),
+                            TextSpan(text: ProjectResources.banner3),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
