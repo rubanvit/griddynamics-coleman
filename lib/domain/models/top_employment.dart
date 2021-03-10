@@ -13,8 +13,8 @@ class TopEmploymentModel {
 
   int id;
   String title;
-  String startDate;
-  String? endDate;
+  DateTime startDate;
+  DateTime? endDate;
   bool loc;
   bool isSelfEmployed;
   CorporationModel corporation;

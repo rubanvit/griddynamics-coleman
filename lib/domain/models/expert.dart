@@ -15,7 +15,7 @@ class ExpertModel {
   String firstName;
   String lastName;
   String status;
-  String statusDateModified;
+  DateTime statusDateModified;
   String country;
   TopEmploymentModel topEmployment;
 }
