@@ -23,8 +23,6 @@ class Expert {
   Map<String, dynamic> toJson() => _$ExpertToJson(this);
 
   ExpertModel toDomain() {
-    print ('start string $statusDateModified');
-    print ('date parsed ${DateFormat.yMd().add_Hm().parse(statusDateModified)}');
     return ExpertModel(
         expertId,
         firstName,

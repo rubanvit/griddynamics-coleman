@@ -1,9 +1,12 @@
-import 'package:coleman/domain/repositories/project_repository.dart';
 import 'package:coleman/injection.dart';
 import 'package:coleman/ui/common/search_bar.dart';
 import 'package:coleman/ui/project_module/bloc/experts_bloc.dart';
 import 'package:coleman/ui/project_module/bloc/experts_state.dart';
 import 'package:coleman/ui/project_module/project_resources.dart';
+import 'package:coleman/ui/project_module/widgets/empty_list_widget.dart';
+import 'package:coleman/ui/project_module/widgets/error_widget.dart';
+import 'package:coleman/ui/project_module/widgets/experts_list_widget.dart';
+import 'package:coleman/ui/project_module/widgets/progress_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -133,27 +136,19 @@ class _StackOverState extends State<StackOver>
   Widget _getLeftTabBarView() {
     return BlocBuilder<ExpertsCubit, ExpertsState>(builder: (_, state) {
       if (state is ExpertsStateEmpty) {
-        return Center(child: Text('list is empty'));
+        return EmptyExpertsList();
       } else if (state is ExpertsStateProcessing) {
-        return Center(child: Text('processing'));
+        return ProgressExpertsList();
       } else if (state is ExpertsStateSuccessful) {
-        return Center(child: Text('list of ${state.expertsList.length} items'));
+        return ExpertsListWidget(state);
       } else {
-        return Center(child: Text('error'));
+        return ErrorExpertsList();
       }
     });
   }
 
   Widget _getRightTabBarView() {
-    return Center(
-      child: Text(
-        'Buy Now',
-        style: TextStyle(
-          fontSize: 25,
-          fontWeight: FontWeight.w600,
-        ),
-      ),
-    );
+    return _getLeftTabBarView();
   }
 
   Widget _getSearchBar() {
