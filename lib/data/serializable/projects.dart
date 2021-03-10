@@ -5,6 +5,7 @@ import 'package:coleman/data/serializable/project_lead.dart';
 import 'package:coleman/data/serializable/status.dart';
 import 'package:coleman/data/serializable/target_companies.dart';
 import 'package:coleman/domain/models/projects.dart';
+import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'projects.g.dart';
@@ -45,7 +46,8 @@ class Project {
         description.toDomain(),
         primaryContact.toDomain(),
         projectLead.toDomain(),
-        createdOn,
+        //"2021-02-28T20:57:55.045508+00:00"
+        DateFormat('yyyy-MM-ddTHH:mm:ssZ').parse(createdOn),
         targetCompanies.map((i) => i.toDomain()).toList(),
         industries.map((i) => i.toDomain()).toList());
   }
