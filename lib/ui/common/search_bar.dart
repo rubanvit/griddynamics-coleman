@@ -9,6 +9,7 @@ class SearchBar extends StatefulWidget {
 
 class SearchBarState extends State<SearchBar> {
   final TextEditingController _controller = TextEditingController();
+  // final ExpertsCubit bloc = context.read<ExpertsCubit>();
 
   @override
   void initState() {

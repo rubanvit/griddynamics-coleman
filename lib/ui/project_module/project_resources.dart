@@ -5,7 +5,10 @@ class ProjectResources {
   static const expertsCount = "6 Experts";
   static const searchHint = 'Search';
   static const qualifiedExperts = 'Qualified experts';
-  static const banner1='Coleman is working on qualifying experts and soon the experts will be available in PROJECT EXPERTS section. See a list of Suggested Experts or ';
-  static const banner2='Transcripts and Upcoming Events';
-  static const banner3='.';
+  static const banner1 =
+      'Coleman is working on qualifying experts and soon the experts will be available in PROJECT EXPERTS section. See a list of Suggested Experts or ';
+  static const banner2 = 'Transcripts and Upcoming Events';
+  static const banner3 = '.';
+
+  static const schedule = 'Schedule';
 }
