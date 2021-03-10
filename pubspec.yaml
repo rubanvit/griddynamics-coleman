@@ -75,6 +75,7 @@ flutter:
   assets:
     - assets/mocks/experts.json
     - assets/mocks/projects.json
+    - assets/images/logo_coleman.png
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

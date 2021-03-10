@@ -29,7 +29,14 @@ class ProjectScreen extends StatelessWidget {
 
   AppBar _getAppBar() {
     return AppBar(
-      title: Text(ProjectResources.appName),
+      leading: IconButton(
+        icon: Icon(Icons.menu),
+        color: UIConstants.appbarMenuButtonColor,
+        onPressed: () {},
+      ),
+      centerTitle: true,
+      title: Container(
+          height: 24, child: Image.asset('assets/images/logo_coleman.png')),
     );
   }
 
