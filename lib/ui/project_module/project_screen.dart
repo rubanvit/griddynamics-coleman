@@ -1,23 +1,18 @@
 import 'package:coleman/domain/repositories/project_repository.dart';
 import 'package:coleman/injection.dart';
 import 'package:coleman/ui/common/search_bar.dart';
+import 'package:coleman/ui/project_module/bloc/experts_bloc.dart';
+import 'package:coleman/ui/project_module/bloc/experts_state.dart';
 import 'package:coleman/ui/project_module/project_resources.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../ui_constants.dart';
 
 class ProjectScreen extends StatelessWidget {
-  final repository = getIt<ProjectRepository>();
-
   @override
   Widget build(BuildContext context) {
-    getData();
     return StackOver();
-  }
-
-  void getData() async {
-    final data = await repository.loadProjects();
-    print(data.toString());
   }
 }
 
@@ -45,27 +40,31 @@ class _StackOverState extends State<StackOver>
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: UIConstants.materialTheme,
-      home: Scaffold(
-        appBar: _getAppBar(),
-        body: Padding(
-          padding: EdgeInsets.only(top: 8.0),
-          child: Column(
-            children: [
-              _getTabs(),
-              _getSearchBar(context),
-              _getBanner(context),
-              Expanded(
-                child: TabBarView(
-                  controller: _tabController,
-                  children: [_getLeftTabBarView(), _getRightTabBarView()],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+        theme: UIConstants.materialTheme,
+        home: Scaffold(
+            appBar: _getAppBar(),
+            body: BlocProvider(
+                lazy: false,
+                create: (context) => getIt<ExpertsCubit>(),
+                child: Padding(
+                  padding: EdgeInsets.only(top: 8.0),
+                  child: Column(
+                    children: [
+                      _getTabs(),
+                      _getSearchBar(),
+                      _getBanner(context),
+                      Expanded(
+                        child: TabBarView(
+                          controller: _tabController,
+                          children: [
+                            _getLeftTabBarView(),
+                            _getRightTabBarView()
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ))));
   }
 
   AppBar _getAppBar() {
@@ -132,15 +131,17 @@ class _StackOverState extends State<StackOver>
   }
 
   Widget _getLeftTabBarView() {
-    return Center(
-      child: Text(
-        'Place Bid',
-        style: TextStyle(
-          fontSize: 25,
-          fontWeight: FontWeight.w600,
-        ),
-      ),
-    );
+    return BlocBuilder<ExpertsCubit, ExpertsState>(builder: (_, state) {
+      if (state is ExpertsStateEmpty) {
+        return Center(child: Text('list is empty'));
+      } else if (state is ExpertsStateProcessing) {
+        return Center(child: Text('processing'));
+      } else if (state is ExpertsStateSuccessful) {
+        return Center(child: Text('list of ${state.expertsList.length} items'));
+      } else {
+        return Center(child: Text('error'));
+      }
+    });
   }
 
   Widget _getRightTabBarView() {
@@ -155,7 +156,7 @@ class _StackOverState extends State<StackOver>
     );
   }
 
-  Widget _getSearchBar(BuildContext context) {
+  Widget _getSearchBar() {
     return Padding(
       padding: EdgeInsets.all(12.0),
       child: SearchBar(),
