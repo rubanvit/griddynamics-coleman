@@ -10,5 +10,5 @@ class ProjectResources {
   static const banner2 = 'Transcripts and Upcoming Events';
   static const banner3 = '.';
 
-  static const schedule = 'Schedule';
+  static const schedule = 'Schedule Call';
 }

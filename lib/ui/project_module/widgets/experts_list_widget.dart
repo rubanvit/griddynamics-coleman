@@ -30,7 +30,10 @@ class ExpertsListWidget extends StatelessWidget {
                       Expanded(
                         child: Text(
                           '${expert.firstName} ${expert.lastName}',
-                          style: Theme.of(context).textTheme.headline6,
+                          style: Theme
+                              .of(context)
+                              .textTheme
+                              .headline6,
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
@@ -42,14 +45,28 @@ class ExpertsListWidget extends StatelessWidget {
                         ),
                         child: Text(
                           ProjectResources.schedule,
-                          style: Theme.of(context)
+                          style: Theme
+                              .of(context)
                               .textTheme
                               .headline6
                               ?.copyWith(
-                                  color: UIConstants.outlinedButtonColor),
+                              color: UIConstants.outlinedButtonColor),
                         ),
                       ),
                     ],
+                  ),
+                  ElevatedButton(
+                    onPressed: () {},
+                    style: ButtonStyle(backgroundColor: MaterialStateProperty.all( UIConstants.buttonColor)),
+                    child: Text(
+                      ProjectResources.schedule,
+                      style: Theme
+                          .of(context)
+                          .textTheme
+                          .bodyText1
+                          ?.copyWith(
+                          color: UIConstants.white),
+                    ),
                   ),
                 ],
               ),
