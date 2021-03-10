@@ -24,7 +24,7 @@ class ProjectModel {
   DescriptionModel description;
   PrimaryContactModel primaryContact;
   ProjectLeadModel projectLead;
-  String createdOn;
+  DateTime createdOn;
   List<TargetCompanyModel> targetCompanies;
   List<IndustryModel> industries;
 }

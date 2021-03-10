@@ -1,5 +1,6 @@
 import 'package:coleman/data/serializable/top_employment.dart';
 import 'package:coleman/domain/models/expert.dart';
+import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'expert.g.dart';
@@ -22,7 +23,16 @@ class Expert {
   Map<String, dynamic> toJson() => _$ExpertToJson(this);
 
   ExpertModel toDomain() {
-    return ExpertModel(expertId, firstName, lastName, status,
-        statusDateModified, country, topEmployment.toDomain());
+    print ('start string $statusDateModified');
+    print ('date parsed ${DateFormat.yMd().add_Hm().parse(statusDateModified)}');
+    return ExpertModel(
+        expertId,
+        firstName,
+        lastName,
+        status,
+        //"01/21/2021 10:46:19"
+        DateFormat.yMd().add_Hm().parse(statusDateModified),
+        country,
+        topEmployment.toDomain());
   }
 }
