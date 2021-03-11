@@ -1,4 +1,4 @@
-import 'package:coleman/ui/project_module/project_resources.dart';
+import 'package:coleman/resources/project_resources.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

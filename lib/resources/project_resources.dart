@@ -11,4 +11,9 @@ class ProjectResources {
   static const banner3 = '.';
 
   static const schedule = 'Schedule Call';
+  static const present = 'Present';
+  static const dateFormatWithZone = 'yyyy-MM-ddTHH:mm:ssZ';
+  static const type = 'Type';
+  static const location = 'Location';
+  static const unassigned = 'Unassigned';
 }

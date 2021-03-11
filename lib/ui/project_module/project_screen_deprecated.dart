@@ -1,8 +1,9 @@
 import 'package:coleman/injection.dart';
+import 'package:coleman/resources/colors.dart';
 import 'package:coleman/ui/common/search_bar.dart';
 import 'package:coleman/ui/project_module/bloc/experts_bloc.dart';
 import 'package:coleman/ui/project_module/bloc/experts_state.dart';
-import 'package:coleman/ui/project_module/project_resources.dart';
+import 'package:coleman/resources/project_resources.dart';
 import 'package:coleman/ui/project_module/widgets/empty_list_widget.dart';
 import 'package:coleman/ui/project_module/widgets/error_widget.dart';
 import 'package:coleman/ui/project_module/widgets/experts_list_widget.dart';
@@ -10,7 +11,7 @@ import 'package:coleman/ui/project_module/widgets/progress_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../ui_constants.dart';
+import '../../resources/ui_constants.dart';
 
 class ProjectScreenDeprecated extends StatelessWidget {
   @override
@@ -81,14 +82,14 @@ class _StackOverState extends State<StackOver>
       elevation: 4,
       child: Container(
         height: 64,
-        color: UIConstants.appbarBackground,
+        color: AppColors.appbarBackground,
         child: TabBar(
           controller: _tabController,
           indicator: BoxDecoration(
             border: Border(
               bottom: BorderSide(
                 width: 2,
-                color: UIConstants.blue,
+                color: AppColors.blue,
               ),
             ),
           ),
@@ -121,7 +122,7 @@ class _StackOverState extends State<StackOver>
             style: Theme.of(context)
                 .textTheme
                 .headline3!
-                .copyWith(color: UIConstants.blue),
+                .copyWith(color: AppColors.blue),
           ),
         ),
         Text(
@@ -162,9 +163,9 @@ class _StackOverState extends State<StackOver>
     return Container(
       width: double.infinity,
       child: Card(
-        color: UIConstants.lightOrange,
+        color: AppColors.lightOrange,
         shape: RoundedRectangleBorder(
-          side: BorderSide(color: UIConstants.orange, width: 1.0),
+          side: BorderSide(color: AppColors.orange, width: 1.0),
         ),
         elevation: 4,
         child: Padding(
@@ -172,7 +173,7 @@ class _StackOverState extends State<StackOver>
           child: Container(
             child: Row(
               children: [
-                Icon(Icons.people, size: 40, color: UIConstants.orange),
+                Icon(Icons.people, size: 40, color: AppColors.orange),
                 SizedBox(width: 16),
                 Expanded(
                   child: Column(
@@ -190,7 +191,7 @@ class _StackOverState extends State<StackOver>
                           children: <TextSpan>[
                             TextSpan(
                                 text: ProjectResources.banner2,
-                                style: TextStyle(color: UIConstants.blue)),
+                                style: TextStyle(color: AppColors.blue)),
                             TextSpan(text: ProjectResources.banner3),
                           ],
                         ),

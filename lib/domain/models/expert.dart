@@ -1,4 +1,4 @@
-
+import 'package:coleman/domain/models/angle.dart';
 import 'package:coleman/domain/models/top_employment.dart';
 
 class ExpertModel {
@@ -9,7 +9,8 @@ class ExpertModel {
       this.status,
       this.statusDateModified,
       this.country,
-      this.topEmployment);
+      this.topEmployment,
+      this.angle);
 
   int expertId;
   String firstName;
@@ -18,4 +19,5 @@ class ExpertModel {
   DateTime statusDateModified;
   String country;
   TopEmploymentModel topEmployment;
+  AngleModel? angle;
 }
