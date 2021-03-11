@@ -13,30 +13,36 @@ class ExpertsListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return Expanded(
       child: ListView.builder(
+        scrollDirection: Axis.vertical,
+        // shrinkWrap: true,
         itemCount: _state.expertsList.length,
         itemBuilder: (context, index) {
           final expert = _state.expertsList[index];
-          return Card(
-            elevation: 2,
-            child: ListTile(
-              title: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _header(context, expert),
-                  Divider(),
-                  _middlePart(context, expert),
-                  SizedBox(height: 16),
-                  _columnPart(context, expert),
-                  SizedBox(height: 8),
-                  _scheduleButton(context, expert),
-                ],
-              ),
-            ),
-          );
+          return _getTile(context, expert);
         },
+      ),
+    );
+  }
+
+  Widget _getTile(BuildContext context, ExpertModel expert) {
+    return Card(
+      elevation: 2,
+      child: ListTile(
+        title: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _header(context, expert),
+            const Divider(),
+            ..._middlePart(context, expert),
+            const SizedBox(height: 16),
+            _columnPart(context, expert),
+            const SizedBox(height: 8),
+            _scheduleButton(context, expert),
+          ],
+        ),
       ),
     );
   }
@@ -44,11 +50,11 @@ class ExpertsListWidget extends StatelessWidget {
   Widget _header(BuildContext context, ExpertModel expert) {
     return Row(
       children: [
-        Icon(
+        const Icon(
           Icons.bookmark_border,
           color: AppColors.bookmarkIconColor,
         ),
-        SizedBox(width: 16),
+        const SizedBox(width: 16),
         Expanded(
           child: Text(
             '${expert.firstName} ${expert.lastName}',
@@ -99,31 +105,27 @@ class ExpertsListWidget extends StatelessWidget {
         DateFormat.jm().format(startDate);
   }
 
-  Widget _middlePart(BuildContext context, ExpertModel expert) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          expert.topEmployment.corporation.name,
-          style: Theme.of(context).textTheme.bodyText1,
-          overflow: TextOverflow.ellipsis,
-        ),
-        Text(
-          expert.topEmployment.title,
-          style: Theme.of(context).textTheme.bodyText2,
-          overflow: TextOverflow.ellipsis,
-        ),
-        Text(
-          _getDateFormatted(expert),
-          style: Theme.of(context)
-              .textTheme
-              .bodyText2
-              ?.copyWith(color: AppColors.gray3),
-          overflow: TextOverflow.ellipsis,
-        ),
-      ],
-    );
+  List<Widget> _middlePart(BuildContext context, ExpertModel expert) {
+    return [
+      Text(
+        expert.topEmployment.corporation.name,
+        style: Theme.of(context).textTheme.bodyText1,
+        overflow: TextOverflow.ellipsis,
+      ),
+      Text(
+        expert.topEmployment.title,
+        style: Theme.of(context).textTheme.bodyText2,
+        overflow: TextOverflow.ellipsis,
+      ),
+      Text(
+        _getDateFormatted(expert),
+        style: Theme.of(context)
+            .textTheme
+            .bodyText2
+            ?.copyWith(color: AppColors.gray3),
+        overflow: TextOverflow.ellipsis,
+      ),
+    ];
   }
 
   Widget _columnPart(BuildContext context, ExpertModel expert) {
@@ -153,7 +155,7 @@ class ExpertsListWidget extends StatelessWidget {
               ],
             ),
           ),
-          VerticalDivider(width: 32),
+          const VerticalDivider(width: 32),
           Expanded(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -184,30 +186,25 @@ class ExpertsListWidget extends StatelessWidget {
     final startDate = expert.topEmployment.startDate;
     final endDate = expert.topEmployment.endDate;
     final startDateString = DateFormat.yMd().format(startDate);
-    String endDateString = endDate == null
+    final String endDateString = endDate == null
         ? ProjectResources.present
         : DateFormat.yMd().format(endDate);
     return '$startDateString - $endDateString';
   }
 
   Widget _scheduleButton(BuildContext context, ExpertModel expert) {
-    return Center(
-      child: Expanded(
-        child: Container(
-          width: double.infinity,
-          child: ElevatedButton(
-            onPressed: () {},
-            style: ButtonStyle(
-                backgroundColor:
-                    MaterialStateProperty.all(AppColors.buttonColor)),
-            child: Text(
-              ProjectResources.schedule,
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyText1
-                  ?.copyWith(color: AppColors.white),
-            ),
-          ),
+    return Container(
+      width: double.infinity,
+      child: ElevatedButton(
+        onPressed: () {},
+        style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(AppColors.buttonColor)),
+        child: Text(
+          ProjectResources.schedule,
+          style: Theme.of(context)
+              .textTheme
+              .bodyText1
+              ?.copyWith(color: AppColors.white),
         ),
       ),
     );

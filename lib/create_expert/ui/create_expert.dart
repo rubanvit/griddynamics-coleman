@@ -230,7 +230,7 @@ class CreateExpertView extends StatelessWidget {
   }
 
   void _openProjectExpertsScreen(String name, BuildContext context) {
-    Navigator.push(
+    Navigator.push<ProjectScreen>(
         context,
         MaterialPageRoute(builder: (context) => ProjectScreen(name))
     );
