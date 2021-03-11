@@ -18,7 +18,7 @@ class ProjectApi {
   }
 
   Future<ProjectsList> loadProjects() async {
-    await Future<void>.delayed(const Duration(seconds: 5));
+    await Future<void>.delayed(const Duration(seconds: 4));
     final String stringResult =
         await rootBundle.loadString('assets/mocks/projects.json');
     final ProjectsList result = ProjectsList.fromJson(
@@ -27,7 +27,7 @@ class ProjectApi {
   }
 
   Future<ExpertsList> loadExperts() async {
-    await Future<void>.delayed(const Duration(seconds: 5));
+    await Future<void>.delayed(const Duration(seconds: 8));
     final String stringResult =
         await rootBundle.loadString('assets/mocks/experts.json');
     final ExpertsList result =

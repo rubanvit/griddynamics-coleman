@@ -7,8 +7,9 @@ import 'package:intl/intl.dart';
 
 class ExpertsListWidget extends StatelessWidget {
   final ExpertsStateSuccessful _state;
+  late String projectName;
 
-  ExpertsListWidget(this._state);
+  ExpertsListWidget(this.projectName, this._state);
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +30,7 @@ class ExpertsListWidget extends StatelessWidget {
                   _middlePart(context, expert),
                   SizedBox(height: 16),
                   _columnPart(context, expert),
+                  SizedBox(height: 8),
                   _scheduleButton(context, expert),
                 ],
               ),

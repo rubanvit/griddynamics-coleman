@@ -4,10 +4,8 @@ import 'package:coleman/ui/common/search_bar.dart';
 import 'package:coleman/ui/project_module/bloc/experts_bloc.dart';
 import 'package:coleman/ui/project_module/bloc/experts_state.dart';
 import 'package:coleman/resources/project_resources.dart';
-import 'package:coleman/ui/project_module/widgets/empty_list_widget.dart';
-import 'package:coleman/ui/project_module/widgets/error_widget.dart';
+import 'package:coleman/ui/project_module/widgets/template_list_widget.dart';
 import 'package:coleman/ui/project_module/widgets/experts_list_widget.dart';
-import 'package:coleman/ui/project_module/widgets/progress_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -135,17 +133,18 @@ class _StackOverState extends State<StackOver>
   }
 
   Widget _getLeftTabBarView() {
-    return BlocBuilder<ExpertsCubit, ExpertsState>(builder: (_, state) {
-      if (state is ExpertsStateEmpty) {
-        return EmptyExpertsList();
-      } else if (state is ExpertsStateProcessing) {
-        return ProgressExpertsList();
-      } else if (state is ExpertsStateSuccessful) {
-        return ExpertsListWidget(state);
-      } else {
-        return ErrorExpertsList();
-      }
-    });
+    return CircularProgressIndicator();
+    // return BlocBuilder<ExpertsCubit, ExpertsState>(builder: (_, state) {
+      // if (state is ExpertsStateEmpty) {
+      //   return TemplateExpertsList("", ProjectResources.experts_empty_list);
+      // } else if (state is ExpertsStateProcessing) {
+      //   return TemplateExpertsList.asProgress("");
+      // } else if (state is ExpertsStateSuccessful) {
+      //   return ExpertsListWidget(state, "");
+      // } else {
+      //   return TemplateExpertsList("", ProjectResources.experts_error_list);
+      // }
+    // });
   }
 
   Widget _getRightTabBarView() {

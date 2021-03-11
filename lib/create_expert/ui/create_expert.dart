@@ -4,6 +4,7 @@ import 'package:coleman/injection.dart';
 import 'package:coleman/resources/colors.dart';
 import 'package:coleman/resources/dimens.dart';
 import 'package:coleman/resources/text_styles.dart';
+import 'package:coleman/ui/project_module/project_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -34,7 +35,7 @@ class CreateExpertView extends StatelessWidget {
               _headerWidget(),
               _searchWidget(context: context, state: state),
               state.when(initial: (List<ProjectModel> projectList) {
-                return _projectsListWidget(projectList);
+                return _projectsListWidget(projectList, context);
               }, progress: () {
                 return const CircularProgressIndicator();
               }, error: () {
@@ -115,7 +116,7 @@ class CreateExpertView extends StatelessWidget {
     );
   }
 
-  Widget _projectsListWidget(List<ProjectModel> projectList) {
+  Widget _projectsListWidget(List<ProjectModel> projectList, BuildContext context) {
     return Expanded(
       child: ListView.builder(
         itemCount: projectList.length,
@@ -123,17 +124,17 @@ class CreateExpertView extends StatelessWidget {
           if (index == 0) {
             return Padding(
               padding: const EdgeInsets.only(top: Dimens.normal),
-              child: _projectWidget(projectList[index]),
+              child: _projectWidget(projectList[index], context),
             );
           } else {
-            return _projectWidget(projectList[index]);
+            return _projectWidget(projectList[index], context);
           }
         },
       ),
     );
   }
 
-  Widget _projectWidget(ProjectModel project) {
+  Widget _projectWidget(ProjectModel project, BuildContext context) {
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(Dimens.small),
@@ -152,7 +153,7 @@ class CreateExpertView extends StatelessWidget {
               ),
               child: Text('${project.status.name}'),
               onPressed: () {
-                print('open new project');
+                _openProjectExpertsScreen(project.name, context);
               },
             ),
             const SizedBox(height: Dimens.small),
@@ -226,7 +227,10 @@ class CreateExpertView extends StatelessWidget {
     );
   }
 
-  void _openExpertDetails(int id) {
-    print('id');
+  void _openProjectExpertsScreen(String name, BuildContext context) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => ProjectScreen(name))
+    );
   }
 }
