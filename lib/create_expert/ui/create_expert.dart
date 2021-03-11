@@ -135,7 +135,9 @@ class CreateExpertView extends StatelessWidget {
   }
 
   Widget _projectWidget(ProjectModel project, BuildContext context) {
-    return Card(
+    return GestureDetector(
+      onTap: (){_openProjectExpertsScreen(project.name, context);},
+    child: Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(Dimens.small),
       ),
@@ -145,16 +147,16 @@ class CreateExpertView extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                side: const BorderSide(color: AppColors.green),
-                primary: AppColors.white,
-                onPrimary: AppColors.black,
+            OutlinedButton(
+              style: ButtonStyle(
+                side: MaterialStateProperty.all(
+                    BorderSide(color: AppColors.outlinedButtonColor)),
               ),
-              child: Text('${project.status.name}'),
-              onPressed: () {
-                _openProjectExpertsScreen(project.name, context);
-              },
+              child: Text(
+                '${project.status.name.toUpperCase()}',
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+              onPressed: null,
             ),
             const SizedBox(height: Dimens.small),
             Text(
@@ -217,7 +219,7 @@ class CreateExpertView extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ));
   }
 
   OutlineInputBorder _buildOutLineBorder({required Color color}) {
