@@ -16,4 +16,7 @@ class ProjectResources {
   static const type = 'Type';
   static const location = 'Location';
   static const unassigned = 'Unassigned';
+  static const experts_empty_list ='Experts list is empty';
+  static const experts_error_list ='Error happens when Experts list is loading';
+  static const experts_list_header ='Project Experts';
 }
