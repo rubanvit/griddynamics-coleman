@@ -18,6 +18,8 @@ class TopEmployment {
   bool isSelfEmployed;
   Corporation corporation;
 
+  final String _dateFormat = 'yyyy-MM-ddTHH:mm:ssZ';
+
   factory TopEmployment.fromJson(Map<String, dynamic> json) =>
       _$TopEmploymentFromJson(json);
 
@@ -28,8 +30,8 @@ class TopEmployment {
         id,
         title,
         //"2021-03-03T00:20:17.0554299+00:00",
-        DateFormat('yyyy-MM-ddTHH:mm:ssZ').parse(startDate),
-        endDate == null ? null :  DateFormat('yyyy-MM-ddTHH:mm:ssZ').parse(endDate!),
+        DateFormat(_dateFormat).parse(startDate),
+        endDate == null ? null :  DateFormat(_dateFormat).parse(endDate!),
         loc,
         isSelfEmployed,
         corporation.toDomain());
