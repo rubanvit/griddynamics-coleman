@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 // ignore: avoid_classes_with_only_static_members
 class UIConstants {
-
   static ThemeData materialTheme = ThemeData(
     // primarySwatch: Colors.purple,
     // accentColor: Colors.amber,
@@ -19,20 +18,16 @@ class UIConstants {
     ),
 
     textTheme: ThemeData.light().textTheme.copyWith(
-
-          headline3: const TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
-
-          headline5: const TextStyle(
-            fontWeight: FontWeight.normal,
-          ),
-
-          button: const TextStyle(color: Colors.white),
+          headline1: const TextStyle(height: 1.3),
+          headline2: const TextStyle(height: 1.3),
+          headline3: const TextStyle(height: 1.3),
+          headline4: const TextStyle(height: 1.3),
+          headline5: const TextStyle(height: 1.3),
+          headline6: const TextStyle(height: 1.3),
+          bodyText1: const TextStyle(height: 1.3),
+          bodyText2: const TextStyle(height: 1.3),
         ),
-    dividerTheme: DividerThemeData(
-      color: AppColors.gray3,
-      thickness: 1,
-    ),
+
+    dividerTheme: DividerThemeData(color: AppColors.gray3, thickness: 1),
   );
 }

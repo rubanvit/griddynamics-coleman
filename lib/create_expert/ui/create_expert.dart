@@ -6,7 +6,6 @@ import 'package:coleman/resources/dimens.dart';
 import 'package:coleman/resources/text_styles.dart';
 import 'package:coleman/resources/ui_constants.dart';
 import 'package:coleman/ui/project_module/project_screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -43,7 +42,7 @@ class CreateExpertView extends StatelessWidget {
                 }, progress: () {
                   return const CircularProgressIndicator();
                 }, error: () {
-                  return const Text('error Happend');
+                  return const Text('Some error happens');
                 }),
               ],
             ),
@@ -55,19 +54,14 @@ class CreateExpertView extends StatelessWidget {
 
   AppBar _getAppBar(BuildContext context) {
     return AppBar(
-      // leading: IconButton(
-      //   icon: Icon(Icons.menu),
-      //   color: AppColors.appbarMenuButtonColor,
-      //   onPressed: () {},
-      // ),
       centerTitle: true,
       title: Container(
           height: 24, child: Image.asset('assets/images/logo_coleman.png')),
-      bottom: _headerWidget(),
+      bottom: _headerWidget(context),
     );
   }
 
-  AppBar _headerWidget() {
+  AppBar _headerWidget(BuildContext context) {
     return AppBar(
       backgroundColor: AppColors.white,
       title: Column(
@@ -81,18 +75,16 @@ class CreateExpertView extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
-                  'Projects',
-                  style: AppTextStyle.headerBoldBlack,
-                ),
+                Text('Projects'),
                 ElevatedButton(
                   onPressed: () {
                     print('On Pressed');
                   },
-                  child: const Text('Create Project'),
-                  style: ElevatedButton.styleFrom(
-                      primary: AppColors.dark_red,
-                      textStyle: AppTextStyle.bodyBoldWhite),
+                  child: Text(
+                    'Create Project',
+                    style: AppStyles.redButtonTextStyle(context),
+                  ),
+                  style: AppStyles.redButtonStyle(context),
                 ),
               ],
             ),
@@ -108,37 +100,40 @@ class CreateExpertView extends StatelessWidget {
         margin: EdgeInsets.zero,
         elevation: 4,
         child: Container(
-      padding: const EdgeInsets.all(Dimens.big),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(Dimens.small),
-        color: Colors.white,
-      ),
-      child: IgnorePointer(
-        ignoring: state is! CreateExpertStateInitial,
-        child: TextFormField(
-          onChanged: (value) {
-            context
-                .read<CreateExpertBloc>()
-                .add(CreateExpertEvent.search(value));
-          },
-          decoration: InputDecoration(
-            isDense: true,
-            contentPadding: EdgeInsets.zero,
-            hintText: 'Search',
-            prefixIcon: const Icon(
-              Icons.search,
-              size: 30,
-              color: AppColors.light_gray,
-            ),
-            enabledBorder: _buildOutLineBorder(color: AppColors.light_purple),
-            focusedBorder: _buildOutLineBorder(color: AppColors.light_purple),
+          padding: const EdgeInsets.all(Dimens.big),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(Dimens.small),
+            color: Colors.white,
           ),
-        ),
-      ),
-    ));
+          child: IgnorePointer(
+            ignoring: state is! CreateExpertStateInitial,
+            child: TextFormField(
+              onChanged: (value) {
+                context
+                    .read<CreateExpertBloc>()
+                    .add(CreateExpertEvent.search(value));
+              },
+              decoration: InputDecoration(
+                isDense: true,
+                contentPadding: EdgeInsets.zero,
+                hintText: 'Search',
+                prefixIcon: const Icon(
+                  Icons.search,
+                  size: 30,
+                  color: AppColors.light_gray,
+                ),
+                enabledBorder:
+                    _buildOutLineBorder(color: AppColors.light_purple),
+                focusedBorder:
+                    _buildOutLineBorder(color: AppColors.light_purple),
+              ),
+            ),
+          ),
+        ));
   }
 
-  Widget _projectsListWidget(List<ProjectModel> projectList, BuildContext context) {
+  Widget _projectsListWidget(
+      List<ProjectModel> projectList, BuildContext context) {
     return Expanded(
       child: ListView.builder(
         itemCount: projectList.length,
@@ -158,86 +153,88 @@ class CreateExpertView extends StatelessWidget {
 
   Widget _projectWidget(ProjectModel project, BuildContext context) {
     return GestureDetector(
-      onTap: (){_openProjectExpertsScreen(project.name, context);},
-    child: Card(
-      elevation: 4,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(Dimens.small),
-      ),
-      margin: const EdgeInsets.only(bottom: Dimens.normal),
-      child: Padding(
-        padding: const EdgeInsets.all(Dimens.big),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            OutlinedButton(
-              style: ButtonStyle(
-                side: MaterialStateProperty.all(
-                    BorderSide(color: AppColors.outlinedButtonColor)),
-              ),
-              child: Text(
-                '${project.status.name.toUpperCase()}',
-                style: Theme.of(context).textTheme.bodyText1,
-              ),
-              onPressed: null,
-            ),
-            const SizedBox(height: Dimens.small),
-            Text(
-              '${project.name}',
-              style: AppTextStyle.headerBoldBlack,
-            ),
-            const SizedBox(height: Dimens.small),
-            Text('CREATED ON: ${project.createdOn}'),
-            const SizedBox(height: Dimens.small),
-            Text('${project.description.internal}'),
-            const SizedBox(height: Dimens.medium),
-            IntrinsicHeight(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text('PRIMARY CONTACT'),
-                        const SizedBox(height: Dimens.small),
-                        Text('${project.primaryContact.fullName}'),
-                      ],
-                    ),
+        onTap: () {
+          _openProjectExpertsScreen(project.name, context);
+        },
+        child: Card(
+          elevation: 4,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(Dimens.small),
+          ),
+          margin: const EdgeInsets.only(bottom: Dimens.normal),
+          child: Padding(
+            padding: const EdgeInsets.all(Dimens.big),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                OutlinedButton(
+                  style: ButtonStyle(
+                    side: MaterialStateProperty.all(
+                        BorderSide(color: AppColors.outlinedButtonColor)),
                   ),
-                  const VerticalDivider(),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text('INDUSTRY'),
-                        const SizedBox(height: Dimens.small),
-                        ...project.industries.map((e) {
-                          return Text(
-                            '${e.name}',
-                            style: const TextStyle(height: 1.3),
-                          );
-                        }),
-                      ],
-                    ),
+                  child: Text(
+                    '${project.status.name.toUpperCase()}',
+                    style: Theme.of(context).textTheme.bodyText1,
                   ),
-                ],
-              ),
+                  onPressed: null,
+                ),
+                const SizedBox(height: Dimens.small),
+                Text(
+                  '${project.name}',
+                  style: AppStyles.headerBoldBlack(context),
+                ),
+                const SizedBox(height: Dimens.small),
+                Text('CREATED ON: ${project.createdOn}'),
+                const SizedBox(height: Dimens.small),
+                Text('${project.description.internal}'),
+                const SizedBox(height: Dimens.medium),
+                IntrinsicHeight(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text('PRIMARY CONTACT'),
+                            const SizedBox(height: Dimens.small),
+                            Text('${project.primaryContact.fullName}'),
+                          ],
+                        ),
+                      ),
+                      const VerticalDivider(),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text('INDUSTRY'),
+                            const SizedBox(height: Dimens.small),
+                            ...project.industries.map((e) {
+                              return Text(
+                                '${e.name}',
+                                style: const TextStyle(height: 1.3),
+                              );
+                            }),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const Divider(),
+                const SizedBox(height: Dimens.small),
+                const Text('PROJECT VISIBLE TO:'),
+                const SizedBox(height: Dimens.small),
+                Text(
+                  '${project.projectLead.fullName}',
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w500, color: AppColors.blue),
+                ),
+                const SizedBox(height: Dimens.medium),
+              ],
             ),
-            const Divider(),
-            const SizedBox(height: Dimens.small),
-            const Text('PROJECT VISIBLE TO:'),
-            const SizedBox(height: Dimens.small),
-            Text(
-              '${project.projectLead.fullName}',
-              style: const TextStyle(
-                  fontWeight: FontWeight.w500, color: AppColors.blue),
-            ),
-            const SizedBox(height: Dimens.medium),
-          ],
-        ),
-      ),
-    ));
+          ),
+        ));
   }
 
   OutlineInputBorder _buildOutLineBorder({required Color color}) {
@@ -249,8 +246,6 @@ class CreateExpertView extends StatelessWidget {
 
   void _openProjectExpertsScreen(String name, BuildContext context) {
     Navigator.push<ProjectScreen>(
-        context,
-        MaterialPageRoute(builder: (context) => ProjectScreen(name))
-    );
+        context, MaterialPageRoute(builder: (context) => ProjectScreen(name)));
   }
 }

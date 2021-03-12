@@ -83,7 +83,7 @@ class _LoginViewState extends State<_LoginView> {
             filled: true,
             hintText: 'Enter your Email',
             hintMaxLines: 1,
-            hintStyle: AppTextStyle.hint,
+            hintStyle: AppStyles.hint,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(Dimens.medium),
             ),
@@ -104,7 +104,7 @@ class _LoginViewState extends State<_LoginView> {
             filled: true,
             hintText: 'Enter your Password',
             hintMaxLines: 1,
-            hintStyle: AppTextStyle.hint,
+            hintStyle: AppStyles.hint,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(Dimens.medium),
             ),
