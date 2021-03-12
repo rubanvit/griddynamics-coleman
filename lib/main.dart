@@ -1,7 +1,5 @@
 import 'package:coleman/resources/colors.dart';
-import 'package:coleman/ui/project_module/project_screen.dart';
 import 'package:flutter/material.dart';
-import 'create_expert/ui/create_expert.dart';
 import 'injection.dart';
 import 'login_module/ui/login_screen.dart';
 
@@ -22,7 +20,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: AppColors.scaffold_background,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: CreateExpertScreen(),
+      home: LoginScreen(),
     );
   }
 }
