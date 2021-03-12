@@ -1,5 +1,6 @@
 import 'package:coleman/domain/models/expert.dart';
 import 'package:coleman/resources/colors.dart';
+import 'package:coleman/resources/text_styles.dart';
 import 'package:coleman/ui/project_module/bloc/experts_state.dart';
 import 'package:coleman/resources/project_resources.dart';
 import 'package:flutter/material.dart';
@@ -197,14 +198,10 @@ class ExpertsListWidget extends StatelessWidget {
       width: double.infinity,
       child: ElevatedButton(
         onPressed: () {},
-        style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(AppColors.buttonColor)),
+        style: AppStyles.redButtonStyle(context),
         child: Text(
           ProjectResources.schedule,
-          style: Theme.of(context)
-              .textTheme
-              .bodyText1
-              ?.copyWith(color: AppColors.white),
+          style: AppStyles.redButtonTextStyle(context),
         ),
       ),
     );
