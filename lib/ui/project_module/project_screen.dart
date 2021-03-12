@@ -1,10 +1,8 @@
 import 'package:coleman/injection.dart';
 import 'package:coleman/resources/colors.dart';
-import 'package:coleman/resources/project_resources.dart';
 import 'package:coleman/ui/project_module/bloc/experts_bloc.dart';
 import 'package:coleman/ui/project_module/bloc/experts_state.dart';
 import 'package:coleman/ui/project_module/widgets/template_list_widget.dart';
-import 'package:coleman/ui/project_module/widgets/experts_list_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

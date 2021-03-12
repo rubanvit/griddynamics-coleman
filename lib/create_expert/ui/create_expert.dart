@@ -4,6 +4,7 @@ import 'package:coleman/injection.dart';
 import 'package:coleman/resources/colors.dart';
 import 'package:coleman/resources/dimens.dart';
 import 'package:coleman/resources/text_styles.dart';
+import 'package:coleman/resources/ui_constants.dart';
 import 'package:coleman/ui/project_module/project_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -28,64 +29,85 @@ class CreateExpertView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CreateExpertBloc, CreateExpertState>(
         builder: (ctx, state) {
-      return Scaffold(
-        body: SafeArea(
-          child: Column(
-            children: [
-              _headerWidget(),
-              _searchWidget(context: context, state: state),
-              state.when(initial: (List<ProjectModel> projectList) {
-                return _projectsListWidget(projectList, context);
-              }, progress: () {
-                return const CircularProgressIndicator();
-              }, error: () {
-                return const Text('error Happent');
-              }),
-            ],
+      return MaterialApp(
+        theme: UIConstants.materialTheme,
+        home: SafeArea(
+          child: Scaffold(
+            appBar: _getAppBar(context),
+            body: Column(
+              children: [
+                const SizedBox(height: 10),
+                _searchWidget(context: context, state: state),
+                state.when(initial: (List<ProjectModel> projectList) {
+                  return _projectsListWidget(projectList, context);
+                }, progress: () {
+                  return const CircularProgressIndicator();
+                }, error: () {
+                  return const Text('error Happend');
+                }),
+              ],
+            ),
           ),
         ),
       );
     });
   }
 
-  Widget _headerWidget() {
-    return Column(
-      children: [
-        Container(
-          padding: const EdgeInsets.all(Dimens.big),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(Dimens.small),
-            color: Colors.white,
+  AppBar _getAppBar(BuildContext context) {
+    return AppBar(
+      leading: IconButton(
+        icon: Icon(Icons.menu),
+        color: AppColors.appbarMenuButtonColor,
+        onPressed: () {},
+      ),
+      centerTitle: true,
+      title: Container(
+          height: 24, child: Image.asset('assets/images/logo_coleman.png')),
+      bottom: _headerWidget(),
+    );
+  }
+
+  AppBar _headerWidget() {
+    return AppBar(
+      backgroundColor: AppColors.white,
+      title: Column(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(Dimens.normal),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(Dimens.small),
+              color: Colors.white,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  'Projects',
+                  style: AppTextStyle.headerBoldBlack,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    print('On Pressed');
+                  },
+                  child: const Text('Create Project'),
+                  style: ElevatedButton.styleFrom(
+                      primary: AppColors.dark_red,
+                      textStyle: AppTextStyle.bodyBoldWhite),
+                ),
+              ],
+            ),
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text(
-                'Projects',
-                style: AppTextStyle.headerBoldBlack,
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  print('On Preseed');
-                },
-                child: const Text('Create Project'),
-                style: ElevatedButton.styleFrom(
-                    primary: AppColors.dark_red,
-                    textStyle: AppTextStyle.bodyBoldWhite),
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-      ],
+        ],
+      ),
     );
   }
 
   Widget _searchWidget(
       {required BuildContext context, required CreateExpertState state}) {
-    return Container(
+    return Card(
+        margin: EdgeInsets.zero,
+        elevation: 4,
+        child: Container(
       padding: const EdgeInsets.all(Dimens.big),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(Dimens.small),
@@ -113,7 +135,7 @@ class CreateExpertView extends StatelessWidget {
           ),
         ),
       ),
-    );
+    ));
   }
 
   Widget _projectsListWidget(List<ProjectModel> projectList, BuildContext context) {
@@ -138,6 +160,7 @@ class CreateExpertView extends StatelessWidget {
     return GestureDetector(
       onTap: (){_openProjectExpertsScreen(project.name, context);},
     child: Card(
+      elevation: 4,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(Dimens.small),
       ),
@@ -182,10 +205,7 @@ class CreateExpertView extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const VerticalDivider(
-                    thickness: 1,
-                    color: Colors.grey,
-                  ),
+                  const VerticalDivider(),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -204,9 +224,7 @@ class CreateExpertView extends StatelessWidget {
                 ],
               ),
             ),
-            const Divider(
-              thickness: 1,
-            ),
+            const Divider(),
             const SizedBox(height: Dimens.small),
             const Text('PROJECT VISIBLE TO:'),
             const SizedBox(height: Dimens.small),
@@ -230,7 +248,7 @@ class CreateExpertView extends StatelessWidget {
   }
 
   void _openProjectExpertsScreen(String name, BuildContext context) {
-    Navigator.push(
+    Navigator.push<ProjectScreen>(
         context,
         MaterialPageRoute(builder: (context) => ProjectScreen(name))
     );
