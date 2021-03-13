@@ -1,20 +1,23 @@
 import 'package:coleman/injection.dart';
+import 'package:coleman/main.dart';
 import 'package:coleman/resources/colors.dart';
+import 'package:coleman/resources/ui_constants.dart';
 import 'package:coleman/ui/project_module/bloc/experts_bloc.dart';
 import 'package:coleman/ui/project_module/bloc/experts_state.dart';
 import 'package:coleman/ui/project_module/widgets/template_list_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../resources/ui_constants.dart';
-
 class ProjectScreen extends StatelessWidget {
-  late String projectName;
+  static const routeName = AppNavigation.EXPERTS;
 
-  ProjectScreen(this.projectName);
+  late String projectName = "";
 
   @override
   Widget build(BuildContext context) {
+    final arguments = ModalRoute.of(context)?.settings.arguments;
+    projectName = arguments == null ? "" : arguments as String;
+
     return MaterialApp(
         theme: UIConstants.materialTheme,
         home: SafeArea(

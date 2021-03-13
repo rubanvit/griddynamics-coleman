@@ -1,6 +1,7 @@
 import 'package:coleman/create_expert/ui/bloc/create_expert_bloc.dart';
 import 'package:coleman/domain/models/projects.dart';
 import 'package:coleman/injection.dart';
+import 'package:coleman/main.dart';
 import 'package:coleman/resources/colors.dart';
 import 'package:coleman/resources/dimens.dart';
 import 'package:coleman/resources/text_styles.dart';
@@ -245,7 +246,10 @@ class CreateExpertView extends StatelessWidget {
   }
 
   void _openProjectExpertsScreen(String name, BuildContext context) {
-    Navigator.push<ProjectScreen>(
-        context, MaterialPageRoute(builder: (context) => ProjectScreen(name)));
+    Navigator.pushNamed(
+      context,
+      AppNavigation.EXPERTS,
+      arguments: name,
+    );
   }
 }

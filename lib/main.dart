@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
       routes: <String, WidgetBuilder>{
         AppNavigation.LOGIN: (_) => LoginScreen(),
         AppNavigation.HOME: (_) => CreateExpertScreen(),
+        AppNavigation.EXPERTS: (_) => ProjectScreen(),
       },
     );
   }
@@ -32,4 +33,5 @@ class MyApp extends StatelessWidget {
 class AppNavigation{
   static const LOGIN = '/';
   static const HOME = '/home';
+  static const EXPERTS = '/experts';
 }
