@@ -1,13 +1,12 @@
+import 'package:coleman/injection.dart';
 import 'package:coleman/resources/dimens.dart';
 import 'package:coleman/resources/text_styles.dart';
+import 'package:coleman/ui/login_module/bloc/login_bloc.dart';
+import 'package:coleman/ui/login_module/bloc/login_event.dart';
+import 'package:coleman/ui/login_module/bloc/login_state.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../injection.dart';
-import 'bloc/login_bloc.dart';
-import 'bloc/login_event.dart';
-import 'bloc/login_state.dart';
 
 class LoginScreen extends StatelessWidget {
   @override

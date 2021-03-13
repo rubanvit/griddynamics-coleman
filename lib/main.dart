@@ -1,7 +1,7 @@
 import 'package:coleman/resources/colors.dart';
 import 'package:flutter/material.dart';
 import 'injection.dart';
-import 'login_module/ui/login_screen.dart';
+import 'ui/login_module/login_screen.dart';
 
 
 void main() {
