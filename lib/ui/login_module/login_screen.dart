@@ -1,4 +1,5 @@
 import 'package:coleman/injection.dart';
+import 'package:coleman/main.dart';
 import 'package:coleman/resources/dimens.dart';
 import 'package:coleman/resources/text_styles.dart';
 import 'package:coleman/ui/login_module/bloc/login_bloc.dart';
@@ -36,7 +37,7 @@ class _LoginViewState extends State<_LoginView> {
         if (state is LoginStateError) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text('error'),
+              content: Text('Login is failed'),
               backgroundColor: Colors.red,
             ),
           );
@@ -133,6 +134,6 @@ class _LoginViewState extends State<_LoginView> {
   }
 
   void _goToMainMenu() {
-    print('go to main Menu');
+    Navigator.of(context).pushReplacementNamed(AppNavigation.HOME);
   }
 }

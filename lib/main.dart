@@ -1,8 +1,9 @@
+import 'package:coleman/create_expert/ui/create_expert.dart';
 import 'package:coleman/resources/colors.dart';
+import 'package:coleman/ui/project_module/project_screen.dart';
 import 'package:flutter/material.dart';
 import 'injection.dart';
 import 'ui/login_module/login_screen.dart';
-
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,8 +21,15 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: AppColors.scaffold_background,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: LoginScreen(),
+      routes: <String, WidgetBuilder>{
+        AppNavigation.LOGIN: (_) => LoginScreen(),
+        AppNavigation.HOME: (_) => CreateExpertScreen(),
+      },
     );
   }
 }
 
+class AppNavigation{
+  static const LOGIN = '/';
+  static const HOME = '/home';
+}
