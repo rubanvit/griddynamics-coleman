@@ -34,4 +34,47 @@ class AppStyles {
       borderSide: BorderSide(color: color),
     );
   }
+
+  static const TextStyle bodyBoldBlack =  TextStyle(
+    color: AppColors.black,
+    fontSize: Dimens.normal,
+    fontWeight: FontWeight.bold,
+  );
+
+  static const TextStyle body2BoldBlack =  TextStyle(
+    color: AppColors.black,
+    fontSize: 14,
+    fontWeight: FontWeight.bold,
+  );
+
+  static const TextStyle bodyW400Grey =  TextStyle(
+    color: AppColors.light_gray,
+    fontSize: Dimens.normal,
+    fontWeight: FontWeight.w400,
+  );
+
+  static const TextStyle body2W400Green =  TextStyle(
+    color: AppColors.green,
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+  );
+
+  static const TextStyle body2W400Black =  TextStyle(
+    color: AppColors.black,
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+  );
+
+  static const TextStyle headerW400White =  TextStyle(
+    color: AppColors.white,
+    fontSize: Dimens.big,
+    fontWeight: FontWeight.w400,
+  );
+
+  static const TextStyle headerW400Blue =  TextStyle(
+    color: AppColors.blue,
+    fontSize: Dimens.big,
+    fontWeight: FontWeight.w400,
+  );
 }
+
