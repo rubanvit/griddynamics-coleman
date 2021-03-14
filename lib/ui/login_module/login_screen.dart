@@ -16,7 +16,10 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (ctx) => getIt.get<LoginBloc>(),
-      child: _LoginView(),
+      child: Scaffold(
+          body: SafeArea(
+        child: _LoginView(),
+      )),
     );
   }
 }
@@ -34,6 +37,7 @@ class _LoginViewState extends State<_LoginView> {
   final _formKey = GlobalKey<FormState>();
   final _nameFocus = FocusNode();
   final _passFocus = FocusNode();
+  bool _obscureText = true;
 
   @override
   void dispose() {
@@ -66,18 +70,16 @@ class _LoginViewState extends State<_LoginView> {
         }
       },
       builder: (ctx, state) {
-        return MaterialApp(
-          home: Scaffold(
-            body: SafeArea(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  _logoWidget(),
-                  SizedBox(height: 60),
-                  _emailPasswordWidget(state),
-                ],
-              ),
+        return Center(
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                _logoWidget(),
+                const SizedBox(height: 40),
+                _emailPasswordWidget(state),
+              ],
             ),
           ),
         );
@@ -93,26 +95,29 @@ class _LoginViewState extends State<_LoginView> {
   }
 
   Widget _emailPasswordWidget(LoginState state) {
-    return Padding(
-      padding: const EdgeInsets.all(24.0),
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
-        elevation: 4,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 48),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                _emailField(context, state),
-                const SizedBox(height: Dimens.normal),
-                _passwordField(context, state),
-                const SizedBox(height: Dimens.big),
-                _buttonSection(context, state),
-              ],
+    return Center(
+      child: Container(
+        width: 300,
+        child: Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          elevation: 4,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 48),
+            child: Form(
+              key: _formKey,
+              autovalidateMode: AutovalidateMode.always,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  _emailField(context, state),
+                  const SizedBox(height: Dimens.normal),
+                  _passwordField(context, state),
+                  const SizedBox(height: Dimens.big),
+                  _buttonSection(context, state),
+                ],
+              ),
             ),
           ),
         ),
@@ -130,7 +135,9 @@ class _LoginViewState extends State<_LoginView> {
       controller: _nameController,
       decoration: _fieldDecoration(
           context,
-          LoginTextResources.login_username_hint),
+          LoginTextResources.login_username_hint,
+          LoginTextResources.login_username_label,
+          false),
       keyboardType: TextInputType.emailAddress,
       validator: _validateName,
     );
@@ -138,63 +145,86 @@ class _LoginViewState extends State<_LoginView> {
 
   TextFormField _passwordField(BuildContext context, LoginState state) {
     return TextFormField(
-      obscureText: true,
+      obscureText: _obscureText,
       focusNode: _passFocus,
       onFieldSubmitted: (_) {
-        _fieldFocusChange(context, _passFocus, _nameFocus);
+        _passFocus.unfocus();
+        _submitForm();
       },
       controller: _passwordController,
       decoration: _fieldDecoration(
           context,
-          LoginTextResources.login_password_hint),
+          LoginTextResources.login_password_hint,
+          LoginTextResources.login_password_label,
+          true),
       keyboardType: TextInputType.visiblePassword,
       validator: _validatePassword,
     );
   }
 
-  InputDecoration _fieldDecoration(
-      BuildContext context, String hintText) {
+  InputDecoration _fieldDecoration(BuildContext context, String hintText,
+      String labelText, bool isPassword) {
     return InputDecoration(
-      fillColor: AppColors.formBackgroundColor,
-      filled: true,
-      hintText: hintText,
-      hintMaxLines: 1,
-      border: const OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(Dimens.medium)),
-        borderSide: BorderSide(
-          color: AppColors.formUnfocusedBorderColor,
-          width: 2,
+        fillColor: AppColors.formBackgroundColor,
+        filled: true,
+        hintText: hintText,
+        labelText: labelText,
+        hintStyle: Theme.of(context).textTheme.bodyText2,
+        labelStyle: Theme.of(context).textTheme.bodyText1,
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        hintMaxLines: 1,
+        border: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(Dimens.medium)),
+          borderSide: BorderSide(
+            color: AppColors.formUnfocusedBorderColor,
+            width: 2,
+          ),
         ),
-      ),
-      enabledBorder: const OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(Dimens.medium)),
-        borderSide: BorderSide(
-          color: AppColors.formUnfocusedBorderColor,
-          width: 2,
+        enabledBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(Dimens.medium)),
+          borderSide: BorderSide(
+            color: AppColors.formUnfocusedBorderColor,
+            width: 2,
+          ),
         ),
-      ),
-      focusedBorder: const OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(Dimens.medium)),
-        borderSide: BorderSide(
-          color: AppColors.formFocusedBorderColor,
-          width: 2,
+        focusedBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(Dimens.medium)),
+          borderSide: BorderSide(
+            color: AppColors.formFocusedBorderColor,
+            width: 2,
+          ),
         ),
-      ),
-    );
+        suffixIcon: isPassword
+            ? IconButton(
+                icon: Icon(
+                  _obscureText ? Icons.visibility : Icons.visibility_off,
+                  color: AppColors.black,
+                ),
+                onPressed: () {
+                  setState(() {
+                    _obscureText = !_obscureText;
+                  });
+                },
+              )
+            : null);
   }
 
   Widget _buttonSection(BuildContext context, LoginState state) {
     return (state is LoginStateProcessing)
-        ? CircularProgressIndicator()
-        : ElevatedButton(
-            child: Text(
-              LoginTextResources.login_login_button,
-              style: AppStyles.redButtonTextStyle(context),
+        ? const CircularProgressIndicator()
+        : Container(
+            width: double.infinity,
+            child: ElevatedButton(
+              child: Text(
+                LoginTextResources.login_login_button,
+                style: AppStyles.redButtonTextStyle(context),
+              ),
+              style: AppStyles.redButtonStyle(context),
+              onPressed: () {
+                FocusScope.of(context).focusedChild?.unfocus();
+                _submitForm();
+              },
             ),
-            style: AppStyles.redButtonStyle(context),
-            onPressed: () {
-              _submitForm();
-            },
           );
   }
 
@@ -230,8 +260,10 @@ class _LoginViewState extends State<_LoginView> {
 
 class LoginTextResources {
   static const login_failed_error = 'Login is failed';
-  static const login_username_hint = 'Username \u{22c6}';
-  static const login_password_hint = 'Password \u{22c6}';
+  static const login_username_label = 'Username \u{22c6}';
+  static const login_username_hint = 'Input Username';
+  static const login_password_label = 'Password \u{22c6}';
+  static const login_password_hint = 'Input Password';
   static const login_login_button = 'Log In';
   static const login_name_required = 'Name is required';
   static const login_email_wrong_format = 'Use alphabetical symbols';

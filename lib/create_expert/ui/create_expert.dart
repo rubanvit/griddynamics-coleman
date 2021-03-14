@@ -31,10 +31,10 @@ class CreateExpertView extends StatelessWidget {
         builder: (ctx, state) {
       return MaterialApp(
         theme: UIConstants.materialTheme,
-        home: SafeArea(
-          child: Scaffold(
-            appBar: _getAppBar(context),
-            body: Column(
+        home: Scaffold(
+          appBar: _getAppBar(context),
+          body: SafeArea(
+            child: Column(
               children: [
                 const SizedBox(height: 10),
                 _searchWidget(context: context, state: state),

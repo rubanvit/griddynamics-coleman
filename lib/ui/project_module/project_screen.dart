@@ -20,14 +20,14 @@ class ProjectScreen extends StatelessWidget {
 
     return MaterialApp(
         theme: UIConstants.materialTheme,
-        home: SafeArea(
-          child: Scaffold(
-              appBar: _getAppBar(context),
-              body: BlocProvider(
+        home: Scaffold(
+            appBar: _getAppBar(context),
+            body: SafeArea(
+              child: BlocProvider(
                   lazy: false,
                   create: (context) => getIt<ExpertsCubit>(),
-                  child: _getPageContent())),
-        ));
+                  child: _getPageContent()),
+            )));
   }
 
   AppBar _getAppBar(BuildContext context) {
