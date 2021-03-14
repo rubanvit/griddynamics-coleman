@@ -7,6 +7,7 @@ class UIConstants {
 
   static ThemeData materialTheme = ThemeData(
     appBarTheme: AppBarTheme(
+      brightness: Brightness.dark,
       color: AppColors.appbarBackground,
       textTheme: ThemeData.dark().textTheme.copyWith(
             title: const TextStyle(
