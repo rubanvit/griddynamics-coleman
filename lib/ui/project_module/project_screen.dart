@@ -34,7 +34,7 @@ class ProjectScreen extends StatelessWidget {
     return AppBar(
       centerTitle: true,
       title: Container(
-          height: 24, child: Image.asset('assets/images/logo_coleman.png')),
+          height: 24, child: Image.asset(UIConstants.logo_url)),
       bottom: _getPageHeader(context),
     );
   }

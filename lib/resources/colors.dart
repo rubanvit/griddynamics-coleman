@@ -27,4 +27,7 @@ class AppColors{
   static const bookmarkIconColor = Color(0xffb3aec7);
   static const outlinedButtonColor = Color(0xff006e00);
   static const buttonColor = Color(0xff6c141f);
+  static const formBackgroundColor = Color(0xffe9f0fd);
+  static const formUnfocusedBorderColor = Color(0xffbdb5ca);
+  static const formFocusedBorderColor = Color(0xff000568);
 }
