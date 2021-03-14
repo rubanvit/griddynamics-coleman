@@ -246,6 +246,7 @@ class CreateExpertView extends StatelessWidget {
   }
 
   void _openProjectExpertsScreen(String name, BuildContext context) {
+    FocusScope.of(context).focusedChild?.unfocus();
     Navigator.pushNamed(
       context,
       AppNavigation.EXPERTS,
