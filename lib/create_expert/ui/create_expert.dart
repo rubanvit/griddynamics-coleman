@@ -31,10 +31,10 @@ class CreateExpertView extends StatelessWidget {
         builder: (ctx, state) {
       return MaterialApp(
         theme: UIConstants.materialTheme,
-        home: SafeArea(
-          child: Scaffold(
-            appBar: _getAppBar(context),
-            body: Column(
+        home: Scaffold(
+          appBar: _getAppBar(context),
+          body: SafeArea(
+            child: Column(
               children: [
                 const SizedBox(height: 10),
                 _searchWidget(context: context, state: state),
@@ -57,7 +57,7 @@ class CreateExpertView extends StatelessWidget {
     return AppBar(
       centerTitle: true,
       title: Container(
-          height: 24, child: Image.asset('assets/images/logo_coleman.png')),
+          height: 24, child: Image.asset(UIConstants.logo_url)),
       bottom: _headerWidget(context),
     );
   }

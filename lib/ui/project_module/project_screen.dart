@@ -20,21 +20,21 @@ class ProjectScreen extends StatelessWidget {
 
     return MaterialApp(
         theme: UIConstants.materialTheme,
-        home: SafeArea(
-          child: Scaffold(
-              appBar: _getAppBar(context),
-              body: BlocProvider(
+        home: Scaffold(
+            appBar: _getAppBar(context),
+            body: SafeArea(
+              child: BlocProvider(
                   lazy: false,
                   create: (context) => getIt<ExpertsCubit>(),
-                  child: _getPageContent())),
-        ));
+                  child: _getPageContent()),
+            )));
   }
 
   AppBar _getAppBar(BuildContext context) {
     return AppBar(
       centerTitle: true,
       title: Container(
-          height: 24, child: Image.asset('assets/images/logo_coleman.png')),
+          height: 24, child: Image.asset(UIConstants.logo_url)),
       bottom: _getPageHeader(context),
     );
   }

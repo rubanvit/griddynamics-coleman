@@ -1,7 +1,9 @@
 import 'package:coleman/injection.dart';
 import 'package:coleman/main.dart';
+import 'package:coleman/resources/colors.dart';
 import 'package:coleman/resources/dimens.dart';
 import 'package:coleman/resources/text_styles.dart';
+import 'package:coleman/resources/ui_constants.dart';
 import 'package:coleman/ui/login_module/bloc/login_bloc.dart';
 import 'package:coleman/ui/login_module/bloc/login_event.dart';
 import 'package:coleman/ui/login_module/bloc/login_state.dart';
@@ -14,7 +16,10 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (ctx) => getIt.get<LoginBloc>(),
-      child: _LoginView(),
+      child: Scaffold(
+          body: SafeArea(
+        child: _LoginView(),
+      )),
     );
   }
 }
@@ -27,8 +32,27 @@ class _LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<_LoginView> {
-  final _emailController = TextEditingController();
+  final _nameController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+  final _nameFocus = FocusNode();
+  final _passFocus = FocusNode();
+  bool _obscureText = true;
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _passwordController.dispose();
+    _nameFocus.dispose();
+    _passFocus.dispose();
+    super.dispose();
+  }
+
+  void _fieldFocusChange(
+      BuildContext context, FocusNode current, FocusNode next) {
+    current.unfocus();
+    FocusScope.of(context).requestFocus(next);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,26 +61,25 @@ class _LoginViewState extends State<_LoginView> {
         if (state is LoginStateError) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text('Login is failed'),
+              content: Text(LoginTextResources.login_failed_error),
               backgroundColor: Colors.red,
             ),
           );
-        } else if (state is LoginStateSuccess){
+        } else if (state is LoginStateSuccess) {
           _goToMainMenu();
         }
       },
       builder: (ctx, state) {
-        return Scaffold(
-          body: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.all(Dimens.big),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  _logoWidget(),
-                  _emailPasswordWidget(state),
-                ],
-              ),
+        return Center(
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                _logoWidget(),
+                const SizedBox(height: 40),
+                _emailPasswordWidget(state),
+              ],
             ),
           ),
         );
@@ -65,75 +88,183 @@ class _LoginViewState extends State<_LoginView> {
   }
 
   Widget _logoWidget() {
-    return const Text('image');
+    return Container(
+      width: 200,
+      child: Image.asset(UIConstants.logo_url),
+    );
   }
 
   Widget _emailPasswordWidget(LoginState state) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        TextFormField(
-          controller: _emailController,
-          decoration: InputDecoration(
-            prefixIcon: const Icon(
-              Icons.email,
-              color: Colors.white,
-            ),
-            fillColor: Colors.blueAccent,
-            filled: true,
-            hintText: 'Enter your Email',
-            hintMaxLines: 1,
-            hintStyle: AppStyles.hint,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(Dimens.medium),
+    return Center(
+      child: Container(
+        width: 300,
+        child: Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          elevation: 4,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 48),
+            child: Form(
+              key: _formKey,
+              autovalidateMode: AutovalidateMode.always,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  _emailField(context, state),
+                  const SizedBox(height: Dimens.normal),
+                  _passwordField(context, state),
+                  const SizedBox(height: Dimens.big),
+                  _buttonSection(context, state),
+                ],
+              ),
             ),
           ),
-          keyboardType: TextInputType.emailAddress,
         ),
-        const SizedBox(
-          height: Dimens.normal,
-        ),
-        TextFormField(
-          controller: _passwordController,
-          decoration: InputDecoration(
-            prefixIcon: const Icon(
-              Icons.lock,
-              color: Colors.white,
-            ),
-            fillColor: Colors.blueAccent,
-            filled: true,
-            hintText: 'Enter your Password',
-            hintMaxLines: 1,
-            hintStyle: AppStyles.hint,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(Dimens.medium),
-            ),
-          ),
-          keyboardType: TextInputType.emailAddress,
-        ),
-        const SizedBox(
-          height: Dimens.big,
-        ),
-        Container(
-          alignment: Alignment.center,
-          height: Dimens.xlarge,
-          child: state is LoginStateProcessing
-              ? const CircularProgressIndicator()
-              : ElevatedButton(
-            child: const Text('Login'),
-            onPressed: () {
-              context.read<LoginBloc>().add(
-                LoginEventPressed(_emailController.text,
-                    _passwordController.text),
-              );
-            },
-          ),
-        ),
-      ],
+      ),
     );
+  }
+
+  TextFormField _emailField(BuildContext context, LoginState state) {
+    return TextFormField(
+      focusNode: _nameFocus,
+      autofocus: true,
+      onFieldSubmitted: (_) {
+        _fieldFocusChange(context, _nameFocus, _passFocus);
+      },
+      controller: _nameController,
+      decoration: _fieldDecoration(
+          context,
+          LoginTextResources.login_username_hint,
+          LoginTextResources.login_username_label,
+          false),
+      keyboardType: TextInputType.emailAddress,
+      validator: _validateName,
+    );
+  }
+
+  TextFormField _passwordField(BuildContext context, LoginState state) {
+    return TextFormField(
+      obscureText: _obscureText,
+      focusNode: _passFocus,
+      onFieldSubmitted: (_) {
+        _passFocus.unfocus();
+        _submitForm();
+      },
+      controller: _passwordController,
+      decoration: _fieldDecoration(
+          context,
+          LoginTextResources.login_password_hint,
+          LoginTextResources.login_password_label,
+          true),
+      keyboardType: TextInputType.visiblePassword,
+      validator: _validatePassword,
+    );
+  }
+
+  InputDecoration _fieldDecoration(BuildContext context, String hintText,
+      String labelText, bool isPassword) {
+    return InputDecoration(
+        fillColor: AppColors.formBackgroundColor,
+        filled: true,
+        hintText: hintText,
+        labelText: labelText,
+        hintStyle: Theme.of(context).textTheme.bodyText2,
+        labelStyle: Theme.of(context).textTheme.bodyText1,
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        hintMaxLines: 1,
+        border: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(Dimens.medium)),
+          borderSide: BorderSide(
+            color: AppColors.formUnfocusedBorderColor,
+            width: 2,
+          ),
+        ),
+        enabledBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(Dimens.medium)),
+          borderSide: BorderSide(
+            color: AppColors.formUnfocusedBorderColor,
+            width: 2,
+          ),
+        ),
+        focusedBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(Dimens.medium)),
+          borderSide: BorderSide(
+            color: AppColors.formFocusedBorderColor,
+            width: 2,
+          ),
+        ),
+        suffixIcon: isPassword
+            ? IconButton(
+                icon: Icon(
+                  _obscureText ? Icons.visibility : Icons.visibility_off,
+                  color: AppColors.black,
+                ),
+                onPressed: () {
+                  setState(() {
+                    _obscureText = !_obscureText;
+                  });
+                },
+              )
+            : null);
+  }
+
+  Widget _buttonSection(BuildContext context, LoginState state) {
+    return (state is LoginStateProcessing)
+        ? const CircularProgressIndicator()
+        : Container(
+            width: double.infinity,
+            child: ElevatedButton(
+              child: Text(
+                LoginTextResources.login_login_button,
+                style: AppStyles.redButtonTextStyle(context),
+              ),
+              style: AppStyles.redButtonStyle(context),
+              onPressed: () {
+                FocusScope.of(context).focusedChild?.unfocus();
+                _submitForm();
+              },
+            ),
+          );
+  }
+
+  void _submitForm() {
+    if (_formKey.currentState?.validate() == true) {
+      context.read<LoginBloc>().add(
+            LoginEventPressed(_nameController.text, _passwordController.text),
+          );
+    }
   }
 
   void _goToMainMenu() {
     Navigator.of(context).pushReplacementNamed(AppNavigation.HOME);
   }
+
+  String? _validateName(String? value) {
+    final _nameExp = RegExp(r'^[A-Za-z]+$');
+    if (value?.isEmpty == true) {
+      return LoginTextResources.login_name_required;
+    } else if (value != null && !_nameExp.hasMatch(value)) {
+      return LoginTextResources.login_email_wrong_format;
+    } else
+      return null;
+  }
+
+  String? _validatePassword(String? value) {
+    if (_passwordController.text.length < 3) {
+      return "3 characters are required for password";
+    } else
+      return null;
+  }
+}
+
+class LoginTextResources {
+  static const login_failed_error = 'Login is failed';
+  static const login_username_label = 'Username \u{22c6}';
+  static const login_username_hint = 'Input Username';
+  static const login_password_label = 'Password \u{22c6}';
+  static const login_password_hint = 'Input Password';
+  static const login_login_button = 'Log In';
+  static const login_name_required = 'Name is required';
+  static const login_email_wrong_format = 'Use alphabetical symbols';
 }

@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 
 // ignore: avoid_classes_with_only_static_members
 class UIConstants {
+  static const String logo_url = 'assets/images/logo_coleman.png';
+
   static ThemeData materialTheme = ThemeData(
-    // primarySwatch: Colors.purple,
-    // accentColor: Colors.amber,
     appBarTheme: AppBarTheme(
       color: AppColors.appbarBackground,
-      textTheme: ThemeData.light().textTheme.copyWith(
+      textTheme: ThemeData.dark().textTheme.copyWith(
             title: const TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
