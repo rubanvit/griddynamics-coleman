@@ -138,6 +138,7 @@ class CreateExpertView extends StatelessWidget {
     return Expanded(
       child: ListView.builder(
         itemCount: projectList.length,
+        physics: const ClampingScrollPhysics(),
         itemBuilder: (ctx, index) {
           if (index == 0) {
             return Padding(

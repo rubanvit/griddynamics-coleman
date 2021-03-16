@@ -17,6 +17,7 @@ class ExpertsListWidget extends StatelessWidget {
     return Expanded(
       child: ListView.builder(
         scrollDirection: Axis.vertical,
+        physics: const ClampingScrollPhysics(),
         // shrinkWrap: true,
         itemCount: _state.expertsList.length,
         itemBuilder: (context, index) {
