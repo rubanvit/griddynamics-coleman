@@ -48,13 +48,13 @@ class ProjectScreen extends StatelessWidget {
           child: Row(
             children: [
               IconButton(
-                icon: Icon(Icons.arrow_back, color: AppColors.black),
+                icon: const Icon(Icons.arrow_back, color: AppColors.black),
                 color: AppColors.appbarMenuButtonColor,
                 onPressed: () {
                   Navigator.pop(context);
                 },
               ),
-              VerticalDivider(width: 8, thickness: 1, endIndent: 8, indent: 8),
+              const VerticalDivider(width: 8, thickness: 1, endIndent: 8, indent: 8),
             ],
           ),
         ));

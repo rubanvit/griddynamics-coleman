@@ -34,7 +34,7 @@ class ProjectsListView extends StatelessWidget {
                     }, progress: () {
                       return const CircularProgressIndicator();
                     }, error: () {
-                      return Text(Resources.projects_error);
+                      return const Text(Resources.projects_error);
                     }),
                   ],
                 ),
@@ -66,7 +66,7 @@ class ProjectsListView extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(Resources.projects_header),
+                const Text(Resources.projects_header),
                 ElevatedButton(
                   onPressed: () {
                     print('On Pressed');
