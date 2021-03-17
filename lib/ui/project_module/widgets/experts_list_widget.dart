@@ -1,3 +1,4 @@
+import 'package:coleman/common/platform_util.dart';
 import 'package:coleman/domain/models/expert.dart';
 import 'package:coleman/resources/colors.dart';
 import 'package:coleman/resources/text_styles.dart';
@@ -17,7 +18,7 @@ class ExpertsListWidget extends StatelessWidget {
     return Expanded(
       child: ListView.builder(
         scrollDirection: Axis.vertical,
-        physics: const ClampingScrollPhysics(),
+        physics: PlatformUtil.isWeb() ? const ClampingScrollPhysics() : null,
         // shrinkWrap: true,
         itemCount: _state.expertsList.length,
         itemBuilder: (context, index) {

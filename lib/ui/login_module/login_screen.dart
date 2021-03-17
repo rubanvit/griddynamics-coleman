@@ -1,5 +1,5 @@
 import 'package:coleman/injection.dart';
-import 'package:coleman/main.dart';
+import 'package:coleman/navigation/navigation.dart';
 import 'package:coleman/resources/colors.dart';
 import 'package:coleman/resources/dimens.dart';
 import 'package:coleman/resources/text_styles.dart';

@@ -1,5 +1,5 @@
 import 'package:coleman/injection.dart';
-import 'package:coleman/main.dart';
+import 'package:coleman/navigation/navigation.dart';
 import 'package:coleman/resources/colors.dart';
 import 'package:coleman/resources/ui_constants.dart';
 import 'package:coleman/ui/project_module/bloc/experts_bloc.dart';

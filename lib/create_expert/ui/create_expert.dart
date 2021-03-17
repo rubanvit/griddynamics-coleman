@@ -1,12 +1,12 @@
+import 'package:coleman/common/platform_util.dart';
 import 'package:coleman/create_expert/ui/bloc/create_expert_bloc.dart';
 import 'package:coleman/domain/models/projects.dart';
 import 'package:coleman/injection.dart';
-import 'package:coleman/main.dart';
+import 'package:coleman/navigation/navigation.dart';
 import 'package:coleman/resources/colors.dart';
 import 'package:coleman/resources/dimens.dart';
 import 'package:coleman/resources/text_styles.dart';
 import 'package:coleman/resources/ui_constants.dart';
-import 'package:coleman/ui/project_module/project_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -56,8 +56,7 @@ class CreateExpertView extends StatelessWidget {
   AppBar _getAppBar(BuildContext context) {
     return AppBar(
       centerTitle: true,
-      title: Container(
-          height: 24, child: Image.asset(UIConstants.logo_url)),
+      title: Container(height: 24, child: Image.asset(UIConstants.logo_url)),
       bottom: _headerWidget(context),
     );
   }
@@ -138,7 +137,7 @@ class CreateExpertView extends StatelessWidget {
     return Expanded(
       child: ListView.builder(
         itemCount: projectList.length,
-        physics: const ClampingScrollPhysics(),
+        physics: PlatformUtil.isWeb() ? const ClampingScrollPhysics() : null,
         itemBuilder: (ctx, index) {
           if (index == 0) {
             return Padding(
