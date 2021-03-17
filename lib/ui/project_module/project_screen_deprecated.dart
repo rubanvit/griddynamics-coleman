@@ -1,12 +1,11 @@
 import 'package:coleman/injection.dart';
 import 'package:coleman/ui/common/colors.dart';
+import 'package:coleman/ui/common/constants.dart';
 import 'package:coleman/ui/common/resources.dart';
 import 'package:coleman/ui/common/search_bar.dart';
-import 'package:coleman/ui/common/constants.dart';
 import 'package:coleman/ui/project_module/bloc/experts_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 
 class ProjectScreenDeprecated extends StatelessWidget {
   @override
@@ -46,7 +45,7 @@ class _StackOverState extends State<StackOver>
                 lazy: false,
                 create: (context) => getIt<ExpertsCubit>(),
                 child: Padding(
-                  padding: EdgeInsets.only(top: 8.0),
+                  padding: const EdgeInsets.only(top: 8.0),
                   child: Column(
                     children: [
                       _getTabs(),
@@ -68,7 +67,7 @@ class _StackOverState extends State<StackOver>
 
   AppBar _getAppBar() {
     return AppBar(
-      title: Text(Resources.appName),
+      title: const Text(Resources.appName),
     );
   }
 
@@ -80,7 +79,7 @@ class _StackOverState extends State<StackOver>
         color: AppColors.appbarBackground,
         child: TabBar(
           controller: _tabController,
-          indicator: BoxDecoration(
+          indicator: const BoxDecoration(
             border: Border(
               bottom: BorderSide(
                 width: 2,
@@ -130,17 +129,17 @@ class _StackOverState extends State<StackOver>
   }
 
   Widget _getLeftTabBarView() {
-    return CircularProgressIndicator();
+    return const CircularProgressIndicator();
     // return BlocBuilder<ExpertsCubit, ExpertsState>(builder: (_, state) {
-      // if (state is ExpertsStateEmpty) {
-      //   return TemplateExpertsList("", ProjectResources.experts_empty_list);
-      // } else if (state is ExpertsStateProcessing) {
-      //   return TemplateExpertsList.asProgress("");
-      // } else if (state is ExpertsStateSuccessful) {
-      //   return ExpertsListWidget(state, "");
-      // } else {
-      //   return TemplateExpertsList("", ProjectResources.experts_error_list);
-      // }
+    // if (state is ExpertsStateEmpty) {
+    //   return TemplateExpertsList("", ProjectResources.experts_empty_list);
+    // } else if (state is ExpertsStateProcessing) {
+    //   return TemplateExpertsList.asProgress("");
+    // } else if (state is ExpertsStateSuccessful) {
+    //   return ExpertsListWidget(state, "");
+    // } else {
+    //   return TemplateExpertsList("", ProjectResources.experts_error_list);
+    // }
     // });
   }
 
@@ -150,7 +149,7 @@ class _StackOverState extends State<StackOver>
 
   Widget _getSearchBar() {
     return Padding(
-      padding: EdgeInsets.all(12.0),
+      padding: const EdgeInsets.all(12.0),
       child: SearchBar(),
     );
   }
@@ -160,7 +159,7 @@ class _StackOverState extends State<StackOver>
       width: double.infinity,
       child: Card(
         color: AppColors.lightOrange,
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           side: BorderSide(color: AppColors.orange, width: 1.0),
         ),
         elevation: 4,
@@ -169,8 +168,8 @@ class _StackOverState extends State<StackOver>
           child: Container(
             child: Row(
               children: [
-                Icon(Icons.people, size: 40, color: AppColors.orange),
-                SizedBox(width: 16),
+                const Icon(Icons.people, size: 40, color: AppColors.orange),
+                const SizedBox(width: 16),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -179,12 +178,12 @@ class _StackOverState extends State<StackOver>
                         Resources.experts_qualifiedExperts,
                         style: Theme.of(context).textTheme.headline6,
                       ),
-                      SizedBox(height: 4),
+                      const SizedBox(height: 4),
                       RichText(
                         text: TextSpan(
                           text: Resources.experts_banner1,
                           style: Theme.of(context).textTheme.bodyText2,
-                          children: <TextSpan>[
+                          children: const <TextSpan>[
                             TextSpan(
                                 text: Resources.experts_banner2,
                                 style: TextStyle(color: AppColors.blue)),

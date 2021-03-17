@@ -114,7 +114,7 @@ class ProjectWidget extends StatelessWidget {
 
   Widget _progectVisibility(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Text(Resources.projects_visible_to),
+      const Text(Resources.projects_visible_to),
       const SizedBox(height: Dimens.small),
       Text(
         '${project.projectLead.fullName}',

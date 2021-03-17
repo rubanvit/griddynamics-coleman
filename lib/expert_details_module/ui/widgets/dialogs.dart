@@ -1,6 +1,6 @@
-import 'package:coleman/resources/colors.dart';
-import 'package:coleman/resources/dimens.dart';
-import 'package:coleman/resources/text_styles.dart';
+import 'package:coleman/ui/common/colors.dart';
+import 'package:coleman/ui/common/dimens.dart';
+import 'package:coleman/ui/common/styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -36,13 +36,13 @@ class AppDialog extends StatelessWidget {
             FittedBox(
               child: Text(
                 _title,
-                style: AppTextStyle.headerW400White,
+                style: AppStyles.headerW400White,
               ),
             ),
             FittedBox(
               child: Text(
                 _title2,
-                style: AppTextStyle.headerW400White,
+                style: AppStyles.headerW400White,
               ),
             ),
             ElevatedButton(
@@ -51,7 +51,7 @@ class AppDialog extends StatelessWidget {
               onPressed: _onPressed,
               child: Text(
                 _actionButtonTitle,
-                style: AppTextStyle.headerW400Blue,
+                style: AppStyles.headerW400Blue,
               ),
             ),
           ],

@@ -26,6 +26,6 @@ class UIConstants {
           bodyText1: const TextStyle(height: 1.3),
           bodyText2: const TextStyle(height: 1.3),
         ),
-    dividerTheme: DividerThemeData(color: AppColors.gray3, thickness: 1),
+    dividerTheme: const DividerThemeData(color: AppColors.gray3, thickness: 1),
   );
 }

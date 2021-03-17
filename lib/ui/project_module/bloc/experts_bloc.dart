@@ -14,11 +14,11 @@ class ExpertsCubit extends Cubit<ExpertsState> {
 
   ExpertsCubit(ProjectRepository repository) :
         _repository = repository,
-        super(ExpertsStateProcessing()){
+        super(const ExpertsStateProcessing()){
     _repository.loadExperts().then((value) {
       _experts = value.experts;
       if (_experts.isEmpty){
-        emit(ExpertsStateEmpty());
+        emit(const ExpertsStateEmpty());
       }else{
         emit(ExpertsStateSuccessful(_experts));
       }
@@ -26,14 +26,14 @@ class ExpertsCubit extends Cubit<ExpertsState> {
   }
 
   void setProcessing(){
-    emit(ExpertsStateProcessing());
+    emit(const ExpertsStateProcessing());
   }
 
   void setError(){
-    emit(ExpertsStateError());
+    emit(const ExpertsStateError());
   }
 
   void setEmpty(){
-    emit(ExpertsStateEmpty());
+    emit(const ExpertsStateEmpty());
   }
 }

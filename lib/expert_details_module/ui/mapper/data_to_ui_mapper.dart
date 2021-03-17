@@ -1,6 +1,6 @@
 import 'package:coleman/domain/models/expert_details.dart';
-import 'package:coleman/resources/colors.dart';
-import 'package:coleman/resources/dimens.dart';
+import 'package:coleman/ui/common/colors.dart';
+import 'package:coleman/ui/common/dimens.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

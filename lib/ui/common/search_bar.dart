@@ -26,15 +26,15 @@ class SearchBarState extends State<SearchBar> {
       controller: _controller,
       style: Theme.of(context).textTheme.headline6,
       decoration: InputDecoration(
-        prefixIcon: Icon(Icons.search),
+        prefixIcon: const Icon(Icons.search),
         suffixIcon: _controller.text.isNotEmpty
             ? IconButton(
-                icon: Icon(Icons.close),
+                icon: const Icon(Icons.close),
                 onPressed: _controller.clear,
               )
             : null,
         hintText: Resources.experts_searchHint,
-        border: OutlineInputBorder(
+        border: const OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(20)),
         ),
       ),

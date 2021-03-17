@@ -6,6 +6,7 @@ import 'package:coleman/injection.dart';
 import 'package:coleman/ui/common/colors.dart';
 import 'package:coleman/ui/common/dimens.dart';
 import 'package:coleman/ui/common/resources.dart';
+import 'package:coleman/ui/common/styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -58,8 +59,8 @@ class _ExpertDetailsView extends StatelessWidget {
           builder: (ctx, state) => Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _expertDescriptionWidgets(),
-              _expertNameWidget(),
+              _expertDescriptionWidgets(context),
+              _expertNameWidget(context),
               _availabilityContentWidget(),
               _timePickerWidget(context, state),
               _scheduleButton(context)
@@ -70,25 +71,25 @@ class _ExpertDetailsView extends StatelessWidget {
     );
   }
 
-  Widget _expertDescriptionWidgets() {
+  Widget _expertDescriptionWidgets(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(
           left: Dimens.normal, right: Dimens.normal, top: Dimens.normal),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
+        children: [
           Text(
             Resources.expert_details_header,
-            style: AppTextStyle.headerBoldBlack,
+            style: AppStyles.headerBoldBlack(context),
           ),
-          SizedBox(
+          const SizedBox(
             height: Dimens.normal,
           ),
-          Text(
+          const Text(
             Resources.expert_details_sub_header,
-            style: AppTextStyle.bodyW400Grey,
+            style: AppStyles.bodyW400Grey,
           ),
-          SizedBox(
+          const SizedBox(
             height: Dimens.small,
           ),
         ],
@@ -96,15 +97,15 @@ class _ExpertDetailsView extends StatelessWidget {
     );
   }
 
-  Widget _expertNameWidget() {
+  Widget _expertNameWidget(BuildContext context) {
     return Container(
       constraints: const BoxConstraints(minWidth: double.infinity),
       color: Colors.white,
-      child: const Padding(
-        padding: EdgeInsets.all(Dimens.normal),
+      child: Padding(
+        padding: const EdgeInsets.all(Dimens.normal),
         child: Text(
           Resources.expert_details_expert_name,
-          style: AppTextStyle.headerBoldBlack,
+          style: AppStyles.headerBoldBlack(context),
         ),
       ),
     );
@@ -118,18 +119,18 @@ class _ExpertDetailsView extends StatelessWidget {
           Column(crossAxisAlignment: CrossAxisAlignment.start, children: const [
         Text(
           Resources.expert_details_current_date_mock,
-          style: AppTextStyle.body2BoldBlack,
+          style: AppStyles.body2BoldBlack,
         ),
         SizedBox(
           height: Dimens.micro,
         ),
         Text(Resources.expert_details_scheduling_time_mock,
-            style: AppTextStyle.body2W400Green),
+            style: AppStyles.body2W400Green),
         SizedBox(
           height: Dimens.micro,
         ),
         Text(Resources.expert_details_availability_time_mock,
-            style: AppTextStyle.body2W400Black),
+            style: AppStyles.body2W400Black),
       ]),
     );
   }
@@ -160,7 +161,7 @@ class _ExpertDetailsView extends StatelessWidget {
         ),
       );
     else
-      return SizedBox();
+      return const SizedBox();
   }
 
   Widget _scheduleButton(BuildContext context) {
