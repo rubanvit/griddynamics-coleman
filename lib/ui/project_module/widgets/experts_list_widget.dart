@@ -1,5 +1,6 @@
 import 'package:coleman/common/platform_util.dart';
 import 'package:coleman/domain/models/expert.dart';
+import 'package:coleman/navigation/navigation.dart';
 import 'package:coleman/ui/common/colors.dart';
 import 'package:coleman/ui/common/resources.dart';
 import 'package:coleman/ui/common/styles.dart';
@@ -207,13 +208,22 @@ class ExpertsListWidget extends StatelessWidget {
     return Container(
       width: double.infinity,
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          _openProjectExpertDetailsScreen(projectName, context);
+        },
         style: AppStyles.redButtonStyle(context),
         child: Text(
           Resources.experts_schedule,
           style: AppStyles.redButtonTextStyle(context),
         ),
       ),
+    );
+  }
+
+  void _openProjectExpertDetailsScreen(String name, BuildContext context) {
+    Navigator.pushNamed(
+      context,
+      AppNavigation.EXPERTS_DETAILS
     );
   }
 }

@@ -3,8 +3,11 @@ import 'package:coleman/expert_details_module/ui/bloc/expert_details_bloc.dart';
 import 'package:coleman/expert_details_module/ui/mapper/data_to_ui_mapper.dart';
 import 'package:coleman/expert_details_module/ui/widgets/dialogs.dart';
 import 'package:coleman/injection.dart';
+import 'package:coleman/navigation/navigation.dart';
 import 'package:coleman/ui/common/colors.dart';
+import 'package:coleman/ui/common/constants.dart';
 import 'package:coleman/ui/common/dimens.dart';
+import 'package:coleman/ui/common/icons.dart';
 import 'package:coleman/ui/common/resources.dart';
 import 'package:coleman/ui/common/styles.dart';
 import 'package:flutter/cupertino.dart';
@@ -16,16 +19,26 @@ import 'bloc/expert_details_event.dart';
 import 'bloc/expert_details_state.dart';
 
 class ExpertDetailsScreen extends StatelessWidget {
+  static const routeName = AppNavigation.EXPERTS_DETAILS;
+  late String projectName = "";
+
   @override
   Widget build(BuildContext context) {
+    final arguments = ModalRoute.of(context)?.settings.arguments;
+    projectName = arguments == null ? "" : arguments as String;
+
     return BlocProvider<ExpertDetailsBloc>(
       create: (ctx) => getIt.get<ExpertDetailsBloc>(),
-      child: _ExpertDetailsView(),
+      child: _ExpertDetailsView(projectName),
     );
   }
 }
 
 class _ExpertDetailsView extends StatelessWidget {
+  final String projectName;
+
+  _ExpertDetailsView(this.projectName, {Key? key}): super(key: key);
+
   @override
   Widget build(BuildContext context) {
     void showConfirmedDialog(ExpertDetailsTime selectedTime) {
@@ -47,24 +60,70 @@ class _ExpertDetailsView extends StatelessWidget {
                 });
           });
     }
+//    return MaterialApp(
+//        theme: UIConstants.materialTheme,
+//        home: Scaffold(
+//            appBar: _getAppBar(context),
+//            body: SafeArea(
+//              child: BlocProvider(
+//                  lazy: false,
+//                  create: (context) => getIt<ExpertsCubit>(),
+//                  child: _getPageContent()),
+//            )));
+//  }
+//
 
-    return Scaffold(
-      body: SafeArea(
-        child: BlocConsumer<ExpertDetailsBloc, ExpertDetailsState>(
-          listener: (ctx, state) {
-            if (state is ExpertDetailsStateTimeSelected) {
-              showConfirmedDialog(state.selectedTime);
-            }
-          },
-          builder: (ctx, state) => Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _expertDescriptionWidgets(context),
-              _expertNameWidget(context),
-              _availabilityContentWidget(),
-              _timePickerWidget(context, state),
-              _scheduleButton(context)
-            ],
+    AppBar _getPageHeader(BuildContext context) {
+      return AppBar(
+          backgroundColor: AppColors.white,
+          title: Text(projectName),
+          leading: Container(
+            child: Row(
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.arrow_back, color: AppColors.black),
+                  color: AppColors.appbarMenuButtonColor,
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                const VerticalDivider(width: 8, thickness: 1, endIndent: 8, indent: 8),
+              ],
+            ),
+          ));
+    }
+
+  AppBar _getAppBar(BuildContext context) {
+    return AppBar(
+      centerTitle: true,
+      title: Container(
+          height: 24, child: Image.asset(AppIcons.logo_url)),
+      bottom: _getPageHeader(context),
+    );
+  }
+
+
+    return MaterialApp(
+      theme: UIConstants.materialTheme,
+      home: Scaffold(
+        appBar: _getAppBar(context),
+        body: SafeArea(
+          child: BlocConsumer<ExpertDetailsBloc, ExpertDetailsState>(
+            listener: (ctx, state) {
+              if (state is ExpertDetailsStateTimeSelected) {
+                showConfirmedDialog(state.selectedTime);
+              }
+            },
+            builder: (ctx, state) => Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _expertDescriptionWidgets(context),
+                _expertNameWidget(context),
+                _availabilityContentWidget(),
+                _timePickerWidget(context, state),
+                _scheduleButton(context)
+              ],
+            ),
           ),
         ),
       ),
@@ -184,4 +243,6 @@ class _ExpertDetailsView extends StatelessWidget {
       ),
     );
   }
+
+
 }
