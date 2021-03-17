@@ -1,9 +1,9 @@
 import 'package:coleman/common/platform_util.dart';
 import 'package:coleman/domain/models/expert.dart';
-import 'package:coleman/resources/colors.dart';
-import 'package:coleman/resources/text_styles.dart';
+import 'package:coleman/ui/common/colors.dart';
+import 'package:coleman/ui/common/resources.dart';
+import 'package:coleman/ui/common/styles.dart';
 import 'package:coleman/ui/project_module/bloc/experts_state.dart';
-import 'package:coleman/resources/project_resources.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 

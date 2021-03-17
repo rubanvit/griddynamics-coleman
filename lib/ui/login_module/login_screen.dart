@@ -1,10 +1,10 @@
 import 'package:coleman/injection.dart';
 import 'package:coleman/navigation/navigation.dart';
-import 'package:coleman/resources/colors.dart';
-import 'package:coleman/resources/dimens.dart';
-import 'package:coleman/resources/project_resources.dart';
-import 'package:coleman/resources/text_styles.dart';
-import 'package:coleman/resources/ui_constants.dart';
+import 'package:coleman/ui/common/colors.dart';
+import 'package:coleman/ui/common/dimens.dart';
+import 'package:coleman/ui/common/icons.dart';
+import 'package:coleman/ui/common/resources.dart';
+import 'package:coleman/ui/common/styles.dart';
 import 'package:coleman/ui/login_module/bloc/login_bloc.dart';
 import 'package:coleman/ui/login_module/bloc/login_event.dart';
 import 'package:coleman/ui/login_module/bloc/login_state.dart';
@@ -91,7 +91,7 @@ class _LoginViewState extends State<_LoginView> {
   Widget _logoWidget() {
     return Container(
       width: 200,
-      child: Image.asset(UIConstants.logo_url),
+      child: Image.asset(AppIcons.logo_url),
     );
   }
 

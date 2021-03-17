@@ -1,5 +1,6 @@
-import 'package:coleman/resources/dimens.dart';
 import 'package:flutter/cupertino.dart';
+
+import 'dimens.dart';
 
 class SpaceHnano extends StatelessWidget{
   @override

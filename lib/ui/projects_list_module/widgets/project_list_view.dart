@@ -1,63 +1,51 @@
 import 'package:coleman/common/platform_util.dart';
-import 'package:coleman/create_expert/ui/bloc/create_expert_bloc.dart';
 import 'package:coleman/domain/models/projects.dart';
-import 'package:coleman/injection.dart';
 import 'package:coleman/navigation/navigation.dart';
-import 'package:coleman/resources/colors.dart';
-import 'package:coleman/resources/dimens.dart';
-import 'package:coleman/resources/project_resources.dart';
-import 'package:coleman/resources/text_styles.dart';
-import 'package:coleman/resources/ui_constants.dart';
+import 'package:coleman/ui/common/colors.dart';
+import 'package:coleman/ui/common/dimens.dart';
+import 'package:coleman/ui/common/icons.dart';
+import 'package:coleman/ui/common/resources.dart';
+import 'package:coleman/ui/common/styles.dart';
+import 'package:coleman/ui/common/constants.dart';
+import 'package:coleman/ui/projects_list_module/bloc/create_expert_bloc.dart';
+import 'package:coleman/ui/projects_list_module/bloc/create_expert_event.dart';
+import 'package:coleman/ui/projects_list_module/bloc/create_expert_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'bloc/create_expert_bloc.dart';
-import 'bloc/create_expert_event.dart';
-import 'bloc/create_expert_state.dart';
-
-class CreateExpertScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (ctx) => getIt.get<CreateExpertBloc>(),
-      child: CreateExpertView(),
-    );
-  }
-}
-
-class CreateExpertView extends StatelessWidget {
+class ProjectsListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CreateExpertBloc, CreateExpertState>(
         builder: (ctx, state) {
-      return MaterialApp(
-        theme: UIConstants.materialTheme,
-        home: Scaffold(
-          appBar: _getAppBar(context),
-          body: SafeArea(
-            child: Column(
-              children: [
-                const SizedBox(height: 10),
-                _searchWidget(context: context, state: state),
-                state.when(initial: (List<ProjectModel> projectList) {
-                  return _projectsListWidget(projectList, context);
-                }, progress: () {
-                  return const CircularProgressIndicator();
-                }, error: () {
-                  return Text(Resources.projects_error);
-                }),
-              ],
+          return MaterialApp(
+            theme: UIConstants.materialTheme,
+            home: Scaffold(
+              appBar: _getAppBar(context),
+              body: SafeArea(
+                child: Column(
+                  children: [
+                    const SizedBox(height: 10),
+                    _searchWidget(context: context, state: state),
+                    state.when(initial: (List<ProjectModel> projectList) {
+                      return _projectsListWidget(projectList, context);
+                    }, progress: () {
+                      return const CircularProgressIndicator();
+                    }, error: () {
+                      return Text(Resources.projects_error);
+                    }),
+                  ],
+                ),
+              ),
             ),
-          ),
-        ),
-      );
-    });
+          );
+        });
   }
 
   AppBar _getAppBar(BuildContext context) {
     return AppBar(
       centerTitle: true,
-      title: Container(height: 24, child: Image.asset(UIConstants.logo_url)),
+      title: Container(height: 24, child: Image.asset(AppIcons.logo_url)),
       bottom: _headerWidget(context),
     );
   }
@@ -124,9 +112,9 @@ class CreateExpertView extends StatelessWidget {
                   color: AppColors.light_gray,
                 ),
                 enabledBorder:
-                    _buildOutLineBorder(color: AppColors.light_purple),
+                _buildOutLineBorder(color: AppColors.light_purple),
                 focusedBorder:
-                    _buildOutLineBorder(color: AppColors.light_purple),
+                _buildOutLineBorder(color: AppColors.light_purple),
               ),
             ),
           ),

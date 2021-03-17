@@ -1,9 +1,8 @@
-import 'package:coleman/resources/colors.dart';
+import 'package:coleman/ui/common/colors.dart';
 import 'package:flutter/material.dart';
 
 // ignore: avoid_classes_with_only_static_members
 class UIConstants {
-  static const String logo_url = 'assets/images/logo_coleman.png';
 
   static ThemeData materialTheme = ThemeData(
     appBarTheme: AppBarTheme(
