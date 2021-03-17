@@ -92,7 +92,7 @@ class ProjectsListView extends StatelessWidget {
         itemCount: projectList.length,
         physics: PlatformUtil.isWeb() ? const ClampingScrollPhysics() : null,
         itemBuilder: (ctx, index) {
-          return ProjectWidget(projectList[index], _openProjectExpertsScreen);
+          return ProjectWidget(projectList[index], context, _openProjectExpertsScreen);
         },
       ),
     );
