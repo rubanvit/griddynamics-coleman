@@ -71,7 +71,7 @@ class _StackOverState extends State<StackOver>
 
   AppBar _getAppBar() {
     return AppBar(
-      title: Text(ProjectResources.appName),
+      title: Text(Resources.appName),
     );
   }
 
@@ -101,7 +101,7 @@ class _StackOverState extends State<StackOver>
     return Tab(
         child: FittedBox(
       child: Text(
-        ProjectResources.suggestedExperts.toUpperCase(),
+        Resources.experts_suggestedExperts.toUpperCase(),
         textAlign: TextAlign.start,
         style: Theme.of(context).textTheme.headline3,
       ),
@@ -115,7 +115,7 @@ class _StackOverState extends State<StackOver>
       children: [
         FittedBox(
           child: Text(
-            ProjectResources.projectExperts.toUpperCase(),
+            Resources.experts_projectExperts.toUpperCase(),
             textAlign: TextAlign.start,
             style: Theme.of(context)
                 .textTheme
@@ -124,7 +124,7 @@ class _StackOverState extends State<StackOver>
           ),
         ),
         Text(
-          ProjectResources.expertsCount,
+          Resources.experts_expertsCount,
           textAlign: TextAlign.start,
           style: Theme.of(context).textTheme.bodyText2,
         ),
@@ -179,19 +179,19 @@ class _StackOverState extends State<StackOver>
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        ProjectResources.qualifiedExperts,
+                        Resources.experts_qualifiedExperts,
                         style: Theme.of(context).textTheme.headline6,
                       ),
                       SizedBox(height: 4),
                       RichText(
                         text: TextSpan(
-                          text: ProjectResources.banner1,
+                          text: Resources.experts_banner1,
                           style: Theme.of(context).textTheme.bodyText2,
                           children: <TextSpan>[
                             TextSpan(
-                                text: ProjectResources.banner2,
+                                text: Resources.experts_banner2,
                                 style: TextStyle(color: AppColors.blue)),
-                            TextSpan(text: ProjectResources.banner3),
+                            TextSpan(text: Resources.experts_banner3),
                           ],
                         ),
                       ),

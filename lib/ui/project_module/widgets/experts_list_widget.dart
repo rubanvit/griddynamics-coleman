@@ -149,7 +149,7 @@ class ExpertsListWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  ProjectResources.type.toUpperCase(),
+                  Resources.experts_type.toUpperCase(),
                   style: Theme.of(context)
                       .textTheme
                       .bodyText2
@@ -158,7 +158,7 @@ class ExpertsListWidget extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  expert.angle?.name ?? ProjectResources.unassigned,
+                  expert.angle?.name ?? Resources.experts_unassigned,
                   style: Theme.of(context).textTheme.bodyText2,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -172,7 +172,7 @@ class ExpertsListWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  ProjectResources.location.toUpperCase(),
+                  Resources.experts_location.toUpperCase(),
                   style: Theme.of(context)
                       .textTheme
                       .bodyText2
@@ -198,7 +198,7 @@ class ExpertsListWidget extends StatelessWidget {
     final endDate = expert.topEmployment.endDate;
     final startDateString = DateFormat.yMd().format(startDate);
     final String endDateString = endDate == null
-        ? ProjectResources.present
+        ? Resources.experts_present
         : DateFormat.yMd().format(endDate);
     return '$startDateString - $endDateString';
   }
@@ -210,7 +210,7 @@ class ExpertsListWidget extends StatelessWidget {
         onPressed: () {},
         style: AppStyles.redButtonStyle(context),
         child: Text(
-          ProjectResources.schedule,
+          Resources.experts_schedule,
           style: AppStyles.redButtonTextStyle(context),
         ),
       ),
