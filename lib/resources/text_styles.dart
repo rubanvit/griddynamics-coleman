@@ -1,9 +1,10 @@
 import 'dart:ui';
 
+import 'package:coleman/resources/colors.dart';
 import 'package:flutter/material.dart';
+
 import 'colors.dart';
 import 'dimens.dart';
-import 'package:coleman/resources/colors.dart';
 
 class AppStyles {
 

@@ -32,19 +32,22 @@ class ExpertsListWidget extends StatelessWidget {
   Widget _getTile(BuildContext context, ExpertModel expert) {
     return Card(
       elevation: 2,
-      child: ListTile(
-        title: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _header(context, expert),
-            const Divider(),
-            ..._middlePart(context, expert),
-            const SizedBox(height: 16),
-            _columnPart(context, expert),
-            const SizedBox(height: 8),
-            _scheduleButton(context, expert),
-          ],
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 16),
+        child: ListTile(
+          title: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _header(context, expert),
+              const Divider(height: 32),
+              ..._middlePart(context, expert),
+              const SizedBox(height: 16),
+              _columnPart(context, expert),
+              const SizedBox(height: 8),
+              _scheduleButton(context, expert),
+            ],
+          ),
         ),
       ),
     );
@@ -112,7 +115,10 @@ class ExpertsListWidget extends StatelessWidget {
     return [
       Text(
         expert.topEmployment.corporation.name,
-        style: Theme.of(context).textTheme.bodyText1,
+        style: Theme.of(context)
+            .textTheme
+            .bodyText1
+            ?.copyWith(fontWeight: FontWeight.bold),
         overflow: TextOverflow.ellipsis,
       ),
       Text(
@@ -150,6 +156,7 @@ class ExpertsListWidget extends StatelessWidget {
                       ?.copyWith(color: AppColors.gray3),
                   overflow: TextOverflow.ellipsis,
                 ),
+                const SizedBox(height: 8),
                 Text(
                   expert.angle?.name ?? ProjectResources.unassigned,
                   style: Theme.of(context).textTheme.bodyText2,
@@ -172,6 +179,7 @@ class ExpertsListWidget extends StatelessWidget {
                       ?.copyWith(color: AppColors.gray3),
                   overflow: TextOverflow.ellipsis,
                 ),
+                const SizedBox(height: 8),
                 Text(
                   expert.country,
                   style: Theme.of(context).textTheme.bodyText2,

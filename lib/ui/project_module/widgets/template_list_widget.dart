@@ -38,7 +38,7 @@ class TemplateExpertsList extends StatelessWidget {
           child: Container(
             width: double.infinity,
             padding: const EdgeInsets.all(16),
-            child: Text(ProjectResources.experts_list_header,
+            child: Text(ProjectResources.experts_list_header.toUpperCase(),
                 style: Theme.of(context).appBarTheme.textTheme?.title),
           ),
         ),
