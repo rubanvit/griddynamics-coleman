@@ -9,6 +9,7 @@ import 'package:coleman/ui/common/styles.dart';
 import 'package:coleman/ui/common/constants.dart';
 import 'package:coleman/ui/projects_list_module/bloc/projects_list_bloc.dart';
 import 'package:coleman/ui/projects_list_module/bloc/projects_list_state.dart';
+import 'package:coleman/ui/projects_list_module/widgets/project_widget.dart';
 import 'package:coleman/ui/projects_list_module/widgets/search_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,6 +28,7 @@ class ProjectsListView extends StatelessWidget {
                   children: [
                     const SizedBox(height: 10),
                     SearchWidget.getWidget(context, state),
+                    const SizedBox(height: 10),
                     state.when(initial: (List<ProjectModel> projectList) {
                       return _projectsListWidget(projectList, context);
                     }, progress: () {
@@ -90,103 +92,10 @@ class ProjectsListView extends StatelessWidget {
         itemCount: projectList.length,
         physics: PlatformUtil.isWeb() ? const ClampingScrollPhysics() : null,
         itemBuilder: (ctx, index) {
-          if (index == 0) {
-            return Padding(
-              padding: const EdgeInsets.only(top: Dimens.normal),
-              child: _projectWidget(projectList[index], context),
-            );
-          } else {
-            return _projectWidget(projectList[index], context);
-          }
+          return ProjectWidget(projectList[index], _openProjectExpertsScreen);
         },
       ),
     );
-  }
-
-  Widget _projectWidget(ProjectModel project, BuildContext context) {
-    return GestureDetector(
-        onTap: () {
-          _openProjectExpertsScreen(project.name, context);
-        },
-        child: Card(
-          elevation: 4,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(Dimens.small),
-          ),
-          margin: const EdgeInsets.only(bottom: Dimens.normal),
-          child: Padding(
-            padding: const EdgeInsets.all(Dimens.big),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                OutlinedButton(
-                  style: ButtonStyle(
-                    side: MaterialStateProperty.all(
-                        const BorderSide(color: AppColors.outlinedButtonColor)),
-                  ),
-                  child: Text(
-                    '${project.status.name.toUpperCase()}',
-                    style: Theme.of(context).textTheme.bodyText1,
-                  ),
-                  onPressed: null,
-                ),
-                const SizedBox(height: Dimens.small),
-                Text(
-                  '${project.name}',
-                  style: AppStyles.headerBoldBlack(context),
-                ),
-                const SizedBox(height: Dimens.small),
-                Text(Resources.projects_created_on +
-                    '${project.createdOn}'),
-                const SizedBox(height: Dimens.small),
-                Text('${project.description.internal}'),
-                const SizedBox(height: Dimens.medium),
-                IntrinsicHeight(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(Resources.projects_primary_contact),
-                            const SizedBox(height: Dimens.small),
-                            Text('${project.primaryContact.fullName}'),
-                          ],
-                        ),
-                      ),
-                      const VerticalDivider(),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(Resources.projects_industry),
-                            const SizedBox(height: Dimens.small),
-                            ...project.industries.map((e) {
-                              return Text(
-                                '${e.name}',
-                                style: const TextStyle(height: 1.3),
-                              );
-                            }),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const Divider(height: 32),
-                const Text(Resources.projects_visible_to),
-                const SizedBox(height: Dimens.small),
-                Text(
-                  '${project.projectLead.fullName}',
-                  style: const TextStyle(
-                      fontWeight: FontWeight.w500, color: AppColors.blue),
-                ),
-                const SizedBox(height: Dimens.medium),
-              ],
-            ),
-          ),
-        ));
   }
 
   void _openProjectExpertsScreen(String name, BuildContext context) {
