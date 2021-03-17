@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 
 // ignore: avoid_classes_with_only_static_members
 class UIConstants {
+
   static ThemeData materialTheme = ThemeData(
+    primarySwatch: AppColors.createMaterialColor(AppColors.appbarBackground),
     visualDensity: VisualDensity.adaptivePlatformDensity,
+    scaffoldBackgroundColor: AppColors.scaffold_background,
     appBarTheme: AppBarTheme(
       brightness: Brightness.dark,
       color: AppColors.appbarBackground,

@@ -1,5 +1,5 @@
 import 'package:coleman/navigation/navigation.dart';
-import 'package:coleman/ui/common/colors.dart';
+import 'package:coleman/ui/common/constants.dart';
 import 'package:flutter/material.dart';
 import 'injection.dart';
 
@@ -13,12 +13,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        scaffoldBackgroundColor: AppColors.scaffold_background,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
+      title: 'Coleman',
+      theme: UIConstants.materialTheme,
       routes: AppNavigation.getNavigationRoutes(),
     );
   }

@@ -5,10 +5,10 @@ import 'package:coleman/ui/projects_list_module/projects_list.dart';
 import 'package:flutter/material.dart';
 
 class AppNavigation {
-  static const LOGIN = '/';
-  static const HOME = '/home';
-  static const EXPERTS = '/experts';
-  static const EXPERTS_DETAILS = '/details';
+  static const LOGIN =              '/';
+  static const HOME =               '/home';
+  static const EXPERTS =            '/home/experts';
+  static const EXPERTS_DETAILS =    '/home/experts/details';
 
   static Map<String, WidgetBuilder> getNavigationRoutes() {
     //here can be different data according to platform

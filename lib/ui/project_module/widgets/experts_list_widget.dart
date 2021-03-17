@@ -223,7 +223,8 @@ class ExpertsListWidget extends StatelessWidget {
   void _openProjectExpertDetailsScreen(String name, BuildContext context) {
     Navigator.pushNamed(
       context,
-      AppNavigation.EXPERTS_DETAILS
+      AppNavigation.EXPERTS_DETAILS,
+      arguments: name
     );
   }
 }
