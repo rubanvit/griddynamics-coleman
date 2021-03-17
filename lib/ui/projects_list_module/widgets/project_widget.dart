@@ -8,14 +8,15 @@ import 'package:flutter/material.dart';
 class ProjectWidget extends StatelessWidget {
   ProjectModel project;
   Function(String name, BuildContext context) onItemClickCallback;
+  BuildContext navigationContext;
 
-  ProjectWidget(this.project, this.onItemClickCallback);
+  ProjectWidget(this.project, this.navigationContext, this.onItemClickCallback);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () {
-          onItemClickCallback(project.name, context);
+          onItemClickCallback(project.name, navigationContext);
         },
         child: Card(
           elevation: 4,

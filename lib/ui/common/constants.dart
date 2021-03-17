@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 // ignore: avoid_classes_with_only_static_members
 class UIConstants {
-
   static ThemeData materialTheme = ThemeData(
+    visualDensity: VisualDensity.adaptivePlatformDensity,
     appBarTheme: AppBarTheme(
       brightness: Brightness.dark,
       color: AppColors.appbarBackground,
@@ -16,7 +16,6 @@ class UIConstants {
             ),
           ),
     ),
-
     textTheme: ThemeData.light().textTheme.copyWith(
           headline1: const TextStyle(height: 1.3),
           headline2: const TextStyle(height: 1.3),
@@ -27,7 +26,6 @@ class UIConstants {
           bodyText1: const TextStyle(height: 1.3),
           bodyText2: const TextStyle(height: 1.3),
         ),
-
     dividerTheme: DividerThemeData(color: AppColors.gray3, thickness: 1),
   );
 }
