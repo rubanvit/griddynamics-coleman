@@ -1,10 +1,7 @@
-import 'package:coleman/create_expert/ui/create_expert.dart';
 import 'package:coleman/navigation/navigation.dart';
-import 'package:coleman/resources/colors.dart';
-import 'package:coleman/ui/project_module/project_screen.dart';
+import 'package:coleman/ui/common/colors.dart';
 import 'package:flutter/material.dart';
 import 'injection.dart';
-import 'ui/login_module/login_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

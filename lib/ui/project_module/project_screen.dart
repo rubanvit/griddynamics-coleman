@@ -1,7 +1,8 @@
 import 'package:coleman/injection.dart';
 import 'package:coleman/navigation/navigation.dart';
-import 'package:coleman/resources/colors.dart';
-import 'package:coleman/resources/ui_constants.dart';
+import 'package:coleman/ui/common/colors.dart';
+import 'package:coleman/ui/common/icons.dart';
+import 'package:coleman/ui/common/constants.dart';
 import 'package:coleman/ui/project_module/bloc/experts_bloc.dart';
 import 'package:coleman/ui/project_module/bloc/experts_state.dart';
 import 'package:coleman/ui/project_module/widgets/template_list_widget.dart';
@@ -34,7 +35,7 @@ class ProjectScreen extends StatelessWidget {
     return AppBar(
       centerTitle: true,
       title: Container(
-          height: 24, child: Image.asset(UIConstants.logo_url)),
+          height: 24, child: Image.asset(AppIcons.logo_url)),
       bottom: _getPageHeader(context),
     );
   }

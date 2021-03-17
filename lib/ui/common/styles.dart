@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:coleman/resources/colors.dart';
 import 'package:flutter/material.dart';
 
 import 'colors.dart';
