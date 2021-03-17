@@ -27,4 +27,11 @@ class AppStyles {
           .textTheme
           .bodyText1
           ?.copyWith(color: AppColors.white, fontWeight: FontWeight.bold);
+
+  static OutlineInputBorder buildOutLineBorder({required Color color}) {
+    return OutlineInputBorder(
+      borderRadius: BorderRadius.circular(Dimens.micro),
+      borderSide: BorderSide(color: color),
+    );
+  }
 }

@@ -7,16 +7,16 @@ import 'package:coleman/ui/common/icons.dart';
 import 'package:coleman/ui/common/resources.dart';
 import 'package:coleman/ui/common/styles.dart';
 import 'package:coleman/ui/common/constants.dart';
-import 'package:coleman/ui/projects_list_module/bloc/create_expert_bloc.dart';
-import 'package:coleman/ui/projects_list_module/bloc/create_expert_event.dart';
-import 'package:coleman/ui/projects_list_module/bloc/create_expert_state.dart';
+import 'package:coleman/ui/projects_list_module/bloc/projects_list_bloc.dart';
+import 'package:coleman/ui/projects_list_module/bloc/projects_list_state.dart';
+import 'package:coleman/ui/projects_list_module/widgets/search_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProjectsListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CreateExpertBloc, CreateExpertState>(
+    return BlocBuilder<ProjectsListBloc, ProjectsListState>(
         builder: (ctx, state) {
           return MaterialApp(
             theme: UIConstants.materialTheme,
@@ -26,7 +26,7 @@ class ProjectsListView extends StatelessWidget {
                 child: Column(
                   children: [
                     const SizedBox(height: 10),
-                    _searchWidget(context: context, state: state),
+                    SearchWidget.getWidget(context, state),
                     state.when(initial: (List<ProjectModel> projectList) {
                       return _projectsListWidget(projectList, context);
                     }, progress: () {
@@ -81,44 +81,6 @@ class ProjectsListView extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  Widget _searchWidget(
-      {required BuildContext context, required CreateExpertState state}) {
-    return Card(
-        margin: EdgeInsets.zero,
-        elevation: 4,
-        child: Container(
-          padding: const EdgeInsets.all(Dimens.big),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(Dimens.small),
-            color: Colors.white,
-          ),
-          child: IgnorePointer(
-            ignoring: state is! CreateExpertStateInitial,
-            child: TextFormField(
-              onChanged: (value) {
-                context
-                    .read<CreateExpertBloc>()
-                    .add(CreateExpertEvent.search(value));
-              },
-              decoration: InputDecoration(
-                isDense: true,
-                contentPadding: EdgeInsets.zero,
-                hintText: Resources.projects_search_hint,
-                prefixIcon: const Icon(
-                  Icons.search,
-                  size: 30,
-                  color: AppColors.light_gray,
-                ),
-                enabledBorder:
-                _buildOutLineBorder(color: AppColors.light_purple),
-                focusedBorder:
-                _buildOutLineBorder(color: AppColors.light_purple),
-              ),
-            ),
-          ),
-        ));
   }
 
   Widget _projectsListWidget(
@@ -225,13 +187,6 @@ class ProjectsListView extends StatelessWidget {
             ),
           ),
         ));
-  }
-
-  OutlineInputBorder _buildOutLineBorder({required Color color}) {
-    return OutlineInputBorder(
-      borderRadius: BorderRadius.circular(Dimens.micro),
-      borderSide: BorderSide(color: color),
-    );
   }
 
   void _openProjectExpertsScreen(String name, BuildContext context) {
