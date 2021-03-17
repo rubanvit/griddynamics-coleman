@@ -5,31 +5,31 @@ import 'package:coleman/domain/models/projects.dart';
 import 'package:coleman/domain/repositories/project_repository.dart';
 import 'package:injectable/injectable.dart';
 
-import 'create_expert_event.dart';
-import 'create_expert_state.dart';
+import 'projects_list_event.dart';
+import 'projects_list_state.dart';
 
 @singleton
-class CreateExpertBloc extends Bloc<CreateExpertEvent, CreateExpertState> {
+class ProjectsListBloc extends Bloc<ProjectsListEvent, ProjectsListState> {
   final ProjectRepository _projectRepository;
   List<ProjectModel> projects = [];
 
-  CreateExpertBloc(ProjectRepository projectRepository)
+  ProjectsListBloc(ProjectRepository projectRepository)
       : _projectRepository = projectRepository,
-        super(const CreateExpertState.progress()) {
+        super(const ProjectsListState.progress()) {
      _projectRepository.loadProjects().then((value) {
       projects = value.projects;
-      emit(CreateExpertState.initial(projects));
+      emit(ProjectsListState.initial(projects));
     });
   }
 
   @override
-  Stream<CreateExpertState> mapEventToState(
-    CreateExpertEvent event,
+  Stream<ProjectsListState> mapEventToState(
+    ProjectsListEvent event,
   ) async* {
     yield* event.when(
         search: (searchText) async* {
           final filteredList = projects.where((element) => element.name.toLowerCase().contains(searchText.toLowerCase())).toList();
-          yield CreateExpertState.initial(filteredList);
+          yield ProjectsListState.initial(filteredList);
         },
         clearSearch: () async* {},
         showDetails: () async* {},
