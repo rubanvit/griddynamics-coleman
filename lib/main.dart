@@ -1,4 +1,5 @@
 import 'package:coleman/create_expert/ui/create_expert.dart';
+import 'package:coleman/navigation/navigation.dart';
 import 'package:coleman/resources/colors.dart';
 import 'package:coleman/ui/project_module/project_screen.dart';
 import 'package:flutter/material.dart';
@@ -21,17 +22,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: AppColors.scaffold_background,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      routes: <String, WidgetBuilder>{
-        AppNavigation.LOGIN: (_) => LoginScreen(),
-        AppNavigation.HOME: (_) => CreateExpertScreen(),
-        AppNavigation.EXPERTS: (_) => ProjectScreen(),
-      },
+      routes: AppNavigation.getNavigationRoutes(),
     );
   }
-}
-
-class AppNavigation{
-  static const LOGIN = '/';
-  static const HOME = '/home';
-  static const EXPERTS = '/experts';
 }

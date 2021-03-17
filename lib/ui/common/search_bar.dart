@@ -33,7 +33,7 @@ class SearchBarState extends State<SearchBar> {
                 onPressed: _controller.clear,
               )
             : null,
-        hintText: ProjectResources.searchHint,
+        hintText: Resources.experts_searchHint,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(20)),
         ),

@@ -1,7 +1,8 @@
 import 'package:coleman/injection.dart';
-import 'package:coleman/main.dart';
+import 'package:coleman/navigation/navigation.dart';
 import 'package:coleman/resources/colors.dart';
 import 'package:coleman/resources/dimens.dart';
+import 'package:coleman/resources/project_resources.dart';
 import 'package:coleman/resources/text_styles.dart';
 import 'package:coleman/resources/ui_constants.dart';
 import 'package:coleman/ui/login_module/bloc/login_bloc.dart';
@@ -61,7 +62,7 @@ class _LoginViewState extends State<_LoginView> {
         if (state is LoginStateError) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text(LoginTextResources.login_failed_error),
+              content: Text(Resources.login_failed_error),
               backgroundColor: Colors.red,
             ),
           );
@@ -135,8 +136,8 @@ class _LoginViewState extends State<_LoginView> {
       controller: _nameController,
       decoration: _fieldDecoration(
           context,
-          LoginTextResources.login_username_hint,
-          LoginTextResources.login_username_label,
+          Resources.login_username_hint,
+          Resources.login_username_label,
           false),
       keyboardType: TextInputType.emailAddress,
       validator: _validateName,
@@ -154,8 +155,8 @@ class _LoginViewState extends State<_LoginView> {
       controller: _passwordController,
       decoration: _fieldDecoration(
           context,
-          LoginTextResources.login_password_hint,
-          LoginTextResources.login_password_label,
+          Resources.login_password_hint,
+          Resources.login_password_label,
           true),
       keyboardType: TextInputType.visiblePassword,
       validator: _validatePassword,
@@ -216,7 +217,7 @@ class _LoginViewState extends State<_LoginView> {
             width: double.infinity,
             child: ElevatedButton(
               child: Text(
-                LoginTextResources.login_login_button,
+                Resources.login_login_button,
                 style: AppStyles.redButtonTextStyle(context),
               ),
               style: AppStyles.redButtonStyle(context),
@@ -243,9 +244,9 @@ class _LoginViewState extends State<_LoginView> {
   String? _validateName(String? value) {
     final _nameExp = RegExp(r'^[A-Za-z]+$');
     if (value?.isEmpty == true) {
-      return LoginTextResources.login_name_required;
+      return Resources.login_name_required;
     } else if (value != null && !_nameExp.hasMatch(value)) {
-      return LoginTextResources.login_email_wrong_format;
+      return Resources.login_email_wrong_format;
     } else
       return null;
   }
@@ -256,15 +257,4 @@ class _LoginViewState extends State<_LoginView> {
     } else
       return null;
   }
-}
-
-class LoginTextResources {
-  static const login_failed_error = 'Login is failed';
-  static const login_username_label = 'Username \u{22c6}';
-  static const login_username_hint = 'Input Username';
-  static const login_password_label = 'Password \u{22c6}';
-  static const login_password_hint = 'Input Password';
-  static const login_login_button = 'Log In';
-  static const login_name_required = 'Name is required';
-  static const login_email_wrong_format = 'Use alphabetical symbols';
 }

@@ -38,7 +38,7 @@ class TemplateExpertsList extends StatelessWidget {
           child: Container(
             width: double.infinity,
             padding: const EdgeInsets.all(16),
-            child: Text(ProjectResources.experts_list_header,
+            child: Text(Resources.experts_experts_list_header.toUpperCase(),
                 style: Theme.of(context).appBarTheme.textTheme?.title),
           ),
         ),
@@ -70,7 +70,7 @@ class TemplateExpertsList extends StatelessWidget {
   Widget _getEmptyListWidget(BuildContext context) {
     return Flexible(
       child: Center(
-        child: Text(ProjectResources.experts_empty_list,
+        child: Text(Resources.experts_experts_empty_list,
             style: Theme.of(context).textTheme.headline5),
       ),
     );
@@ -79,7 +79,7 @@ class TemplateExpertsList extends StatelessWidget {
   Widget _getErrorWidget(BuildContext context) {
     return Flexible(
       child: Center(
-        child: Text(ProjectResources.experts_error_list,
+        child: Text(Resources.experts_experts_error_list,
             style: Theme.of(context).textTheme.headline5),
       ),
     );

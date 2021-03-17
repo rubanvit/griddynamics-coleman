@@ -1,12 +1,13 @@
+import 'package:coleman/common/platform_util.dart';
 import 'package:coleman/create_expert/ui/bloc/create_expert_bloc.dart';
 import 'package:coleman/domain/models/projects.dart';
 import 'package:coleman/injection.dart';
-import 'package:coleman/main.dart';
+import 'package:coleman/navigation/navigation.dart';
 import 'package:coleman/resources/colors.dart';
 import 'package:coleman/resources/dimens.dart';
+import 'package:coleman/resources/project_resources.dart';
 import 'package:coleman/resources/text_styles.dart';
 import 'package:coleman/resources/ui_constants.dart';
-import 'package:coleman/ui/project_module/project_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -43,7 +44,7 @@ class CreateExpertView extends StatelessWidget {
                 }, progress: () {
                   return const CircularProgressIndicator();
                 }, error: () {
-                  return const Text('Some error happens');
+                  return Text(Resources.projects_error);
                 }),
               ],
             ),
@@ -56,8 +57,7 @@ class CreateExpertView extends StatelessWidget {
   AppBar _getAppBar(BuildContext context) {
     return AppBar(
       centerTitle: true,
-      title: Container(
-          height: 24, child: Image.asset(UIConstants.logo_url)),
+      title: Container(height: 24, child: Image.asset(UIConstants.logo_url)),
       bottom: _headerWidget(context),
     );
   }
@@ -76,13 +76,13 @@ class CreateExpertView extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Projects'),
+                Text(Resources.projects_header),
                 ElevatedButton(
                   onPressed: () {
                     print('On Pressed');
                   },
                   child: Text(
-                    'Create Project',
+                    Resources.projects_create_project,
                     style: AppStyles.redButtonTextStyle(context),
                   ),
                   style: AppStyles.redButtonStyle(context),
@@ -117,7 +117,7 @@ class CreateExpertView extends StatelessWidget {
               decoration: InputDecoration(
                 isDense: true,
                 contentPadding: EdgeInsets.zero,
-                hintText: 'Search',
+                hintText: Resources.projects_search_hint,
                 prefixIcon: const Icon(
                   Icons.search,
                   size: 30,
@@ -138,7 +138,7 @@ class CreateExpertView extends StatelessWidget {
     return Expanded(
       child: ListView.builder(
         itemCount: projectList.length,
-        physics: const ClampingScrollPhysics(),
+        physics: PlatformUtil.isWeb() ? const ClampingScrollPhysics() : null,
         itemBuilder: (ctx, index) {
           if (index == 0) {
             return Padding(
@@ -172,7 +172,7 @@ class CreateExpertView extends StatelessWidget {
                 OutlinedButton(
                   style: ButtonStyle(
                     side: MaterialStateProperty.all(
-                        BorderSide(color: AppColors.outlinedButtonColor)),
+                        const BorderSide(color: AppColors.outlinedButtonColor)),
                   ),
                   child: Text(
                     '${project.status.name.toUpperCase()}',
@@ -186,7 +186,8 @@ class CreateExpertView extends StatelessWidget {
                   style: AppStyles.headerBoldBlack(context),
                 ),
                 const SizedBox(height: Dimens.small),
-                Text('CREATED ON: ${project.createdOn}'),
+                Text(Resources.projects_created_on +
+                    '${project.createdOn}'),
                 const SizedBox(height: Dimens.small),
                 Text('${project.description.internal}'),
                 const SizedBox(height: Dimens.medium),
@@ -198,7 +199,7 @@ class CreateExpertView extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text('PRIMARY CONTACT'),
+                            const Text(Resources.projects_primary_contact),
                             const SizedBox(height: Dimens.small),
                             Text('${project.primaryContact.fullName}'),
                           ],
@@ -209,7 +210,7 @@ class CreateExpertView extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text('INDUSTRY'),
+                            const Text(Resources.projects_industry),
                             const SizedBox(height: Dimens.small),
                             ...project.industries.map((e) {
                               return Text(
@@ -223,9 +224,8 @@ class CreateExpertView extends StatelessWidget {
                     ],
                   ),
                 ),
-                const Divider(),
-                const SizedBox(height: Dimens.small),
-                const Text('PROJECT VISIBLE TO:'),
+                const Divider(height: 32),
+                const Text(Resources.projects_visible_to),
                 const SizedBox(height: Dimens.small),
                 Text(
                   '${project.projectLead.fullName}',
