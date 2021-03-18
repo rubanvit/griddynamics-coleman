@@ -116,7 +116,7 @@ class _ExpertDetailsView extends StatelessWidget {
   Widget _expertDescriptionWidgets(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(
-          left: Dimens.normal, right: Dimens.normal, top: Dimens.normal),
+          left: Dimens.large, right: Dimens.large, top: Dimens.normal),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -144,7 +144,7 @@ class _ExpertDetailsView extends StatelessWidget {
       constraints: const BoxConstraints(minWidth: double.infinity),
       color: Colors.white,
       child: Padding(
-        padding: const EdgeInsets.all(Dimens.normal),
+        padding: const EdgeInsets.symmetric(vertical:Dimens.normal, horizontal: Dimens.large),
         child: Text(
           Resources.expert_details_expert_name,
           style: AppStyles.headerBoldBlack(context),
@@ -156,7 +156,7 @@ class _ExpertDetailsView extends StatelessWidget {
   Widget _availabilityContentWidget() {
     return Padding(
       padding: const EdgeInsets.only(
-          left: Dimens.normal, right: Dimens.normal, top: Dimens.normal),
+          left: Dimens.large, right: Dimens.large, top: Dimens.normal),
       child:
           Column(crossAxisAlignment: CrossAxisAlignment.start, children: const [
         Text(
@@ -181,13 +181,13 @@ class _ExpertDetailsView extends StatelessWidget {
     if (state is ExpertDetailsStateInitial)
       return Flexible(
         child: Padding(
-          padding: const EdgeInsets.all(Dimens.normal),
+          padding: const EdgeInsets.symmetric(vertical:Dimens.normal, horizontal: Dimens.large),
           child: GridView.count(
             shrinkWrap: true,
-            childAspectRatio: 2,
+            childAspectRatio: 2.2,
             crossAxisCount: 3,
-            crossAxisSpacing: Dimens.normal,
-            mainAxisSpacing: Dimens.normal,
+            crossAxisSpacing: Dimens.small,
+            mainAxisSpacing: 6,
             children: state.expertDetails.times
                 .map(
                   (ExpertDetailsTime e) => e.toWidget(
@@ -208,7 +208,7 @@ class _ExpertDetailsView extends StatelessWidget {
 
   Widget _scheduleButton(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: Dimens.normal),
+      padding: const EdgeInsets.symmetric(horizontal: Dimens.large),
       child: Container(
         width: double.infinity,
         child: ElevatedButton(
