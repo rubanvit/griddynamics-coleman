@@ -132,9 +132,11 @@ class ExpertsListWidget extends StatelessWidget {
             '${expert.firstName} ${expert.lastName}',
             style: Theme.of(context).textTheme.headline6,
             overflow: TextOverflow.ellipsis,
+            maxLines: 5,
           ),
         ),
         _label(context, expert),
+        const SizedBox(width: 8),
       ],
     );
   }
