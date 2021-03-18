@@ -41,6 +41,7 @@ class Resources {
   static const projects_create_project ='Create Project';
   static const projects_search_hint ='Search';
   static const projects_created_on ='CREATED ON: ';
+  static const projects_target_company ='TARGET COMPANY';
   static const projects_primary_contact ='PRIMARY CONTACT';
   static const projects_industry ='INDUSTRY';
   static const projects_visible_to ='PROJECT VISIBLE TO:';

@@ -15,33 +15,38 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProjectsListView extends StatelessWidget {
+  bool _isWideScreen = false;
+
   @override
   Widget build(BuildContext context) {
+    _isWideScreen = PlatformUtil.isWideScreen(context);
+
     return BlocBuilder<ProjectsListBloc, ProjectsListState>(
         builder: (ctx, state) {
-          return MaterialApp(
-            theme: UIConstants.materialTheme,
-            home: Scaffold(
-              appBar: _getAppBar(context),
-              body: SafeArea(
-                child: Column(
-                  children: [
-                    const SizedBox(height: 10),
-                    SearchWidget.getWidget(context, state),
-                    const SizedBox(height: 10),
-                    state.when(initial: (List<ProjectModel> projectList) {
-                      return _projectsListWidget(projectList, context);
-                    }, progress: () {
-                      return const CircularProgressIndicator();
-                    }, error: () {
-                      return const Text(Resources.projects_error);
-                    }),
-                  ],
-                ),
-              ),
+      return MaterialApp(
+        theme: UIConstants.materialTheme,
+        home: Scaffold(
+          appBar: _getAppBar(context),
+          body: SafeArea(
+            child: Column(
+              children: [
+                const SizedBox(height: 10),
+                SearchWidget.getWidget(context, state),
+                const SizedBox(height: 10),
+                state.when(initial: (List<ProjectModel> projectList) {
+                  return _projectsListWidget(
+                      projectList, context, _isWideScreen);
+                }, progress: () {
+                  return const CircularProgressIndicator();
+                }, error: () {
+                  return const Text(Resources.projects_error);
+                }),
+              ],
             ),
-          );
-        });
+          ),
+        ),
+      );
+    });
   }
 
   AppBar _getAppBar(BuildContext context) {
@@ -86,13 +91,17 @@ class ProjectsListView extends StatelessWidget {
   }
 
   Widget _projectsListWidget(
-      List<ProjectModel> projectList, BuildContext context) {
+      List<ProjectModel> projectList, BuildContext context, bool isWideScreen) {
     return Expanded(
       child: ListView.builder(
         itemCount: projectList.length,
         physics: PlatformUtil.isWeb() ? const ClampingScrollPhysics() : null,
         itemBuilder: (ctx, index) {
-          return ProjectWidget(projectList[index], context, _openProjectExpertsScreen);
+          return ProjectWidget(
+              project: projectList[index],
+              navigationContext: context,
+              onItemClickCallback: _openProjectExpertsScreen,
+              isWideScreen: _isWideScreen);
         },
       ),
     );
