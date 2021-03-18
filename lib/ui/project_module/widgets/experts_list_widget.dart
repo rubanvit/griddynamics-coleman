@@ -11,11 +11,13 @@ import 'package:intl/intl.dart';
 class ExpertsListWidget extends StatelessWidget {
   final ExpertsStateSuccessful _state;
   late String projectName;
+  bool _isWideScreen = false;
 
   ExpertsListWidget(this.projectName, this._state);
 
   @override
   Widget build(BuildContext context) {
+    _isWideScreen = PlatformUtil.isWideScreen(context);
     return Expanded(
       child: ListView.builder(
         scrollDirection: Axis.vertical,
@@ -24,13 +26,74 @@ class ExpertsListWidget extends StatelessWidget {
         itemCount: _state.expertsList.length,
         itemBuilder: (context, index) {
           final expert = _state.expertsList[index];
-          return _getTile(context, expert);
+          return _isWideScreen
+              ? _getTileForBigScreen(context, expert)
+              : _getTileForSmallScreen(context, expert);
         },
       ),
     );
   }
 
-  Widget _getTile(BuildContext context, ExpertModel expert) {
+  Widget _getTileForBigScreen(BuildContext context, ExpertModel expert) {
+    return Card(
+      elevation: 2,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 16),
+        child: ListTile(
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                flex: 2,
+                child: Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [_headerForBigScreen(context, expert)],
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 2,
+                child: Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [..._middlePart(context, expert)],
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [..._typeWidgets(context, expert)],
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: _label(context, expert),
+              ),
+              SizedBox(width: 16),
+              Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: _scheduleButton(context, expert),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _getTileForSmallScreen(BuildContext context, ExpertModel expert) {
     return Card(
       elevation: 2,
       child: Padding(
@@ -40,13 +103,15 @@ class ExpertsListWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _header(context, expert),
+              _headerForSmallScreen(context, expert),
               const Divider(height: 32),
               ..._middlePart(context, expert),
               const SizedBox(height: 16),
               _columnPart(context, expert),
               const SizedBox(height: 8),
-              _scheduleButton(context, expert),
+              Container(
+                  width: double.infinity,
+                  child: _scheduleButton(context, expert)),
             ],
           ),
         ),
@@ -54,7 +119,7 @@ class ExpertsListWidget extends StatelessWidget {
     );
   }
 
-  Widget _header(BuildContext context, ExpertModel expert) {
+  Widget _headerForSmallScreen(BuildContext context, ExpertModel expert) {
     return Row(
       children: [
         const Icon(
@@ -70,6 +135,26 @@ class ExpertsListWidget extends StatelessWidget {
           ),
         ),
         _label(context, expert),
+      ],
+    );
+  }
+
+  Widget _headerForBigScreen(BuildContext context, ExpertModel expert) {
+    return Row(
+      children: [
+        const Icon(
+          Icons.bookmark_border,
+          color: AppColors.bookmarkIconColor,
+        ),
+        const SizedBox(width: 12),
+        Expanded(
+          child: Text(
+            '${expert.firstName} ${expert.lastName}',
+            style: Theme.of(context).textTheme.headline6,
+            maxLines: 10,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
       ],
     );
   }
@@ -121,11 +206,13 @@ class ExpertsListWidget extends StatelessWidget {
             .bodyText1
             ?.copyWith(fontWeight: FontWeight.bold),
         overflow: TextOverflow.ellipsis,
+        maxLines: 2,
       ),
       Text(
         expert.topEmployment.title,
         style: Theme.of(context).textTheme.bodyText2,
         overflow: TextOverflow.ellipsis,
+        maxLines: 3,
       ),
       Text(
         _getDateFormatted(expert),
@@ -134,6 +221,7 @@ class ExpertsListWidget extends StatelessWidget {
             .bodyText2
             ?.copyWith(color: AppColors.gray3),
         overflow: TextOverflow.ellipsis,
+        maxLines: 2,
       ),
     ];
   }
@@ -148,22 +236,7 @@ class ExpertsListWidget extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  Resources.experts_type.toUpperCase(),
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyText2
-                      ?.copyWith(color: AppColors.gray3),
-                  overflow: TextOverflow.ellipsis,
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  expert.angle?.name ?? Resources.experts_unassigned,
-                  style: Theme.of(context).textTheme.bodyText2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ],
+              children: [..._typeWidgets(context, expert)],
             ),
           ),
           const VerticalDivider(width: 32),
@@ -171,27 +244,50 @@ class ExpertsListWidget extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  Resources.experts_location.toUpperCase(),
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyText2
-                      ?.copyWith(color: AppColors.gray3),
-                  overflow: TextOverflow.ellipsis,
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  expert.country,
-                  style: Theme.of(context).textTheme.bodyText2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ],
+              children: [..._locationWidgets(context, expert)],
             ),
           )
         ],
       ),
     );
+  }
+
+  List<Widget> _typeWidgets(BuildContext context, ExpertModel expert) {
+    return [
+      Text(
+        Resources.experts_type.toUpperCase(),
+        style: Theme.of(context)
+            .textTheme
+            .bodyText2
+            ?.copyWith(color: AppColors.gray3),
+        overflow: TextOverflow.ellipsis,
+      ),
+      const SizedBox(height: 8),
+      Text(
+        expert.angle?.name ?? Resources.experts_unassigned,
+        style: Theme.of(context).textTheme.bodyText2,
+        overflow: TextOverflow.ellipsis,
+      )
+    ];
+  }
+
+  List<Widget> _locationWidgets(BuildContext context, ExpertModel expert) {
+    return [
+      Text(
+        Resources.experts_location.toUpperCase(),
+        style: Theme.of(context)
+            .textTheme
+            .bodyText2
+            ?.copyWith(color: AppColors.gray3),
+        overflow: TextOverflow.ellipsis,
+      ),
+      const SizedBox(height: 8),
+      Text(
+        expert.country,
+        style: Theme.of(context).textTheme.bodyText2,
+        overflow: TextOverflow.ellipsis,
+      )
+    ];
   }
 
   String _getDateFormatted(ExpertModel expert) {
@@ -205,26 +301,20 @@ class ExpertsListWidget extends StatelessWidget {
   }
 
   Widget _scheduleButton(BuildContext context, ExpertModel expert) {
-    return Container(
-      width: double.infinity,
-      child: ElevatedButton(
-        onPressed: () {
-          _openProjectExpertDetailsScreen(projectName, context);
-        },
-        style: AppStyles.redButtonStyle(context),
-        child: Text(
-          Resources.experts_schedule,
-          style: AppStyles.redButtonTextStyle(context),
-        ),
+    return ElevatedButton(
+      onPressed: () {
+        _openProjectExpertDetailsScreen(projectName, context);
+      },
+      style: AppStyles.redButtonStyle(context),
+      child: Text(
+        Resources.experts_schedule,
+        style: AppStyles.redButtonTextStyle(context),
       ),
     );
   }
 
   void _openProjectExpertDetailsScreen(String name, BuildContext context) {
-    Navigator.pushNamed(
-      context,
-      AppNavigation.EXPERTS_DETAILS,
-      arguments: name
-    );
+    Navigator.pushNamed(context, AppNavigation.EXPERTS_DETAILS,
+        arguments: name);
   }
 }
