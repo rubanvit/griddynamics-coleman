@@ -8,7 +8,7 @@ import 'package:injectable/injectable.dart';
 import 'expert_details_event.dart';
 import 'expert_details_state.dart';
 
-@singleton
+@injectable
 class ExpertDetailsBloc extends Bloc<ExpertDetailsEvent, ExpertDetailsState> {
   final IExpertDetailsRepository _expertRepository;
   late ExpertDetails _expertDetails;
