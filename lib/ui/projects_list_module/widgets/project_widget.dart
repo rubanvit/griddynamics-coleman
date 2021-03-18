@@ -9,8 +9,13 @@ class ProjectWidget extends StatelessWidget {
   ProjectModel project;
   Function(String name, BuildContext context) onItemClickCallback;
   BuildContext navigationContext;
+  bool isWideScreen;
 
-  ProjectWidget(this.project, this.navigationContext, this.onItemClickCallback);
+  ProjectWidget(
+      {required this.project,
+      required this.navigationContext,
+      required this.onItemClickCallback,
+      required this.isWideScreen});
 
   @override
   Widget build(BuildContext context) {
@@ -18,43 +23,108 @@ class ProjectWidget extends StatelessWidget {
         onTap: () {
           onItemClickCallback(project.name, navigationContext);
         },
-        child: Card(
-          elevation: 4,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(Dimens.small),
-          ),
-          margin: const EdgeInsets.only(bottom: Dimens.normal),
-          child: Padding(
-            padding: const EdgeInsets.all(Dimens.big),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+        child: isWideScreen
+            ? _getBigScreenLayout(context)
+            : _getSmallScreenLayout(context));
+  }
+
+  Widget _getSmallScreenLayout(BuildContext context) {
+    return Card(
+      elevation: 4,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(Dimens.small),
+      ),
+      margin: const EdgeInsets.only(bottom: Dimens.normal),
+      child: Padding(
+        padding: const EdgeInsets.all(Dimens.big),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _getOpenButton(context),
+            const SizedBox(height: Dimens.small),
+            _getProjectName(context),
+            const SizedBox(height: Dimens.small),
+            _getDates(context),
+            const SizedBox(height: Dimens.small),
+            _getDescription(context),
+            const SizedBox(height: Dimens.medium),
+            IntrinsicHeight(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Expanded(child: _getPromaryContact(context)),
+                  const VerticalDivider(),
+                  Expanded(child: _getIndustries(context)),
+                ],
+              ),
+            ),
+            const Divider(height: 32),
+            _progectVisibility(context),
+            const SizedBox(height: Dimens.medium),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _getBigScreenLayout(BuildContext context) {
+    return Card(
+      elevation: 4,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(Dimens.small),
+      ),
+      margin: const EdgeInsets.only(bottom: Dimens.normal),
+      child: Padding(
+        padding: const EdgeInsets.all(Dimens.big),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                _getOpenButton(context),
-                const SizedBox(height: Dimens.small),
                 _getProjectName(context),
-                const SizedBox(height: Dimens.small),
-                _getDates(context),
-                const SizedBox(height: Dimens.small),
-                _getDescription(context),
-                const SizedBox(height: Dimens.medium),
-                IntrinsicHeight(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Expanded(child: _getPromaryContact(context)),
-                      const VerticalDivider(),
-                      Expanded(child: _getIndustries(context)),
-                    ],
-                  ),
-                ),
-                const Divider(height: 32),
-                _progectVisibility(context),
-                const SizedBox(height: Dimens.medium),
+                Expanded(child: SizedBox(width: 10)),
+                _getOpenButton(context),
               ],
             ),
-          ),
-        ));
+            const SizedBox(height: Dimens.small),
+            _getDates(context),
+            const SizedBox(height: Dimens.small),
+            _getDescription(context),
+            const SizedBox(height: Dimens.big),
+            IntrinsicHeight(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  ..._getItems(context)
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
+
+  List<Widget> _getItems(BuildContext context){
+    final List<Widget> widgets=[];
+    if (_hasTargetCompany()){
+      widgets.add(Expanded(child: _getTargetCompany(context)));
+      widgets.add(const VerticalDivider());
+    }
+    widgets.add(Expanded(child: _getPromaryContact(context)));
+    widgets.add(const VerticalDivider());
+    widgets.add(Expanded(child: _getIndustries(context)));
+    widgets.add(const VerticalDivider());
+    widgets.add(Expanded(child: _progectVisibility(context)));
+    if (!_hasTargetCompany()){
+      widgets.add(Expanded(child: SizedBox(height: 1)));
+    }
+    return widgets;
+  }
+
+  bool _hasTargetCompany() => project.targetCompanies.isNotEmpty;
 
   Widget _getOpenButton(BuildContext context) {
     return OutlinedButton(
@@ -83,6 +153,17 @@ class ProjectWidget extends StatelessWidget {
 
   Widget _getDescription(BuildContext context) {
     return Text('${project.description.internal}');
+  }
+
+  Widget _getTargetCompany(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(Resources.projects_target_company),
+        const SizedBox(height: Dimens.small),
+        Text('${project.targetCompanies[0].name}'),
+      ],
+    );
   }
 
   Widget _getPromaryContact(BuildContext context) {
