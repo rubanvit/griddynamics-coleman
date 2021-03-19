@@ -3,6 +3,7 @@ import 'package:coleman/expert_details_module/ui/bloc/expert_details_bloc.dart';
 import 'package:coleman/expert_details_module/ui/mapper/data_to_ui_mapper.dart';
 import 'package:coleman/expert_details_module/ui/widgets/dialogs.dart';
 import 'package:coleman/injection.dart';
+import 'package:coleman/navigation/navigation.dart';
 import 'package:coleman/ui/common/colors.dart';
 import 'package:coleman/ui/common/constants.dart';
 import 'package:coleman/ui/common/dimens.dart';
@@ -53,8 +54,7 @@ class _ExpertDetailsView extends StatelessWidget {
                 title2: alertMessage,
                 actionButtonTitle: Resources.common_ok,
                 onPressed: () {
-                  Navigator.of(context).pop();
-                  // Navigator.of(context).pop();
+                  Navigator.of(context).popUntil((route) => route.settings.name == AppNavigation.HOME);
                 });
           });
     }
