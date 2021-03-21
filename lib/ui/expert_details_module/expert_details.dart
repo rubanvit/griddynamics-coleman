@@ -1,22 +1,20 @@
 import 'package:coleman/domain/models/expert_details.dart';
-import 'package:coleman/expert_details_module/ui/bloc/expert_details_bloc.dart';
-import 'package:coleman/expert_details_module/ui/mapper/data_to_ui_mapper.dart';
-import 'package:coleman/expert_details_module/ui/widgets/dialogs.dart';
 import 'package:coleman/injection.dart';
 import 'package:coleman/navigation/navigation.dart';
 import 'package:coleman/ui/common/colors.dart';
-import 'package:coleman/ui/common/constants.dart';
 import 'package:coleman/ui/common/dimens.dart';
 import 'package:coleman/ui/common/icons.dart';
 import 'package:coleman/ui/common/resources.dart';
 import 'package:coleman/ui/common/styles.dart';
+import 'package:coleman/ui/expert_details_module/bloc/expert_details_bloc.dart';
+import 'package:coleman/ui/expert_details_module/bloc/expert_details_event.dart';
+import 'package:coleman/ui/expert_details_module/bloc/expert_details_state.dart';
+import 'package:coleman/ui/expert_details_module/widgets/dialogs.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-
-import 'bloc/expert_details_event.dart';
-import 'bloc/expert_details_state.dart';
+import 'package:coleman/ui/expert_details_module/mapper/data_to_ui_mapper.dart';
 
 class ExpertDetailsScreen extends StatelessWidget {
   String projectName = "";
