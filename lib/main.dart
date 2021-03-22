@@ -10,10 +10,9 @@ void main() async {
   configureDependencies();
 
   const Locale _enLocale = Locale('en', 'US');
-  const Locale _ruLocale = Locale('ru', 'RU');
 
   runApp(EasyLocalization(
-      supportedLocales: const [_enLocale, _ruLocale],
+      supportedLocales: const [_enLocale],
       path: 'assets/translations',
       fallbackLocale: _enLocale,
       child: MyApp()));
