@@ -53,6 +53,9 @@ dependencies:
   #date and time
   intl: ^0.17.0
 
+  #localization
+  easy_localization: ^3.0.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -93,6 +96,7 @@ flutter:
     - assets/mocks/experts.json
     - assets/mocks/projects.json
     - assets/images/logo_coleman.png
+    - assets/translations/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

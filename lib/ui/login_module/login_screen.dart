@@ -3,7 +3,6 @@ import 'package:coleman/navigation/navigation.dart';
 import 'package:coleman/ui/common/colors.dart';
 import 'package:coleman/ui/common/dimens.dart';
 import 'package:coleman/ui/common/icons.dart';
-import 'package:coleman/ui/common/resources.dart';
 import 'package:coleman/ui/common/styles.dart';
 import 'package:coleman/ui/login_module/bloc/login_bloc.dart';
 import 'package:coleman/ui/login_module/bloc/login_event.dart';
@@ -11,6 +10,7 @@ import 'package:coleman/ui/login_module/bloc/login_state.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
@@ -61,8 +61,8 @@ class _LoginViewState extends State<_LoginView> {
       listener: (context, state) {
         if (state is LoginStateError) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text(Resources.login_failed_error),
+            SnackBar(
+              content: Text('login_failed_error'.tr()),
               backgroundColor: Colors.red,
             ),
           );
@@ -134,11 +134,8 @@ class _LoginViewState extends State<_LoginView> {
         _fieldFocusChange(context, _nameFocus, _passFocus);
       },
       controller: _nameController,
-      decoration: _fieldDecoration(
-          context,
-          Resources.login_username_hint,
-          Resources.login_username_label,
-          false),
+      decoration: _fieldDecoration(context, 'login_username_hint'.tr(),
+          'login_username_label'.tr(), false),
       keyboardType: TextInputType.emailAddress,
       validator: _validateName,
     );
@@ -153,11 +150,8 @@ class _LoginViewState extends State<_LoginView> {
         _submitForm();
       },
       controller: _passwordController,
-      decoration: _fieldDecoration(
-          context,
-          Resources.login_password_hint,
-          Resources.login_password_label,
-          true),
+      decoration: _fieldDecoration(context, 'login_password_hint'.tr(),
+          'login_password_label'.tr(), true),
       keyboardType: TextInputType.visiblePassword,
       validator: _validatePassword,
     );
@@ -217,7 +211,7 @@ class _LoginViewState extends State<_LoginView> {
             width: double.infinity,
             child: ElevatedButton(
               child: Text(
-                Resources.login_login_button,
+                'login_login_button'.tr(),
                 style: AppStyles.redButtonTextStyle(context),
               ),
               style: AppStyles.redButtonStyle(context),
@@ -244,16 +238,16 @@ class _LoginViewState extends State<_LoginView> {
   String? _validateName(String? value) {
     final _nameExp = RegExp(r'^[A-Za-z]+$');
     if (value?.isEmpty == true) {
-      return Resources.login_name_required;
+      return 'login_name_required'.tr();
     } else if (value != null && !_nameExp.hasMatch(value)) {
-      return Resources.login_email_wrong_format;
+      return 'login_email_wrong_format'.tr();
     } else
       return null;
   }
 
   String? _validatePassword(String? value) {
     if (_passwordController.text.length < 3) {
-      return "3 characters are required for password";
+      return 'password_length_required'.tr();
     } else
       return null;
   }

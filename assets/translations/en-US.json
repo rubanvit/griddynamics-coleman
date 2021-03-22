@@ -1,0 +1,55 @@
+{
+  "appName": "Coleman",
+
+  "common_ok": "ok",
+
+  "login_failed_error": "Login is failed",
+  "login_username_label": "Username \u22c6",
+  "login_username_hint": "Input Username",
+  "login_password_label": "Password \u22c6",
+  "login_password_hint": "Input Password",
+  "login_login_button": "Log In",
+  "login_name_required": "Name is required",
+  "login_email_wrong_format": "Use alphabetical symbols",
+  "password_length_required": "3 characters are required for password",
+
+   "experts_suggestedExperts" : "Suggested Experts\nand Transcripts",
+   "experts_projectExperts" : "Project Experts",
+   "experts_expertsCount" : "6 Experts",
+   "experts_searchHint" : "Search",
+   "experts_qualifiedExperts" : "Qualified experts",
+   "experts_banner1" :
+  "Coleman is working on qualifying experts and soon the experts will be available in PROJECT EXPERTS section. See a list of Suggested Experts or ",
+   "experts_banner2" : "Transcripts and Upcoming Events",
+   "experts_banner3" : ".",
+
+   "experts_schedule" : "Schedule Call",
+   "experts_present" : "Present",
+   "experts_type" : "Type",
+   "experts_location" : "Location",
+   "experts_unassigned" : "Unassigned",
+   "experts_experts_empty_list" :"Experts list is empty",
+   "experts_experts_error_list" :"Error happens when Experts list is loading",
+   "experts_experts_list_header" :"Project Experts",
+
+  "experts_dateFormatWithZone" : "yyyy-MM-ddTHH:mm:ssZ",
+
+   "projects_error" :"Some error happens",
+   "projects_header" :"Projects",
+   "projects_create_project" :"Create Project",
+   "projects_search_hint" :"Search",
+   "projects_created_on" :"CREATED ON: ",
+   "projects_target_company" :"TARGET COMPANY",
+   "projects_primary_contact" :"PRIMARY CONTACT",
+   "projects_industry" :"INDUSTRY",
+   "projects_visible_to" :"PROJECT VISIBLE TO:",
+
+
+   "expert_details_header" :"SCHEDULE CONSULTATION",
+   "expert_details_sub_header" :"Albert Flores has the following availability. Select a time to book a consultation or request alternate time",
+   "expert_details_expert_name" : "Albert Flores",
+   "expert_details_current_date_mock" : "TODAY * WENSDAY, JANUARY 27",
+   "expert_details_scheduling_time_mock" : "10.30 AM - 1.30 PM BASED ON SCHEDULING REQUEST",
+   "expert_details_availability_time_mock" : "9.00 AM - 5.30 PM EXPERT AVAILABILITY",
+   "expert_details_alert_header" : "Consultation scheduled on"
+}

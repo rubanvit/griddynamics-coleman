@@ -1,7 +1,7 @@
-import 'package:coleman/ui/common/resources.dart';
 import 'package:coleman/ui/project_module/bloc/experts_state.dart';
 import 'package:coleman/ui/project_module/widgets/experts_list_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class TemplateExpertsList extends StatelessWidget {
   late String projectName;
@@ -38,7 +38,7 @@ class TemplateExpertsList extends StatelessWidget {
           child: Container(
             width: double.infinity,
             padding: const EdgeInsets.all(16),
-            child: Text(Resources.experts_experts_list_header.toUpperCase(),
+            child: Text('experts_experts_list_header'.tr().toUpperCase(),
                 style: Theme.of(context).appBarTheme.textTheme?.title),
           ),
         ),
@@ -70,7 +70,7 @@ class TemplateExpertsList extends StatelessWidget {
   Widget _getEmptyListWidget(BuildContext context) {
     return Flexible(
       child: Center(
-        child: Text(Resources.experts_experts_empty_list,
+        child: Text('experts_experts_empty_list'.tr(),
             style: Theme.of(context).textTheme.headline5),
       ),
     );
@@ -79,7 +79,7 @@ class TemplateExpertsList extends StatelessWidget {
   Widget _getErrorWidget(BuildContext context) {
     return Flexible(
       child: Center(
-        child: Text(Resources.experts_experts_error_list,
+        child: Text('experts_experts_error_list'.tr(),
             style: Theme.of(context).textTheme.headline5),
       ),
     );

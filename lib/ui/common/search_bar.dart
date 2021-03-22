@@ -1,4 +1,4 @@
-import 'package:coleman/ui/common/resources.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +9,7 @@ class SearchBar extends StatefulWidget {
 
 class SearchBarState extends State<SearchBar> {
   final TextEditingController _controller = TextEditingController();
+
   // final ExpertsCubit bloc = context.read<ExpertsCubit>();
 
   @override
@@ -33,7 +34,7 @@ class SearchBarState extends State<SearchBar> {
                 onPressed: _controller.clear,
               )
             : null,
-        hintText: Resources.experts_searchHint,
+        hintText: 'experts_searchHint'.tr(),
         border: const OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(20)),
         ),

@@ -5,7 +5,6 @@ import 'package:coleman/navigation/navigation.dart';
 import 'package:coleman/ui/common/colors.dart';
 import 'package:coleman/ui/common/dimens.dart';
 import 'package:coleman/ui/common/icons.dart';
-import 'package:coleman/ui/common/resources.dart';
 import 'package:coleman/ui/common/styles.dart';
 import 'package:coleman/ui/expert_details_module/bloc/expert_details_bloc.dart';
 import 'package:coleman/ui/expert_details_module/bloc/expert_details_event.dart';
@@ -15,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:coleman/ui/expert_details_module/mapper/data_to_ui_mapper.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class ExpertDetailsScreen extends StatelessWidget {
   String projectName = "";
@@ -48,9 +48,9 @@ class _ExpertDetailsView extends StatelessWidget {
             final String alertMessage = '$formatter ${selectedTime.localTime}';
 
             return AppDialog(
-                title: Resources.expert_details_alert_header,
+                title: 'expert_details_alert_header'.tr(),
                 title2: alertMessage,
-                actionButtonTitle: Resources.common_ok,
+                actionButtonTitle: 'common_ok'.tr(),
                 onPressed: () {
                   Navigator.of(context).popUntil(
                       (route) => route.settings.name == AppNavigation.HOME);
@@ -127,12 +127,12 @@ class _ExpertDetailsView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            Resources.expert_details_header,
+            'expert_details_header'.tr(),
             style: AppStyles.headerBoldBlack(context),
           ),
           const SizedBox(height: Dimens.normal),
           Text(
-            Resources.expert_details_sub_header,
+            'expert_details_sub_header'.tr(),
             style: AppStyles.bodyGrey(context),
           ),
           const SizedBox(height: Dimens.small),
@@ -149,7 +149,7 @@ class _ExpertDetailsView extends StatelessWidget {
         padding: const EdgeInsets.symmetric(
             vertical: Dimens.normal, horizontal: Dimens.large),
         child: Text(
-          Resources.expert_details_expert_name,
+          'expert_details_expert_name'.tr(),
           style: AppStyles.headerBoldBlack(context),
         ),
       ),
@@ -162,14 +162,14 @@ class _ExpertDetailsView extends StatelessWidget {
           left: Dimens.large, right: Dimens.large, top: Dimens.normal),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Text(
-          Resources.expert_details_current_date_mock,
+          'expert_details_current_date_mock'.tr(),
           style: AppStyles.body2BoldBlack(context),
         ),
         const SizedBox(height: Dimens.micro),
-        Text(Resources.expert_details_scheduling_time_mock,
+        Text('expert_details_scheduling_time_mock'.tr(),
             style: AppStyles.body2W400Green(context)),
         const SizedBox(height: Dimens.micro),
-        Text(Resources.expert_details_availability_time_mock,
+        Text('expert_details_availability_time_mock'.tr(),
             style: AppStyles.body2W400Black(context)),
       ]),
     );
@@ -183,7 +183,7 @@ class _ExpertDetailsView extends StatelessWidget {
         child: GridView.count(
           primary: false,
           shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           childAspectRatio: 2.2,
           crossAxisCount: PlatformUtil.isBigScreen(context)
               ? 6
@@ -218,7 +218,7 @@ class _ExpertDetailsView extends StatelessWidget {
           onPressed: null,
           style: AppStyles.redButtonStyle(context),
           child: Text(
-            Resources.experts_schedule,
+            'experts_schedule'.tr(),
             style: AppStyles.redButtonTextStyle(context),
           ),
         ),

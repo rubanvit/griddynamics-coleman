@@ -1,11 +1,11 @@
 import 'package:coleman/injection.dart';
 import 'package:coleman/ui/common/colors.dart';
 import 'package:coleman/ui/common/constants.dart';
-import 'package:coleman/ui/common/resources.dart';
 import 'package:coleman/ui/common/search_bar.dart';
 import 'package:coleman/ui/project_module/bloc/experts_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class ProjectScreenDeprecated extends StatelessWidget {
   @override
@@ -67,7 +67,7 @@ class _StackOverState extends State<StackOver>
 
   AppBar _getAppBar() {
     return AppBar(
-      title: const Text(Resources.appName),
+      title: Text('appName'.tr()),
     );
   }
 
@@ -97,7 +97,7 @@ class _StackOverState extends State<StackOver>
     return Tab(
         child: FittedBox(
       child: Text(
-        Resources.experts_suggestedExperts.toUpperCase(),
+        'experts_suggestedExperts'.tr().toUpperCase(),
         textAlign: TextAlign.start,
         style: Theme.of(context).textTheme.headline3,
       ),
@@ -111,7 +111,7 @@ class _StackOverState extends State<StackOver>
       children: [
         FittedBox(
           child: Text(
-            Resources.experts_projectExperts.toUpperCase(),
+            'experts_projectExperts'.tr().toUpperCase(),
             textAlign: TextAlign.start,
             style: Theme.of(context)
                 .textTheme
@@ -120,7 +120,7 @@ class _StackOverState extends State<StackOver>
           ),
         ),
         Text(
-          Resources.experts_expertsCount,
+          'experts_expertsCount'.tr(),
           textAlign: TextAlign.start,
           style: Theme.of(context).textTheme.bodyText2,
         ),
@@ -175,19 +175,19 @@ class _StackOverState extends State<StackOver>
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        Resources.experts_qualifiedExperts,
+                        'experts_qualifiedExperts'.tr(),
                         style: Theme.of(context).textTheme.headline6,
                       ),
                       const SizedBox(height: 4),
                       RichText(
                         text: TextSpan(
-                          text: Resources.experts_banner1,
+                          text: 'experts_banner1'.tr(),
                           style: Theme.of(context).textTheme.bodyText2,
-                          children: const <TextSpan>[
+                          children: <TextSpan>[
                             TextSpan(
-                                text: Resources.experts_banner2,
+                                text: 'experts_banner2'.tr(),
                                 style: TextStyle(color: AppColors.blue)),
-                            TextSpan(text: Resources.experts_banner3),
+                            TextSpan(text: 'experts_banner3'.tr()),
                           ],
                         ),
                       ),
