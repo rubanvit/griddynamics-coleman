@@ -8,6 +8,7 @@ import 'package:coleman/ui/common/styles.dart';
 import 'package:coleman/ui/project_module/bloc/experts_state.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class ExpertsListWidget extends StatelessWidget {
   final ExpertsStateSuccessful _state;
@@ -258,7 +259,7 @@ class ExpertsListWidget extends StatelessWidget {
   List<Widget> _typeWidgets(BuildContext context, ExpertModel expert) {
     return [
       Text(
-        Resources.experts_type.toUpperCase(),
+        'experts_type'.tr().toUpperCase(),
         style: Theme.of(context)
             .textTheme
             .bodyText2
@@ -267,7 +268,7 @@ class ExpertsListWidget extends StatelessWidget {
       ),
       const SizedBox(height: 8),
       Text(
-        expert.angle?.name ?? Resources.experts_unassigned,
+        expert.angle?.name ?? 'experts_unassigned'.tr(),
         style: Theme.of(context).textTheme.bodyText2,
         overflow: TextOverflow.ellipsis,
       )
@@ -277,7 +278,7 @@ class ExpertsListWidget extends StatelessWidget {
   List<Widget> _locationWidgets(BuildContext context, ExpertModel expert) {
     return [
       Text(
-        Resources.experts_location.toUpperCase(),
+        'experts_location'.tr().toUpperCase(),
         style: Theme.of(context)
             .textTheme
             .bodyText2
@@ -298,7 +299,7 @@ class ExpertsListWidget extends StatelessWidget {
     final endDate = expert.topEmployment.endDate;
     final startDateString = DateFormat.yMd(Utils.enLocale).format(startDate);
     final String endDateString = endDate == null
-        ? Resources.experts_present
+        ? 'experts_present'.tr()
         : DateFormat.yMd(Utils.enLocale).format(endDate);
     return '$startDateString - $endDateString';
   }
@@ -310,7 +311,7 @@ class ExpertsListWidget extends StatelessWidget {
       },
       style: AppStyles.redButtonStyle(context),
       child: Text(
-        Resources.experts_schedule,
+        'experts_schedule'.tr(),
         style: AppStyles.redButtonTextStyle(context),
       ),
     );

@@ -219,7 +219,7 @@ class _ExpertDetailsView extends StatelessWidget {
           onPressed: null,
           style: AppStyles.redButtonStyle(context),
           child: Text(
-            Resources.experts_schedule,
+            'experts_schedule'.tr(),
             style: AppStyles.redButtonTextStyle(context),
           ),
         ),
