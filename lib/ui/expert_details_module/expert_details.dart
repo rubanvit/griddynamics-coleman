@@ -17,24 +17,29 @@ import 'package:coleman/ui/expert_details_module/mapper/data_to_ui_mapper.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class ExpertDetailsScreen extends StatelessWidget {
-  String projectName = "";
+  String _projectName = "";
+  String _expertName = "";
 
   @override
   Widget build(BuildContext context) {
-    final arguments = ModalRoute.of(context)?.settings.arguments;
-    projectName = arguments == null ? "" : arguments as String;
+    final arguments =
+        ModalRoute.of(context)?.settings.arguments as ProjectExpertBundle?;
+    _projectName = arguments == null ? "" : arguments.projectName;
+    _expertName = arguments == null ? "" : arguments.expertName;
 
     return BlocProvider<ExpertDetailsBloc>(
       create: (ctx) => getIt.get<ExpertDetailsBloc>(),
-      child: _ExpertDetailsView(projectName),
+      child: _ExpertDetailsView(_projectName, _expertName),
     );
   }
 }
 
 class _ExpertDetailsView extends StatelessWidget {
   final String projectName;
+  final String expertName;
 
-  _ExpertDetailsView(this.projectName, {Key? key}) : super(key: key);
+  _ExpertDetailsView(this.projectName, this.expertName, {Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -132,7 +137,7 @@ class _ExpertDetailsView extends StatelessWidget {
           ),
           const SizedBox(height: Dimens.normal),
           Text(
-            'expert_details_sub_header'.tr(),
+            expertName + 'expert_details_sub_header'.tr(),
             style: AppStyles.bodyGrey(context),
           ),
           const SizedBox(height: Dimens.small),
@@ -149,7 +154,7 @@ class _ExpertDetailsView extends StatelessWidget {
         padding: const EdgeInsets.symmetric(
             vertical: Dimens.normal, horizontal: Dimens.large),
         child: Text(
-          'expert_details_expert_name'.tr(),
+          expertName,
           style: AppStyles.headerBoldBlack(context),
         ),
       ),

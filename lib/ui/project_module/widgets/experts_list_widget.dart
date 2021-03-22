@@ -306,7 +306,8 @@ class ExpertsListWidget extends StatelessWidget {
   Widget _scheduleButton(BuildContext context, ExpertModel expert) {
     return ElevatedButton(
       onPressed: () {
-        _openProjectExpertDetailsScreen(projectName, context);
+        _openProjectExpertDetailsScreen(
+            projectName, '${expert.firstName} ${expert.lastName}', context);
       },
       style: AppStyles.redButtonStyle(context),
       child: Text(
@@ -316,8 +317,10 @@ class ExpertsListWidget extends StatelessWidget {
     );
   }
 
-  void _openProjectExpertDetailsScreen(String name, BuildContext context) {
+  void _openProjectExpertDetailsScreen(
+      String projectName, String expertName, BuildContext context) {
     Navigator.pushNamed(context, AppNavigation.EXPERTS_DETAILS,
-        arguments: name);
+        arguments: ProjectExpertBundle(
+            expertName: expertName, projectName: projectName));
   }
 }
