@@ -18,12 +18,19 @@ class PlatformUtil {
     iPad				    1194  * 834
     Android tab		  1280  * 844
   * */
-  static bool isWideScreen(BuildContext context) {
+  static bool isBigScreen(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     final screenWidth = screenSize.width;
     print('Screen width is $screenWidth');
     final screenHeight = screenSize.height;
     print('Screen height is ${screenSize.height}');
     return screenWidth >= 600 && screenHeight >= 600;
+  }
+
+  static bool isLandscapeOrientation(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
+    final screenWidth = screenSize.width;
+    final screenHeight = screenSize.height;
+    return screenWidth >= 600 && screenHeight < 600;
   }
 }

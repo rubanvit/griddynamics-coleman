@@ -19,7 +19,7 @@ class ProjectsListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _isWideScreen = PlatformUtil.isWideScreen(context);
+    _isWideScreen = PlatformUtil.isBigScreen(context);
 
     return BlocBuilder<ProjectsListBloc, ProjectsListState>(
         builder: (ctx, state) {

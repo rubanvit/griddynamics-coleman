@@ -1,7 +1,6 @@
 import 'package:coleman/ui/common/colors.dart';
 import 'package:coleman/ui/common/dimens.dart';
 import 'package:coleman/ui/common/styles.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AppDialog extends StatelessWidget {

@@ -1,4 +1,4 @@
-import 'package:coleman/expert_details_module/ui/expert_details.dart';
+import 'package:coleman/ui/expert_details_module/expert_details.dart';
 import 'package:coleman/ui/login_module/login_screen.dart';
 import 'package:coleman/ui/project_module/project_screen.dart';
 import 'package:coleman/ui/projects_list_module/projects_list.dart';
