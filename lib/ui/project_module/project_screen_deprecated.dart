@@ -1,7 +1,6 @@
 import 'package:coleman/injection.dart';
 import 'package:coleman/ui/common/colors.dart';
 import 'package:coleman/ui/common/constants.dart';
-import 'package:coleman/ui/common/resources.dart';
 import 'package:coleman/ui/common/search_bar.dart';
 import 'package:coleman/ui/project_module/bloc/experts_bloc.dart';
 import 'package:flutter/material.dart';

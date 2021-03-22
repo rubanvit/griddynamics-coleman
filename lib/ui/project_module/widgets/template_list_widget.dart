@@ -1,4 +1,3 @@
-import 'package:coleman/ui/common/resources.dart';
 import 'package:coleman/ui/project_module/bloc/experts_state.dart';
 import 'package:coleman/ui/project_module/widgets/experts_list_widget.dart';
 import 'package:flutter/material.dart';

@@ -1,13 +1,12 @@
 import 'package:coleman/ui/common/colors.dart';
 import 'package:coleman/ui/common/dimens.dart';
-import 'package:coleman/ui/common/resources.dart';
 import 'package:coleman/ui/common/styles.dart';
 import 'package:coleman/ui/projects_list_module/bloc/projects_list_bloc.dart';
 import 'package:coleman/ui/projects_list_module/bloc/projects_list_event.dart';
 import 'package:coleman/ui/projects_list_module/bloc/projects_list_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 
 class SearchWidget {
   static Widget getWidget(BuildContext context, ProjectsListState state) {
@@ -29,7 +28,7 @@ class SearchWidget {
               decoration: InputDecoration(
                 isDense: true,
                 contentPadding: EdgeInsets.zero,
-                hintText: Resources.projects_search_hint,
+                hintText: 'projects_search_hint'.tr(),
                 prefixIcon: const Icon(
                   Icons.search,
                   size: 30,

@@ -1,9 +1,9 @@
 import 'package:coleman/domain/models/projects.dart';
 import 'package:coleman/ui/common/colors.dart';
 import 'package:coleman/ui/common/dimens.dart';
-import 'package:coleman/ui/common/resources.dart';
 import 'package:coleman/ui/common/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class ProjectWidget extends StatelessWidget {
   ProjectModel project;
@@ -96,9 +96,7 @@ class ProjectWidget extends StatelessWidget {
             IntrinsicHeight(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  ..._getItems(context)
-                ],
+                children: [..._getItems(context)],
               ),
             ),
           ],
@@ -107,9 +105,9 @@ class ProjectWidget extends StatelessWidget {
     );
   }
 
-  List<Widget> _getItems(BuildContext context){
-    final List<Widget> widgets=[];
-    if (_hasTargetCompany()){
+  List<Widget> _getItems(BuildContext context) {
+    final List<Widget> widgets = [];
+    if (_hasTargetCompany()) {
       widgets.add(Expanded(child: _getTargetCompany(context)));
       widgets.add(const VerticalDivider());
     }
@@ -118,7 +116,7 @@ class ProjectWidget extends StatelessWidget {
     widgets.add(Expanded(child: _getIndustries(context)));
     widgets.add(const VerticalDivider());
     widgets.add(Expanded(child: _progectVisibility(context)));
-    if (!_hasTargetCompany()){
+    if (!_hasTargetCompany()) {
       widgets.add(Expanded(child: SizedBox(height: 1)));
     }
     return widgets;
@@ -148,7 +146,7 @@ class ProjectWidget extends StatelessWidget {
   }
 
   Widget _getDates(BuildContext context) {
-    return Text(Resources.projects_created_on + '${project.createdOn}');
+    return Text('projects_created_on'.tr() + '${project.createdOn}');
   }
 
   Widget _getDescription(BuildContext context) {
@@ -159,7 +157,7 @@ class ProjectWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(Resources.projects_target_company),
+        Text('projects_target_company'.tr()),
         const SizedBox(height: Dimens.small),
         Text('${project.targetCompanies[0].name}'),
       ],
@@ -170,7 +168,7 @@ class ProjectWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(Resources.projects_primary_contact),
+        Text('projects_primary_contact'.tr()),
         const SizedBox(height: Dimens.small),
         Text('${project.primaryContact.fullName}'),
       ],
@@ -181,7 +179,7 @@ class ProjectWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(Resources.projects_industry),
+        Text('projects_industry'.tr()),
         const SizedBox(height: Dimens.small),
         ...project.industries.map((e) {
           return Text(
@@ -195,7 +193,7 @@ class ProjectWidget extends StatelessWidget {
 
   Widget _progectVisibility(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      const Text(Resources.projects_visible_to),
+      Text('projects_visible_to'.tr()),
       const SizedBox(height: Dimens.small),
       Text(
         '${project.projectLead.fullName}',

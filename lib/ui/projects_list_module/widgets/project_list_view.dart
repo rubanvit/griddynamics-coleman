@@ -4,7 +4,6 @@ import 'package:coleman/navigation/navigation.dart';
 import 'package:coleman/ui/common/colors.dart';
 import 'package:coleman/ui/common/dimens.dart';
 import 'package:coleman/ui/common/icons.dart';
-import 'package:coleman/ui/common/resources.dart';
 import 'package:coleman/ui/common/styles.dart';
 import 'package:coleman/ui/common/constants.dart';
 import 'package:coleman/ui/projects_list_module/bloc/projects_list_bloc.dart';
@@ -13,6 +12,7 @@ import 'package:coleman/ui/projects_list_module/widgets/project_widget.dart';
 import 'package:coleman/ui/projects_list_module/widgets/search_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class ProjectsListView extends StatelessWidget {
   bool _isWideScreen = false;
@@ -39,7 +39,7 @@ class ProjectsListView extends StatelessWidget {
                 }, progress: () {
                   return const CircularProgressIndicator();
                 }, error: () {
-                  return const Text(Resources.projects_error);
+                  return Text('projects_error'.tr());
                 }),
               ],
             ),
@@ -71,13 +71,13 @@ class ProjectsListView extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(Resources.projects_header),
+                 Text('projects_header'.tr()),
                 ElevatedButton(
                   onPressed: () {
                     print('On Pressed');
                   },
                   child: Text(
-                    Resources.projects_create_project,
+                    'projects_create_project'.tr(),
                     style: AppStyles.redButtonTextStyle(context),
                   ),
                   style: AppStyles.redButtonStyle(context),

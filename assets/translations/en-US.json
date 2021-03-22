@@ -30,5 +30,26 @@
    "experts_unassigned" : "Unassigned",
    "experts_experts_empty_list" :"Experts list is empty",
    "experts_experts_error_list" :"Error happens when Experts list is loading",
-   "experts_experts_list_header" :"Project Experts"
+   "experts_experts_list_header" :"Project Experts",
+
+  "experts_dateFormatWithZone" : "yyyy-MM-ddTHH:mm:ssZ",
+
+   "projects_error" :"Some error happens",
+   "projects_header" :"Projects",
+   "projects_create_project" :"Create Project",
+   "projects_search_hint" :"Search",
+   "projects_created_on" :"CREATED ON: ",
+   "projects_target_company" :"TARGET COMPANY",
+   "projects_primary_contact" :"PRIMARY CONTACT",
+   "projects_industry" :"INDUSTRY",
+   "projects_visible_to" :"PROJECT VISIBLE TO:",
+
+
+   "expert_details_header" :"SCHEDULE CONSULTATION",
+   "expert_details_sub_header" :"Albert Flores has the following availability. Select a time to book a consultation or request alternate time",
+   "expert_details_expert_name" : "Albert Flores",
+   "expert_details_current_date_mock" : "TODAY * WENSDAY, JANUARY 27",
+   "expert_details_scheduling_time_mock" : "10.30 AM - 1.30 PM BASED ON SCHEDULING REQUEST",
+   "expert_details_availability_time_mock" : "9.00 AM - 5.30 PM EXPERT AVAILABILITY",
+   "expert_details_alert_header" : "Consultation scheduled on"
 }

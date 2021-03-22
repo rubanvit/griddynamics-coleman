@@ -3,7 +3,6 @@ import 'package:coleman/data/utils.dart';
 import 'package:coleman/domain/models/expert.dart';
 import 'package:coleman/navigation/navigation.dart';
 import 'package:coleman/ui/common/colors.dart';
-import 'package:coleman/ui/common/resources.dart';
 import 'package:coleman/ui/common/styles.dart';
 import 'package:coleman/ui/project_module/bloc/experts_state.dart';
 import 'package:flutter/material.dart';

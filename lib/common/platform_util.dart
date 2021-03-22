@@ -21,9 +21,8 @@ class PlatformUtil {
   static bool isBigScreen(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     final screenWidth = screenSize.width;
-    print('Screen width is $screenWidth');
     final screenHeight = screenSize.height;
-    print('Screen height is ${screenSize.height}');
+    print('Screen width is $screenWidth, height is $screenHeight');
     return screenWidth >= 600 && screenHeight >= 600;
   }
 
