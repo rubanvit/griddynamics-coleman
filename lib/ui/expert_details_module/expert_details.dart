@@ -1,3 +1,4 @@
+import 'package:coleman/common/platform_util.dart';
 import 'package:coleman/domain/models/expert_details.dart';
 import 'package:coleman/injection.dart';
 import 'package:coleman/navigation/navigation.dart';
@@ -52,7 +53,8 @@ class _ExpertDetailsView extends StatelessWidget {
                 title2: alertMessage,
                 actionButtonTitle: Resources.common_ok,
                 onPressed: () {
-                  Navigator.of(context).popUntil((route) => route.settings.name == AppNavigation.HOME);
+                  Navigator.of(context).popUntil(
+                      (route) => route.settings.name == AppNavigation.HOME);
                 });
           });
     }
@@ -96,15 +98,21 @@ class _ExpertDetailsView extends StatelessWidget {
               showConfirmedDialog(state.selectedTime);
             }
           },
-          builder: (ctx, state) => Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _expertDescriptionWidgets(context),
-              _expertNameWidget(context),
-              _availabilityContentWidget(),
-              _timePickerWidget(context, state),
-              _scheduleButton(context)
-            ],
+          builder: (ctx, state) => SingleChildScrollView(
+            physics: PlatformUtil.isWeb() ? const ClampingScrollPhysics() : null,
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _expertDescriptionWidgets(context),
+                  _expertNameWidget(context),
+                  _availabilityContentWidget(),
+                  _timePickerWidget(context, state),
+                  _scheduleButton(context),
+                  const SizedBox(height: 16)
+                ],
+              ),
+            ),
           ),
         ),
       ),
@@ -142,7 +150,8 @@ class _ExpertDetailsView extends StatelessWidget {
       constraints: const BoxConstraints(minWidth: double.infinity),
       color: Colors.white,
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical:Dimens.normal, horizontal: Dimens.large),
+        padding: const EdgeInsets.symmetric(
+            vertical: Dimens.normal, horizontal: Dimens.large),
         child: Text(
           Resources.expert_details_expert_name,
           style: AppStyles.headerBoldBlack(context),
@@ -177,27 +186,32 @@ class _ExpertDetailsView extends StatelessWidget {
 
   Widget _timePickerWidget(BuildContext context, ExpertDetailsState state) {
     if (state is ExpertDetailsStateInitial)
-      return Flexible(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical:Dimens.normal, horizontal: Dimens.large),
-          child: GridView.count(
-            shrinkWrap: true,
-            childAspectRatio: 2.2,
-            crossAxisCount: 3,
-            crossAxisSpacing: Dimens.small,
-            mainAxisSpacing: 6,
-            children: state.expertDetails.times
-                .map(
-                  (ExpertDetailsTime e) => e.toWidget(
-                    onPressed: (ExpertDetailsTime time) {
-                      context
-                          .read<ExpertDetailsBloc>()
-                          .add(ExpertDetailsEvent.timeSelected(e));
-                    },
-                  ),
-                )
-                .toList(),
-          ),
+      return Padding(
+        padding: const EdgeInsets.symmetric(
+            vertical: Dimens.normal, horizontal: Dimens.large),
+        child: GridView.count(
+          primary: false,
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          childAspectRatio: 2.2,
+          crossAxisCount: PlatformUtil.isBigScreen(context)
+              ? 6
+              : PlatformUtil.isLandscapeOrientation(context)
+                  ? 4
+                  : 3,
+          crossAxisSpacing: Dimens.small,
+          mainAxisSpacing: 6,
+          children: state.expertDetails.times
+              .map(
+                (ExpertDetailsTime e) => e.toWidget(
+                  onPressed: (ExpertDetailsTime time) {
+                    context
+                        .read<ExpertDetailsBloc>()
+                        .add(ExpertDetailsEvent.timeSelected(e));
+                  },
+                ),
+              )
+              .toList(),
         ),
       );
     else

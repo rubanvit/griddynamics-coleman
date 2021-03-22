@@ -17,7 +17,7 @@ class ExpertsListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _isWideScreen = PlatformUtil.isWideScreen(context);
+    _isWideScreen = PlatformUtil.isBigScreen(context);
     return Expanded(
       child: ListView.builder(
         scrollDirection: Axis.vertical,
