@@ -11,7 +11,6 @@ import 'package:coleman/ui/expert_details_module/bloc/expert_details_bloc.dart';
 import 'package:coleman/ui/expert_details_module/bloc/expert_details_event.dart';
 import 'package:coleman/ui/expert_details_module/bloc/expert_details_state.dart';
 import 'package:coleman/ui/expert_details_module/widgets/dialogs.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -45,8 +44,8 @@ class _ExpertDetailsView extends StatelessWidget {
           context: context,
           builder: (ctx) {
             final currentDate = DateTime.now();
-            String formatter = DateFormat('yMMMMd').format(currentDate);
-            String alertMessage = '$formatter ${selectedTime.localTime}';
+            final String formatter = DateFormat('yMMMMd').format(currentDate);
+            final String alertMessage = '$formatter ${selectedTime.localTime}';
 
             return AppDialog(
                 title: Resources.expert_details_alert_header,
@@ -99,17 +98,18 @@ class _ExpertDetailsView extends StatelessWidget {
             }
           },
           builder: (ctx, state) => SingleChildScrollView(
-            physics: PlatformUtil.isWeb() ? const ClampingScrollPhysics() : null,
+            physics:
+                PlatformUtil.isWeb() ? const ClampingScrollPhysics() : null,
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _expertDescriptionWidgets(context),
                   _expertNameWidget(context),
-                  _availabilityContentWidget(),
+                  _availabilityContentWidget(context),
                   _timePickerWidget(context, state),
                   _scheduleButton(context),
-                  const SizedBox(height: 16)
+                  const SizedBox(height: Dimens.normal)
                 ],
               ),
             ),
@@ -130,16 +130,12 @@ class _ExpertDetailsView extends StatelessWidget {
             Resources.expert_details_header,
             style: AppStyles.headerBoldBlack(context),
           ),
-          const SizedBox(
-            height: Dimens.normal,
-          ),
-          const Text(
+          const SizedBox(height: Dimens.normal),
+          Text(
             Resources.expert_details_sub_header,
-            style: AppStyles.bodyW400Grey,
+            style: AppStyles.bodyGrey(context),
           ),
-          const SizedBox(
-            height: Dimens.small,
-          ),
+          const SizedBox(height: Dimens.small),
         ],
       ),
     );
@@ -160,26 +156,21 @@ class _ExpertDetailsView extends StatelessWidget {
     );
   }
 
-  Widget _availabilityContentWidget() {
+  Widget _availabilityContentWidget(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(
           left: Dimens.large, right: Dimens.large, top: Dimens.normal),
-      child:
-          Column(crossAxisAlignment: CrossAxisAlignment.start, children: const [
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Text(
           Resources.expert_details_current_date_mock,
-          style: AppStyles.body2BoldBlack,
+          style: AppStyles.body2BoldBlack(context),
         ),
-        SizedBox(
-          height: Dimens.micro,
-        ),
+        const SizedBox(height: Dimens.micro),
         Text(Resources.expert_details_scheduling_time_mock,
-            style: AppStyles.body2W400Green),
-        SizedBox(
-          height: Dimens.micro,
-        ),
+            style: AppStyles.body2W400Green(context)),
+        const SizedBox(height: Dimens.micro),
         Text(Resources.expert_details_availability_time_mock,
-            style: AppStyles.body2W400Black),
+            style: AppStyles.body2W400Black(context)),
       ]),
     );
   }
@@ -215,7 +206,7 @@ class _ExpertDetailsView extends StatelessWidget {
         ),
       );
     else
-      return const SizedBox();
+      return const SizedBox(height: Dimens.micro);
   }
 
   Widget _scheduleButton(BuildContext context) {
@@ -225,15 +216,10 @@ class _ExpertDetailsView extends StatelessWidget {
         width: double.infinity,
         child: ElevatedButton(
           onPressed: null,
-          style: ButtonStyle(
-              backgroundColor:
-                  MaterialStateProperty.all(AppColors.buttonColor)),
+          style: AppStyles.redButtonStyle(context),
           child: Text(
             Resources.experts_schedule,
-            style: Theme.of(context)
-                .textTheme
-                .bodyText1
-                ?.copyWith(color: AppColors.white),
+            style: AppStyles.redButtonTextStyle(context),
           ),
         ),
       ),
