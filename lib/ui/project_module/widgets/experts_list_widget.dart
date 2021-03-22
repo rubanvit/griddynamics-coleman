@@ -1,4 +1,5 @@
 import 'package:coleman/common/platform_util.dart';
+import 'package:coleman/data/utils.dart';
 import 'package:coleman/domain/models/expert.dart';
 import 'package:coleman/navigation/navigation.dart';
 import 'package:coleman/ui/common/colors.dart';
@@ -196,7 +197,7 @@ class ExpertsListWidget extends StatelessWidget {
     final startDate = expert.statusDateModified;
     return DateFormat(DateFormat.ABBR_MONTH_DAY).format(startDate) +
         " • " +
-        DateFormat.jm().format(startDate);
+        DateFormat.jm(Utils.enLocale).format(startDate);
   }
 
   List<Widget> _middlePart(BuildContext context, ExpertModel expert) {
@@ -295,10 +296,10 @@ class ExpertsListWidget extends StatelessWidget {
   String _getDateFormatted(ExpertModel expert) {
     final startDate = expert.topEmployment.startDate;
     final endDate = expert.topEmployment.endDate;
-    final startDateString = DateFormat.yMd().format(startDate);
+    final startDateString = DateFormat.yMd(Utils.enLocale).format(startDate);
     final String endDateString = endDate == null
         ? Resources.experts_present
-        : DateFormat.yMd().format(endDate);
+        : DateFormat.yMd(Utils.enLocale).format(endDate);
     return '$startDateString - $endDateString';
   }
 

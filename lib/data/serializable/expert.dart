@@ -1,5 +1,6 @@
 import 'package:coleman/data/serializable/angle.dart';
 import 'package:coleman/data/serializable/top_employment.dart';
+import 'package:coleman/data/utils.dart';
 import 'package:coleman/domain/models/expert.dart';
 import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -31,7 +32,7 @@ class Expert {
         lastName,
         status,
         //"01/21/2021 10:46:19"
-        DateFormat.yMd().add_Hm().parse(statusDateModified),
+        DateFormat.yMd(Utils.enLocale).add_Hm().parse(statusDateModified),
         country,
         topEmployment.toDomain(),
         angle?.toDomain());

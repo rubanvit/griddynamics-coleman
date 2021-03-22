@@ -6,6 +6,7 @@ import 'package:coleman/ui/common/search_bar.dart';
 import 'package:coleman/ui/project_module/bloc/experts_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class ProjectScreenDeprecated extends StatelessWidget {
   @override
@@ -67,7 +68,7 @@ class _StackOverState extends State<StackOver>
 
   AppBar _getAppBar() {
     return AppBar(
-      title: const Text(Resources.appName),
+      title: Text('appName'.tr()),
     );
   }
 

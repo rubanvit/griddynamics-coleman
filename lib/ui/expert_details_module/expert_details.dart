@@ -15,6 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:coleman/ui/expert_details_module/mapper/data_to_ui_mapper.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class ExpertDetailsScreen extends StatelessWidget {
   String projectName = "";
@@ -50,7 +51,7 @@ class _ExpertDetailsView extends StatelessWidget {
             return AppDialog(
                 title: Resources.expert_details_alert_header,
                 title2: alertMessage,
-                actionButtonTitle: Resources.common_ok,
+                actionButtonTitle: 'common_ok'.tr(),
                 onPressed: () {
                   Navigator.of(context).popUntil(
                       (route) => route.settings.name == AppNavigation.HOME);

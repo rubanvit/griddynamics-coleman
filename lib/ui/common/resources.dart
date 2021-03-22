@@ -1,19 +1,5 @@
 class Resources {
-  static const appName = "Coleman";
 
-  //common
-  static const common_ok = 'ok';
-
-  //Login screen
-  static const login_failed_error = 'Login is failed';
-  static const login_username_label = 'Username \u{22c6}';
-  static const login_username_hint = 'Input Username';
-  static const login_password_label = 'Password \u{22c6}';
-  static const login_password_hint = 'Input Password';
-  static const login_login_button = 'Log In';
-  static const login_name_required = 'Name is required';
-  static const login_email_wrong_format = 'Use alphabetical symbols';
-  
   //Experts screen
   static const experts_suggestedExperts = "Suggested Experts\nand Transcripts";
   static const experts_projectExperts = "Project Experts";
@@ -55,6 +41,5 @@ class Resources {
   static const expert_details_scheduling_time_mock = '10.30 AM - 1.30 PM BASED ON SCHEDULING REQUEST';
   static const expert_details_availability_time_mock = '9.00 AM - 5.30 PM EXPERT AVAILABILITY';
   static const expert_details_alert_header = 'Consultation scheduled on';
-  
   
 }

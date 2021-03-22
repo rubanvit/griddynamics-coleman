@@ -1,5 +1,15 @@
 {
-  "appName": "Coleman EN",
-  "test_text": "Test text En",
-  "username_hint": "Username located"
+  "appName": "Coleman",
+
+  "common_ok": "ok",
+
+  "login_failed_error": "Login is failed",
+  "login_username_label": "Username \u22c6",
+  "login_username_hint": "Input Username",
+  "login_password_label": "Password \u22c6",
+  "login_password_hint": "Input Password",
+  "login_login_button": "Log In",
+  "login_name_required": "Name is required",
+  "login_email_wrong_format": "Use alphabetical symbols",
+  "password_length_required": "3 characters are required for password"
 }
